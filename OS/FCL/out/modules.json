@@ -1,1 +1,1 @@
-{"modules/term-clear.fbl":"sys/terminal/clear.fbl","modules/term-echo.fbl":"sys/terminal/echo.fbl","modules/term-fib.fbl":"sys/terminal/fib.fbl","modules/term-fltr.fbl":"sys/terminal/fltr.fbl","modules/term-spinny.fbl":"sys/terminal/spinny.fbl","modules/term-state.fbl":"sys/terminal/state.fbl","modules/wm-normal.fbl":"sys/wms/normal.fbl"}
+{"modules/wm-normal.fbl":"sys/wms/normal.fbl"}

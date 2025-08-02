@@ -51,3 +51,7 @@ str deEscape(str text) {
     }
     return newStr;
 }
+
+bool inBox(num x, num y, num x1, num y1, num x2, num y2) {
+    return x > x1 && y > y1 && x < x2 && y < y2;
+}

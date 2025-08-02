@@ -1,4 +1,9 @@
 
+enum grah
+    blehh
+    goob
+end
+
 fn main
-    print 5 <= 3
+    print grah:goob
 end

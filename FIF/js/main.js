@@ -323,12 +323,16 @@ const code = `
 # param crazy
 # flag sigma
 
-w .5
-every x -10 10 0.1 {
-    every y -10 10 0.1 {
-        dot x y
+circle 0 0 10
+
+if ?sigma {
+    dot 0 0
+} else {
+    every x -10 10 5 {
+        dot x -5
     }
 }
+
 `;
 
-console.log(compileFIF(parseFIF(code), {"crazy": "5"}, ["flag"]));
+console.log(compileFIF(parseFIF(code), {"crazy": "5"}, ["crazy"]));

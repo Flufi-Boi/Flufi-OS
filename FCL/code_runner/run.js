@@ -131,7 +131,8 @@ FSF.settings = {
     "legacyNotEqual": { "type": "bool", "desc": "disables the use of the neql command" },
     "unsafe": { "type": "bool", "desc": "removes runtime type checks" },
     "noComp": { "type": "bool", "desc": "doesnt compile the scripts, useful for large projects and updating modules" },
-    "allComp": { "type": "bool", "desc": "force it to compile every module" }
+    "allComp": { "type": "bool", "desc": "force it to compile every module" },
+    "elemDebug": { "type": "bool", "desc": "adds a comment for every element" },
 }
 
 let config = null;
@@ -206,6 +207,7 @@ if (config && config["main"] && config["projectPath"]) {
         context.sharesVariables = ${config["shareVariables"] ?? false};
         context.neqlSupport = ${!(config["legacyNotEqual"] ?? false)};
         context.unsafe = ${config["unsafe"] ?? false};
+        context.elementDebug = ${config["elemDebug"] ?? false};
 
         console.time("compiling (main)");
         const val = script.compile(context,null,{...getDefaultFs(),...importFs(${JSON.stringify(config["projectPath"] + "/src")}),"apis":{...importFs(${JSON.stringify(config["projectPath"] + "/src")})}});
@@ -270,6 +272,9 @@ if (config && config["main"] && config["projectPath"]) {
                     console.timeEnd("parsing (${moduleName})");
                     const context = new CompileContext();
                     context.sharesVariables = ${config["shareVariables"] ?? false};
+                    context.neqlSupport = ${!(config["legacyNotEqual"] ?? false)};
+                    context.unsafe = ${config["unsafe"] ?? false};
+                    context.elementDebug = ${config["elemDebug"] ?? false};
                     console.time("compiling (${moduleName})");
                     const val = script.compile(context,null,{...getDefaultFs(),...importFs(${JSON.stringify(config["projectPath"] + /*"/apis"*/ "/src")})});
                     console.timeEnd("compiling (${moduleName})");

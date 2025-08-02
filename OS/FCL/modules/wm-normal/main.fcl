@@ -1,19 +1,52 @@
 import graphics, state, window;
 
-void drawTopbar(Theme theme, Frame winFrame, Window win, Surface surface, Obj<num> miscData) {
-    num height = miscData["topbarHeight"];
+void updateButtons(Theme theme, Frame buttonFrame, Window win, Surface surface, Obj<num> miscData) {
+    num gap = miscData["buttonGap"];
+
+    num size = miscData["topbarHeight"] - miscData["borderRadius"];
+    num realSize = miscData["buttonSize"];
+    num space = size + gap;
+
+    x = buttonFrame.x2 - (size / 2);
+    y = buttonFrame.getY();
+
+    buttons = win.buttons;
+    for (i, buttons.length) {
+        buttons[i].update(x, y, realSize, theme, win, surface);
+        x -= space;
+    }
+}
+
+num getButtonWidthX(num right, Window win, Obj<num> miscData) {
+    num size = miscData["topbarHeight"] - miscData["borderRadius"];
+    num realSize = miscData["buttonSize"];
+    num gap = miscData["buttonGap"];
+    num space = size + gap;
+
+    x = right - (size / 2);
+
+    x -= win.buttons.length - 1 * space + size - 1.5;
+
+    return x;
+}
+
+void updateTopbar(Theme theme, Frame winFrame, Window win, Surface surface, Obj<num> miscData) {
     num borderRad = miscData["borderRadius"];
-    num textSize = 11;
+    num height = miscData["topbarHeight"];
+    num textSize = 10;
 
     Frame topbarFrame = graphics:cloneFrame(winFrame);
     topbarFrame.y1 = topbarFrame.y2 - height + borderRad;
+
+    num buttonSize = miscData["buttonSize"];
+    num buttonsX = getButtonWidthX(topbarFrame.x2, win, miscData);
     
 
     surface.setColor(theme.primary);
     surface.rect(topbarFrame.x1, topbarFrame.y1, topbarFrame.x2, topbarFrame.y2, borderRad);
 
     Frame titleFrame = graphics:cloneFrame(topbarFrame);
-    titleFrame.x2 -= 100;
+    titleFrame.x2 = buttonsX;
 
     /*
     surface.setColor("#f00");
@@ -42,6 +75,11 @@ void drawTopbar(Theme theme, Frame winFrame, Window win, Surface surface, Obj<nu
         [ titleFrame.x2, titleFrame.y1 - half borderRad + 5 ],
         [ titleFrame.x2, titleFrame.y2 + half borderRad - 5 ],
     ], 2);
+
+    // buttons
+    Frame buttonFrame = graphics:cloneFrame(topbarFrame);
+    buttonFrame.x1 = titleFrame.x2;
+    updateButtons(theme, buttonFrame, win, surface, miscData);
 }
 
 void main(State state, GraphicsState graphicsState, Obj<Window> windows) {
@@ -53,8 +91,10 @@ void main(State state, GraphicsState graphicsState, Obj<Window> windows) {
         
         num borderRadius = 15; // 15
         num borderThickness = 5; // 5
-
+        
         num topbarHeight = 35; // 35
+        num buttonSize = 13.5; // 13.5
+        num buttonGap = 5;
 
         Arr<str> winKeys = windows.keys();
         for (i, winKeys.length) {
@@ -76,9 +116,11 @@ void main(State state, GraphicsState graphicsState, Obj<Window> windows) {
             //surface.rect(win.contentFrame.x1, win.contentFrame.y1, win.contentFrame.x2, win.contentFrame.y2, 1);
             
             if (settings.renderMenuBar) {
-                drawTopbar(theme, frame, win, surface, {
+                updateTopbar(theme, frame, win, surface, {
                     topbarHeight,
-                    borderRadius
+                    borderRadius,
+                    buttonSize,
+                    buttonGap
                 });
             }
         }

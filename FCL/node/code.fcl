@@ -1,3 +1,7 @@
+auto funny<t>(t grah) {
+    return grah;
+}
+
 void main() {
-    print("hello world" + "<- funny");
+    print(funny<str>("hi"));
 }

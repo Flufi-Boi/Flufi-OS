@@ -2,4 +2,5 @@ main: src/main.fcl;
 export: out/build.fbl;
 unsafe: false;
 noComp: false;
-allComp: true;
+allComp: false;
+elemDebug: true;

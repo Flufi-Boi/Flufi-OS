@@ -1,0 +1,25 @@
+{
+  "name": "fbl",
+  "displayName": "fbl",
+  "description": "funny",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.102.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "fbl",
+      "aliases": ["fbl", "fbl"],
+      "extensions": [".fbl"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "fbl",
+      "scopeName": "source.fbl",
+      "path": "./syntaxes/fbl.tmLanguage.json"
+    }]
+  }
+}

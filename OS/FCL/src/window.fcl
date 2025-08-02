@@ -1,11 +1,26 @@
-import graphics;
+import graphics, utils, input;
 
 struct WindowFunction {
-    
+    str preset;
 }
 
 struct WindowButton {
-    str id;
+    WindowFunction function;
+    Icon icon;
+
+    void constructor(Icon icon) {
+        self.icon = icon;
+    }
+
+    void update(num x, num y, num size, Theme theme, Window win, Surface surface) {
+        num hSize = size / 2; // hSize == halfSize
+        bool hovered = utils:inBox(input:getMouseX(), input:getMouseY(), x - hSize, y - hSize, x + hSize, y + hSize);
+        surface.setColor(hovered ? theme.tertiary : theme.secondary);
+        surface.square(x, y, size, size, 10);
+        if (self?.icon) {
+            self.icon.draw(surface, x, y, size);
+        }
+    }
 }
 
 struct WindowRenderSettings {
@@ -19,6 +34,10 @@ struct Window {
     Surface surface;
     Frame frame;
     Frame contentFrame;
+
+    Arr<WindowButton> buttons = [
+        new WindowButton(new Icon())
+    ];
 
     str title = "Window";
 

@@ -1,0 +1,39 @@
+~ mthd:setCurrentProvider
+// segment: if (!self.providers.keys().contains(name)) {\nio:throw("unknown provider" + name);\n}\nself.currentProvider = name;
+// arg_branch: if (!self.providers.keys().contains(name)) {\nio:throw("unknown provider" + name);\n}
+// operation: !self.providers.keys().contains(name)
+// method: self.providers.keys().contains(name)
+// method: self.providers.keys()
+// attribute: self.providers
+// constant: self
+set str rand2659 attributes
+obj get arg0 rand2658 rand2659
+set str rand2659 providers
+obj get rand2658 rand2657 rand2659
+obj keys rand2656 rand2657
+// argument: name
+arr has rand2655 rand2656 arg1
+inv rand2654 rand2655
+jn rand2660 rand2654
+// segment: io:throw("unknown provider" + name);
+// execution: io:throw("unknown provider" + name)
+// operation: "unknown provider" + name
+// string: "unknown provider"
+set str rand2663 unknown provider
+// argument: name
+add rand2662 emptystring rand2663 space arg1
+call io:throw rand2662
+: rand2660
+// assignment: self.currentProvider = name
+// constant: self
+// attribute: self.currentProvider
+// constant: self
+set str rand2666 attributes
+obj get arg0 rand2665 rand2666
+set str rand2666 currentProvider
+obj get rand2665 rand2664 rand2666
+// argument: name
+dupe rand2664 arg1
+obj set rand2665 rand2666 rand2664
+ret
+~

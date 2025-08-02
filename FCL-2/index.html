@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="color-scheme" content="light dark" />
+
+		<title>FCL2</title>
+		<link rel="icon" href="https://avatars.rotur.dev/flufi?radius=50px" type="image/png" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+	</head>
+	<body>
+		<script>
+			const body = document.body;
+
+			fetch('https://flufi.gay/base.html')
+				.then(response => response.text())
+				.then(data => {
+					const temp = document.createElement('div');
+					temp.innerHTML = data;
+
+					// Collect all child nodes first
+					const nodes = Array.from(temp.childNodes);
+
+					// Insert each node in reverse order at the beginning of the body
+					for (let i = nodes.length - 1; i >= 0; i--) {
+						body.insertBefore(nodes[i], body.firstChild);
+					}
+				});
+
+			fetch('https://flufi.gay/canvas.js')
+				.then(response => response.text())
+				.then(data => {
+					const script = document.createElement("script");
+					script.textContent = data;
+					document.body.appendChild(script);
+				});
+		</script>
+
+		<div id="content"></div>
+		<script type="module" src="/src/index.tsx"></script>
+	</body>
+</html>

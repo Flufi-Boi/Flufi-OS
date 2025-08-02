@@ -1,4 +1,11 @@
 
+num getMouseX() {
+    return raw("const mousex .target");
+}
+num getMouseY() {
+    return raw("const mousey .target");
+}
+
 Arr<Obj<str>> getKeys() {
     return raw("keyhistory getkeys .target");
 }

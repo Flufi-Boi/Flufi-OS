@@ -1,697 +1,1453 @@
-~ graphics:io:throw
+~ io:throw
+// segment: raw("err arg0");
+// execution: raw("err arg0")
 err arg0
 ret
 ~
-~ graphics:io:getScreenSize
-const screen_width rand6
-const screen_height rand7
-set obj rand8 []
-arr add rand8 rand6
-arr add rand8 rand7
-ret rand8
+~ io:getScreenSize
+// segment: num width = raw("const screen_width .target");\nnum height = raw("const screen_height .target");\nreturn [width, height];
+// assignment: num width = raw("const screen_width .target")
+// execution: raw("const screen_width .target")
+const screen_width rand5
+// assignment: num height = raw("const screen_height .target")
+// execution: raw("const screen_height .target")
+const screen_height rand6
+// statement: return [width, height]
+// array: [width, height]
+set obj rand7 []
+// variable: width
+arr add rand7 rand5
+// variable: height
+arr add rand7 rand6
+ret rand7
 ~
-~ graphics:io:getCurrentMs
-const ms rand12
-ret rand12
+~ io:getCurrentMs
+// segment: return raw("const ms .target");
+// statement: return raw("const ms .target")
+// execution: raw("const ms .target")
+const ms rand10
+ret rand10
 ~
-~ graphics:math:sin
-sin rand17 arg0
-ret rand17
+~ math:sin
+// statement: return raw("sin .target arg0")
+// execution: raw("sin .target arg0")
+sin rand14 arg0
+ret rand14
 ~
-~ graphics:math:cos
-cos rand22 arg0
+~ math:cos
+// statement: return raw("cos .target arg0")
+// execution: raw("cos .target arg0")
+cos rand18 arg0
+ret rand18
+~
+~ math:tan
+// statement: return raw("tan .target arg0")
+// execution: raw("tan .target arg0")
+tan rand22 arg0
 ret rand22
 ~
-~ graphics:math:tan
-tan rand27 arg0
-ret rand27
+~ math:round
+// statement: return raw("round .target arg0")
+// execution: raw("round .target arg0")
+round rand26 arg0
+ret rand26
 ~
-~ graphics:math:round
-round rand32 arg0
-ret rand32
+~ math:floor
+// statement: return raw("floor .target arg0")
+// execution: raw("floor .target arg0")
+floor rand30 arg0
+ret rand30
 ~
-~ graphics:math:floor
-floor rand37 arg0
-ret rand37
+~ math:ceiling
+// statement: return raw("ceiling .target arg0")
+// execution: raw("ceiling .target arg0")
+ceiling rand34 arg0
+ret rand34
 ~
-~ graphics:math:ceiling
-ceiling rand42 arg0
-ret rand42
+~ math:lerp
+// statement: return b - a * t + a
+// operation: b - a * t + a
+// operation: b-a*t
+// operation: b-a
+// argument: b
+// argument: a
+sub rand42 arg1 arg0
+// argument: t
+mul rand41 rand42 arg2
+// argument: a
+add rand40 rand41 arg0
+ret rand40
 ~
-~ graphics:math:lerp
-sub rand51 arg1 arg0
-mul rand50 rand51 arg2
-add rand49 rand50 arg0
-ret rand49
-~
-~ graphics:math:mid
-add rand58 arg0 arg1
-set num rand59 2
-div rand57 rand58 rand59
-ret rand57
+~ math:mid
+// statement: return a + b / 2
+// operation: a + b / 2
+// operation: a+b
+// argument: a
+// argument: b
+add rand48 arg0 arg1
+// number: 2
+set num rand49 2
+div rand47 rand48 rand49
+ret rand47
 ~
 ~ graphics:getDefaultFrame
-callget rand65 graphics:io:getScreenSize 
-set num rand70 0
-obj get rand65 rand68 rand70
-set str rand71  doesnt exist on screenSize
-add rand71 rand70 rand71
-ernull rand68 rand71
-set num rand69 -0.5
-mul rand67 rand68 rand69
-set num rand75 1
-obj get rand65 rand73 rand75
-set str rand76  doesnt exist on screenSize
-add rand76 rand75 rand76
-ernull rand73 rand76
-set num rand74 -0.5
-mul rand72 rand73 rand74
-set num rand80 0
-obj get rand65 rand78 rand80
-set str rand81  doesnt exist on screenSize
-add rand81 rand80 rand81
-ernull rand78 rand81
-set num rand79 0.5
-mul rand77 rand78 rand79
-set num rand85 1
-obj get rand65 rand83 rand85
-set str rand86  doesnt exist on screenSize
-add rand86 rand85 rand86
-ernull rand83 rand86
-set num rand84 0.5
-mul rand82 rand83 rand84
-set obj rand66 {"methods":{".cns":"~ mthd:constructor\nset str rand95 attributes\nobj get arg0 rand94 rand95\nset str rand95 x1\nobj get rand94 rand93 rand95\ndupe rand93 arg1\nobj set rand94 rand95 rand93\nset str rand98 attributes\nobj get arg0 rand97 rand98\nset str rand98 y1\nobj get rand97 rand96 rand98\ndupe rand96 arg2\nobj set rand97 rand98 rand96\nset str rand101 attributes\nobj get arg0 rand100 rand101\nset str rand101 x2\nobj get rand100 rand99 rand101\ndupe rand99 arg3\nobj set rand100 rand101 rand99\nset str rand104 attributes\nobj get arg0 rand103 rand104\nset str rand104 y2\nobj get rand103 rand102 rand104\ndupe rand102 arg4\nobj set rand103 rand104 rand102\nret\n~","getX":"~ mthd:getX\nset str rand108 attributes\nobj get arg0 rand107 rand108\nset str rand108 x1\nobj get rand107 rand106 rand108\nset str rand109 x1 attribute is null\nerrnull rand106 rand109\nset str rand112 attributes\nobj get arg0 rand111 rand112\nset str rand112 x2\nobj get rand111 rand110 rand112\nset str rand113 x2 attribute is null\nerrnull rand110 rand113\ncallget rand105 graphics:math:mid rand106 rand110\nret rand105\nret\n~","getY":"~ mthd:getY\nset str rand117 attributes\nobj get arg0 rand116 rand117\nset str rand117 y1\nobj get rand116 rand115 rand117\nset str rand118 y1 attribute is null\nerrnull rand115 rand118\nset str rand121 attributes\nobj get arg0 rand120 rand121\nset str rand121 y2\nobj get rand120 rand119 rand121\nset str rand122 y2 attribute is null\nerrnull rand119 rand122\ncallget rand114 graphics:math:mid rand115 rand119\nret rand114\nret\n~","getW":"~ mthd:getW\nset str rand127 attributes\nobj get arg0 rand126 rand127\nset str rand127 x2\nobj get rand126 rand124 rand127\nset str rand128 x2 attribute is null\nerrnull rand124 rand128\nset str rand130 attributes\nobj get arg0 rand129 rand130\nset str rand130 x1\nobj get rand129 rand125 rand130\nset str rand131 x1 attribute is null\nerrnull rand125 rand131\nsub rand123 rand124 rand125\nret rand123\nret\n~","getH":"~ mthd:getH\nset str rand136 attributes\nobj get arg0 rand135 rand136\nset str rand136 y2\nobj get rand135 rand133 rand136\nset str rand137 y2 attribute is null\nerrnull rand133 rand137\nset str rand139 attributes\nobj get arg0 rand138 rand139\nset str rand139 y1\nobj get rand138 rand134 rand139\nset str rand140 y1 attribute is null\nerrnull rand134 rand140\nsub rand132 rand133 rand134\nret rand132\nret\n~","getTL":"~ mthd:getTL\nset obj rand141 []\nset str rand144 attributes\nobj get arg0 rand143 rand144\nset str rand144 x1\nobj get rand143 rand142 rand144\nset str rand145 x1 attribute is null\nerrnull rand142 rand145\narr add rand141 rand142\nset str rand148 attributes\nobj get arg0 rand147 rand148\nset str rand148 y2\nobj get rand147 rand146 rand148\nset str rand149 y2 attribute is null\nerrnull rand146 rand149\narr add rand141 rand146\nret rand141\nret\n~","getT":"~ mthd:getT\nset obj rand150 []\nset str rand153 methods\nobj get arg0 rand152 rand153\nset str rand153 getX\nobj get rand152 rand152 rand153\ncallgetvar rand151 rand152 mthd:getX arg0 \narr add rand150 rand151\nset str rand156 attributes\nobj get arg0 rand155 rand156\nset str rand156 y2\nobj get rand155 rand154 rand156\nset str rand157 y2 attribute is null\nerrnull rand154 rand157\narr add rand150 rand154\nret rand150\nret\n~","getTR":"~ mthd:getTR\nset obj rand158 []\nset str rand161 attributes\nobj get arg0 rand160 rand161\nset str rand161 x2\nobj get rand160 rand159 rand161\nset str rand162 x2 attribute is null\nerrnull rand159 rand162\narr add rand158 rand159\nset str rand165 attributes\nobj get arg0 rand164 rand165\nset str rand165 y2\nobj get rand164 rand163 rand165\nset str rand166 y2 attribute is null\nerrnull rand163 rand166\narr add rand158 rand163\nret rand158\nret\n~","getL":"~ mthd:getL\nset obj rand167 []\nset str rand170 attributes\nobj get arg0 rand169 rand170\nset str rand170 x1\nobj get rand169 rand168 rand170\nset str rand171 x1 attribute is null\nerrnull rand168 rand171\narr add rand167 rand168\nset str rand174 methods\nobj get arg0 rand173 rand174\nset str rand174 getY\nobj get rand173 rand173 rand174\ncallgetvar rand172 rand173 mthd:getY arg0 \narr add rand167 rand172\nret rand167\nret\n~","getM":"~ mthd:getM\nset obj rand175 []\nset str rand178 methods\nobj get arg0 rand177 rand178\nset str rand178 getX\nobj get rand177 rand177 rand178\ncallgetvar rand176 rand177 mthd:getX arg0 \narr add rand175 rand176\nset str rand181 methods\nobj get arg0 rand180 rand181\nset str rand181 getY\nobj get rand180 rand180 rand181\ncallgetvar rand179 rand180 mthd:getY arg0 \narr add rand175 rand179\nret rand175\nret\n~","getR":"~ mthd:getR\nset obj rand182 []\nset str rand185 attributes\nobj get arg0 rand184 rand185\nset str rand185 x2\nobj get rand184 rand183 rand185\nset str rand186 x2 attribute is null\nerrnull rand183 rand186\narr add rand182 rand183\nset str rand189 methods\nobj get arg0 rand188 rand189\nset str rand189 getY\nobj get rand188 rand188 rand189\ncallgetvar rand187 rand188 mthd:getY arg0 \narr add rand182 rand187\nret rand182\nret\n~","getBL":"~ mthd:getBL\nset obj rand190 []\nset str rand193 attributes\nobj get arg0 rand192 rand193\nset str rand193 x1\nobj get rand192 rand191 rand193\nset str rand194 x1 attribute is null\nerrnull rand191 rand194\narr add rand190 rand191\nset str rand197 attributes\nobj get arg0 rand196 rand197\nset str rand197 y1\nobj get rand196 rand195 rand197\nset str rand198 y1 attribute is null\nerrnull rand195 rand198\narr add rand190 rand195\nret rand190\nret\n~","getB":"~ mthd:getB\nset obj rand199 []\nset str rand202 methods\nobj get arg0 rand201 rand202\nset str rand202 getX\nobj get rand201 rand201 rand202\ncallgetvar rand200 rand201 mthd:getX arg0 \narr add rand199 rand200\nset str rand205 attributes\nobj get arg0 rand204 rand205\nset str rand205 y1\nobj get rand204 rand203 rand205\nset str rand206 y1 attribute is null\nerrnull rand203 rand206\narr add rand199 rand203\nret rand199\nret\n~","getBR":"~ mthd:getBR\nset obj rand207 []\nset str rand210 attributes\nobj get arg0 rand209 rand210\nset str rand210 x2\nobj get rand209 rand208 rand210\nset str rand211 x2 attribute is null\nerrnull rand208 rand211\narr add rand207 rand208\nset str rand214 attributes\nobj get arg0 rand213 rand214\nset str rand214 y1\nobj get rand213 rand212 rand214\nset str rand215 y1 attribute is null\nerrnull rand212 rand215\narr add rand207 rand212\nret rand207\nret\n~","toString":"~ mthd:toString\nset str rand227 Frame{\nset str rand230 attributes\nobj get arg0 rand229 rand230\nset str rand230 x1\nobj get rand229 rand228 rand230\nset str rand231 x1 attribute is null\nerrnull rand228 rand231\nadd rand225 emptystring rand227 rand228\nset str rand233 attributes\nobj get arg0 rand232 rand233\nset str rand233 y1\nobj get rand232 rand226 rand233\nset str rand234 y1 attribute is null\nerrnull rand226 rand234\nadd rand223 emptystring rand225 comma rand226\nset str rand224 to\nadd rand221 emptystring rand223 space rand224\nset str rand236 attributes\nobj get arg0 rand235 rand236\nset str rand236 x2\nobj get rand235 rand222 rand236\nset str rand237 x2 attribute is null\nerrnull rand222 rand237\nadd rand219 emptystring rand221 space rand222\nset str rand239 attributes\nobj get arg0 rand238 rand239\nset str rand239 y2\nobj get rand238 rand220 rand239\nset str rand240 y2 attribute is null\nerrnull rand220 rand240\nadd rand217 emptystring rand219 comma rand220\nset str rand218 }\nadd rand216 emptystring rand217 rand218\nret rand216\nret\n~"},"attributes":{}}
-set str rand88 methods
-obj get rand66 rand87 rand88
-set str rand88 .cns
-obj get rand87 rand87 rand88
-callvar rand87 mthd:constructor rand66 rand67 rand72 rand77 rand82
-ret rand66
+// segment: screenSize = io:getScreenSize();\nreturn new Frame(screenSize[0] * -.5, screenSize[1] * -.5, screenSize[0] * .5, screenSize[1] * .5);
+// assignment: screenSize = io:getScreenSize()
+// execution: io:getScreenSize()
+callget rand54 io:getScreenSize 
+// statement: return new Frame(screenSize[0] * -.5, screenSize[1] * -.5, screenSize[0] * .5, screenSize[1] * .5)
+// instance: new Frame(screenSize[0] * -.5, screenSize[1] * -.5, screenSize[0] * .5, screenSize[1] * .5)
+// operation: screenSize[0] * -.5
+// key: screenSize[0]
+// number: 0
+set num rand59 0
+// variable: screenSize
+obj get rand54 rand57 rand59
+set str rand60  doesnt exist on screenSize
+add rand60 rand59 rand60
+ernull rand57 rand60
+// number: -.5
+set num rand58 -0.5
+mul rand56 rand57 rand58
+// operation: screenSize[1] * -.5
+// key: screenSize[1]
+// number: 1
+set num rand64 1
+// variable: screenSize
+obj get rand54 rand62 rand64
+set str rand65  doesnt exist on screenSize
+add rand65 rand64 rand65
+ernull rand62 rand65
+// number: -.5
+set num rand63 -0.5
+mul rand61 rand62 rand63
+// operation: screenSize[0] * .5
+// key: screenSize[0]
+// number: 0
+set num rand69 0
+// variable: screenSize
+obj get rand54 rand67 rand69
+set str rand70  doesnt exist on screenSize
+add rand70 rand69 rand70
+ernull rand67 rand70
+// number: .5
+set num rand68 0.5
+mul rand66 rand67 rand68
+// operation: screenSize[1] * .5
+// key: screenSize[1]
+// number: 1
+set num rand74 1
+// variable: screenSize
+obj get rand54 rand72 rand74
+set str rand75  doesnt exist on screenSize
+add rand75 rand74 rand75
+ernull rand72 rand75
+// number: .5
+set num rand73 0.5
+mul rand71 rand72 rand73
+set obj rand55 {"methods":{".cns":"~ mthd::constructor:1441a7909c087dbbe7ce59881b9df8b9\n// segment: self.x1 = x1;\\nself.y1 = y1;\\nself.x2 = x2;\\nself.y2 = y2;\n// assignment: self.x1 = x1\n// constant: self\n// attribute: self.x1\n// constant: self\nset str rand84 attributes\nobj get arg0 rand83 rand84\nset str rand84 x1\nobj get rand83 rand82 rand84\n// argument: x1\ndupe rand82 arg1\nobj set rand83 rand84 rand82\n// assignment: self.y1 = y1\n// constant: self\n// attribute: self.y1\n// constant: self\nset str rand87 attributes\nobj get arg0 rand86 rand87\nset str rand87 y1\nobj get rand86 rand85 rand87\n// argument: y1\ndupe rand85 arg2\nobj set rand86 rand87 rand85\n// assignment: self.x2 = x2\n// constant: self\n// attribute: self.x2\n// constant: self\nset str rand90 attributes\nobj get arg0 rand89 rand90\nset str rand90 x2\nobj get rand89 rand88 rand90\n// argument: x2\ndupe rand88 arg3\nobj set rand89 rand90 rand88\n// assignment: self.y2 = y2\n// constant: self\n// attribute: self.y2\n// constant: self\nset str rand93 attributes\nobj get arg0 rand92 rand93\nset str rand93 y2\nobj get rand92 rand91 rand93\n// argument: y2\ndupe rand91 arg4\nobj set rand92 rand93 rand91\nret\n~","getX":"~ mthd::getX:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return math:mid(self.x1,self.x2)\n// execution: math:mid(self.x1,self.x2)\n// attribute: self.x1\n// constant: self\nset str rand97 attributes\nobj get arg0 rand96 rand97\nset str rand97 x1\nobj get rand96 rand95 rand97\nset str rand98 x1 attribute is null\nerrnull rand95 rand98\n// attribute: self.x2\n// constant: self\nset str rand101 attributes\nobj get arg0 rand100 rand101\nset str rand101 x2\nobj get rand100 rand99 rand101\nset str rand102 x2 attribute is null\nerrnull rand99 rand102\ncallget rand94 math:mid rand95 rand99\nret rand94\nret\n~","getY":"~ mthd::getY:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return math:mid(self.y1,self.y2)\n// execution: math:mid(self.y1,self.y2)\n// attribute: self.y1\n// constant: self\nset str rand106 attributes\nobj get arg0 rand105 rand106\nset str rand106 y1\nobj get rand105 rand104 rand106\nset str rand107 y1 attribute is null\nerrnull rand104 rand107\n// attribute: self.y2\n// constant: self\nset str rand110 attributes\nobj get arg0 rand109 rand110\nset str rand110 y2\nobj get rand109 rand108 rand110\nset str rand111 y2 attribute is null\nerrnull rand108 rand111\ncallget rand103 math:mid rand104 rand108\nret rand103\nret\n~","getW":"~ mthd::getW:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return self.x2 - self.x1\n// operation: self.x2 - self.x1\n// attribute: self.x2\n// constant: self\nset str rand116 attributes\nobj get arg0 rand115 rand116\nset str rand116 x2\nobj get rand115 rand113 rand116\nset str rand117 x2 attribute is null\nerrnull rand113 rand117\n// attribute: self.x1\n// constant: self\nset str rand119 attributes\nobj get arg0 rand118 rand119\nset str rand119 x1\nobj get rand118 rand114 rand119\nset str rand120 x1 attribute is null\nerrnull rand114 rand120\nsub rand112 rand113 rand114\nret rand112\nret\n~","getH":"~ mthd::getH:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return self.y2 - self.y1\n// operation: self.y2 - self.y1\n// attribute: self.y2\n// constant: self\nset str rand125 attributes\nobj get arg0 rand124 rand125\nset str rand125 y2\nobj get rand124 rand122 rand125\nset str rand126 y2 attribute is null\nerrnull rand122 rand126\n// attribute: self.y1\n// constant: self\nset str rand128 attributes\nobj get arg0 rand127 rand128\nset str rand128 y1\nobj get rand127 rand123 rand128\nset str rand129 y1 attribute is null\nerrnull rand123 rand129\nsub rand121 rand122 rand123\nret rand121\nret\n~","getTL":"~ mthd::getTL:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x1,self.y2]\n// array: [self.x1,self.y2]\nset obj rand130 []\n// attribute: self.x1\n// constant: self\nset str rand133 attributes\nobj get arg0 rand132 rand133\nset str rand133 x1\nobj get rand132 rand131 rand133\nset str rand134 x1 attribute is null\nerrnull rand131 rand134\narr add rand130 rand131\n// attribute: self.y2\n// constant: self\nset str rand137 attributes\nobj get arg0 rand136 rand137\nset str rand137 y2\nobj get rand136 rand135 rand137\nset str rand138 y2 attribute is null\nerrnull rand135 rand138\narr add rand130 rand135\nret rand130\nret\n~","getT":"~ mthd::getT:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.getX(),self.y2]\n// array: [self.getX(),self.y2]\nset obj rand139 []\n// method: self.getX()\n// constant: self\nset str rand142 methods\nobj get arg0 rand141 rand142\nset str rand142 getX\nobj get rand141 rand141 rand142\ncallgetvar rand140 rand141 mthd::getX:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand139 rand140\n// attribute: self.y2\n// constant: self\nset str rand145 attributes\nobj get arg0 rand144 rand145\nset str rand145 y2\nobj get rand144 rand143 rand145\nset str rand146 y2 attribute is null\nerrnull rand143 rand146\narr add rand139 rand143\nret rand139\nret\n~","getTR":"~ mthd::getTR:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x2,self.y2]\n// array: [self.x2,self.y2]\nset obj rand147 []\n// attribute: self.x2\n// constant: self\nset str rand150 attributes\nobj get arg0 rand149 rand150\nset str rand150 x2\nobj get rand149 rand148 rand150\nset str rand151 x2 attribute is null\nerrnull rand148 rand151\narr add rand147 rand148\n// attribute: self.y2\n// constant: self\nset str rand154 attributes\nobj get arg0 rand153 rand154\nset str rand154 y2\nobj get rand153 rand152 rand154\nset str rand155 y2 attribute is null\nerrnull rand152 rand155\narr add rand147 rand152\nret rand147\nret\n~","getL":"~ mthd::getL:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x1,self.getY()]\n// array: [self.x1,self.getY()]\nset obj rand156 []\n// attribute: self.x1\n// constant: self\nset str rand159 attributes\nobj get arg0 rand158 rand159\nset str rand159 x1\nobj get rand158 rand157 rand159\nset str rand160 x1 attribute is null\nerrnull rand157 rand160\narr add rand156 rand157\n// method: self.getY()\n// constant: self\nset str rand163 methods\nobj get arg0 rand162 rand163\nset str rand163 getY\nobj get rand162 rand162 rand163\ncallgetvar rand161 rand162 mthd::getY:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand156 rand161\nret rand156\nret\n~","getM":"~ mthd::getM:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.getX(),self.getY()]\n// array: [self.getX(),self.getY()]\nset obj rand164 []\n// method: self.getX()\n// constant: self\nset str rand167 methods\nobj get arg0 rand166 rand167\nset str rand167 getX\nobj get rand166 rand166 rand167\ncallgetvar rand165 rand166 mthd::getX:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand164 rand165\n// method: self.getY()\n// constant: self\nset str rand170 methods\nobj get arg0 rand169 rand170\nset str rand170 getY\nobj get rand169 rand169 rand170\ncallgetvar rand168 rand169 mthd::getY:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand164 rand168\nret rand164\nret\n~","getR":"~ mthd::getR:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x2,self.getY()]\n// array: [self.x2,self.getY()]\nset obj rand171 []\n// attribute: self.x2\n// constant: self\nset str rand174 attributes\nobj get arg0 rand173 rand174\nset str rand174 x2\nobj get rand173 rand172 rand174\nset str rand175 x2 attribute is null\nerrnull rand172 rand175\narr add rand171 rand172\n// method: self.getY()\n// constant: self\nset str rand178 methods\nobj get arg0 rand177 rand178\nset str rand178 getY\nobj get rand177 rand177 rand178\ncallgetvar rand176 rand177 mthd::getY:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand171 rand176\nret rand171\nret\n~","getBL":"~ mthd::getBL:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x1,self.y1]\n// array: [self.x1,self.y1]\nset obj rand179 []\n// attribute: self.x1\n// constant: self\nset str rand182 attributes\nobj get arg0 rand181 rand182\nset str rand182 x1\nobj get rand181 rand180 rand182\nset str rand183 x1 attribute is null\nerrnull rand180 rand183\narr add rand179 rand180\n// attribute: self.y1\n// constant: self\nset str rand186 attributes\nobj get arg0 rand185 rand186\nset str rand186 y1\nobj get rand185 rand184 rand186\nset str rand187 y1 attribute is null\nerrnull rand184 rand187\narr add rand179 rand184\nret rand179\nret\n~","getB":"~ mthd::getB:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.getX(),self.y1]\n// array: [self.getX(),self.y1]\nset obj rand188 []\n// method: self.getX()\n// constant: self\nset str rand191 methods\nobj get arg0 rand190 rand191\nset str rand191 getX\nobj get rand190 rand190 rand191\ncallgetvar rand189 rand190 mthd::getX:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand188 rand189\n// attribute: self.y1\n// constant: self\nset str rand194 attributes\nobj get arg0 rand193 rand194\nset str rand194 y1\nobj get rand193 rand192 rand194\nset str rand195 y1 attribute is null\nerrnull rand192 rand195\narr add rand188 rand192\nret rand188\nret\n~","getBR":"~ mthd::getBR:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x2,self.y1]\n// array: [self.x2,self.y1]\nset obj rand196 []\n// attribute: self.x2\n// constant: self\nset str rand199 attributes\nobj get arg0 rand198 rand199\nset str rand199 x2\nobj get rand198 rand197 rand199\nset str rand200 x2 attribute is null\nerrnull rand197 rand200\narr add rand196 rand197\n// attribute: self.y1\n// constant: self\nset str rand203 attributes\nobj get arg0 rand202 rand203\nset str rand203 y1\nobj get rand202 rand201 rand203\nset str rand204 y1 attribute is null\nerrnull rand201 rand204\narr add rand196 rand201\nret rand196\nret\n~","toString":"~ mthd::toString:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return \"Frame{\" ++ self.x1 ~++ self.y1 + \"to\" + self.x2 ~++ self.y2 ++ \"}\"\n// operation: \"Frame{\" ++ self.x1 ~++ self.y1 + \"to\" + self.x2 ~++ self.y2 ++ \"}\"\n// operation: \"Frame{\"++self.x1~++self.y1+\"to\"+self.x2~++self.y2\n// operation: \"Frame{\"++self.x1~++self.y1+\"to\"+self.x2\n// operation: \"Frame{\"++self.x1~++self.y1+\"to\"\n// operation: \"Frame{\"++self.x1~++self.y1\n// operation: \"Frame{\"++self.x1\n// string: \"Frame{\"\nset str rand216 Frame{\n// attribute: self.x1\n// constant: self\nset str rand219 attributes\nobj get arg0 rand218 rand219\nset str rand219 x1\nobj get rand218 rand217 rand219\nset str rand220 x1 attribute is null\nerrnull rand217 rand220\nadd rand214 emptystring rand216 rand217\n// attribute: self.y1\n// constant: self\nset str rand222 attributes\nobj get arg0 rand221 rand222\nset str rand222 y1\nobj get rand221 rand215 rand222\nset str rand223 y1 attribute is null\nerrnull rand215 rand223\nadd rand212 emptystring rand214 comma rand215\n// string: \"to\"\nset str rand213 to\nadd rand210 emptystring rand212 space rand213\n// attribute: self.x2\n// constant: self\nset str rand225 attributes\nobj get arg0 rand224 rand225\nset str rand225 x2\nobj get rand224 rand211 rand225\nset str rand226 x2 attribute is null\nerrnull rand211 rand226\nadd rand208 emptystring rand210 space rand211\n// attribute: self.y2\n// constant: self\nset str rand228 attributes\nobj get arg0 rand227 rand228\nset str rand228 y2\nobj get rand227 rand209 rand228\nset str rand229 y2 attribute is null\nerrnull rand209 rand229\nadd rand206 emptystring rand208 comma rand209\n// string: \"}\"\nset str rand207 }\nadd rand205 emptystring rand206 rand207\nret rand205\nret\n~"},"attributes":{}}
+set str rand77 methods
+obj get rand55 rand76 rand77
+set str rand77 .cns
+obj get rand76 rand76 rand77
+callvar rand76 mthd::constructor:1441a7909c087dbbe7ce59881b9df8b9 rand55 rand56 rand61 rand66 rand71
+ret rand55
 ~
 ~ graphics:cloneFrame
-set str rand247 attributes
-obj get arg0 rand246 rand247
-set str rand247 x1
-obj get rand246 rand245 rand247
-set str rand248 x1 attribute is null
-errnull rand245 rand248
-set str rand251 attributes
-obj get arg0 rand250 rand251
-set str rand251 y1
-obj get rand250 rand249 rand251
-set str rand252 y1 attribute is null
-errnull rand249 rand252
-set str rand255 attributes
-obj get arg0 rand254 rand255
-set str rand255 x2
-obj get rand254 rand253 rand255
-set str rand256 x2 attribute is null
-errnull rand253 rand256
-set str rand259 attributes
-obj get arg0 rand258 rand259
-set str rand259 y2
-obj get rand258 rand257 rand259
-set str rand260 y2 attribute is null
-errnull rand257 rand260
-set obj rand244 {"methods":{".cns":"~ mthd:constructor\nset str rand269 attributes\nobj get arg0 rand268 rand269\nset str rand269 x1\nobj get rand268 rand267 rand269\ndupe rand267 arg1\nobj set rand268 rand269 rand267\nset str rand272 attributes\nobj get arg0 rand271 rand272\nset str rand272 y1\nobj get rand271 rand270 rand272\ndupe rand270 arg2\nobj set rand271 rand272 rand270\nset str rand275 attributes\nobj get arg0 rand274 rand275\nset str rand275 x2\nobj get rand274 rand273 rand275\ndupe rand273 arg3\nobj set rand274 rand275 rand273\nset str rand278 attributes\nobj get arg0 rand277 rand278\nset str rand278 y2\nobj get rand277 rand276 rand278\ndupe rand276 arg4\nobj set rand277 rand278 rand276\nret\n~","getX":"~ mthd:getX\nset str rand282 attributes\nobj get arg0 rand281 rand282\nset str rand282 x1\nobj get rand281 rand280 rand282\nset str rand283 x1 attribute is null\nerrnull rand280 rand283\nset str rand286 attributes\nobj get arg0 rand285 rand286\nset str rand286 x2\nobj get rand285 rand284 rand286\nset str rand287 x2 attribute is null\nerrnull rand284 rand287\ncallget rand279 graphics:math:mid rand280 rand284\nret rand279\nret\n~","getY":"~ mthd:getY\nset str rand291 attributes\nobj get arg0 rand290 rand291\nset str rand291 y1\nobj get rand290 rand289 rand291\nset str rand292 y1 attribute is null\nerrnull rand289 rand292\nset str rand295 attributes\nobj get arg0 rand294 rand295\nset str rand295 y2\nobj get rand294 rand293 rand295\nset str rand296 y2 attribute is null\nerrnull rand293 rand296\ncallget rand288 graphics:math:mid rand289 rand293\nret rand288\nret\n~","getW":"~ mthd:getW\nset str rand301 attributes\nobj get arg0 rand300 rand301\nset str rand301 x2\nobj get rand300 rand298 rand301\nset str rand302 x2 attribute is null\nerrnull rand298 rand302\nset str rand304 attributes\nobj get arg0 rand303 rand304\nset str rand304 x1\nobj get rand303 rand299 rand304\nset str rand305 x1 attribute is null\nerrnull rand299 rand305\nsub rand297 rand298 rand299\nret rand297\nret\n~","getH":"~ mthd:getH\nset str rand310 attributes\nobj get arg0 rand309 rand310\nset str rand310 y2\nobj get rand309 rand307 rand310\nset str rand311 y2 attribute is null\nerrnull rand307 rand311\nset str rand313 attributes\nobj get arg0 rand312 rand313\nset str rand313 y1\nobj get rand312 rand308 rand313\nset str rand314 y1 attribute is null\nerrnull rand308 rand314\nsub rand306 rand307 rand308\nret rand306\nret\n~","getTL":"~ mthd:getTL\nset obj rand315 []\nset str rand318 attributes\nobj get arg0 rand317 rand318\nset str rand318 x1\nobj get rand317 rand316 rand318\nset str rand319 x1 attribute is null\nerrnull rand316 rand319\narr add rand315 rand316\nset str rand322 attributes\nobj get arg0 rand321 rand322\nset str rand322 y2\nobj get rand321 rand320 rand322\nset str rand323 y2 attribute is null\nerrnull rand320 rand323\narr add rand315 rand320\nret rand315\nret\n~","getT":"~ mthd:getT\nset obj rand324 []\nset str rand327 methods\nobj get arg0 rand326 rand327\nset str rand327 getX\nobj get rand326 rand326 rand327\ncallgetvar rand325 rand326 mthd:getX arg0 \narr add rand324 rand325\nset str rand330 attributes\nobj get arg0 rand329 rand330\nset str rand330 y2\nobj get rand329 rand328 rand330\nset str rand331 y2 attribute is null\nerrnull rand328 rand331\narr add rand324 rand328\nret rand324\nret\n~","getTR":"~ mthd:getTR\nset obj rand332 []\nset str rand335 attributes\nobj get arg0 rand334 rand335\nset str rand335 x2\nobj get rand334 rand333 rand335\nset str rand336 x2 attribute is null\nerrnull rand333 rand336\narr add rand332 rand333\nset str rand339 attributes\nobj get arg0 rand338 rand339\nset str rand339 y2\nobj get rand338 rand337 rand339\nset str rand340 y2 attribute is null\nerrnull rand337 rand340\narr add rand332 rand337\nret rand332\nret\n~","getL":"~ mthd:getL\nset obj rand341 []\nset str rand344 attributes\nobj get arg0 rand343 rand344\nset str rand344 x1\nobj get rand343 rand342 rand344\nset str rand345 x1 attribute is null\nerrnull rand342 rand345\narr add rand341 rand342\nset str rand348 methods\nobj get arg0 rand347 rand348\nset str rand348 getY\nobj get rand347 rand347 rand348\ncallgetvar rand346 rand347 mthd:getY arg0 \narr add rand341 rand346\nret rand341\nret\n~","getM":"~ mthd:getM\nset obj rand349 []\nset str rand352 methods\nobj get arg0 rand351 rand352\nset str rand352 getX\nobj get rand351 rand351 rand352\ncallgetvar rand350 rand351 mthd:getX arg0 \narr add rand349 rand350\nset str rand355 methods\nobj get arg0 rand354 rand355\nset str rand355 getY\nobj get rand354 rand354 rand355\ncallgetvar rand353 rand354 mthd:getY arg0 \narr add rand349 rand353\nret rand349\nret\n~","getR":"~ mthd:getR\nset obj rand356 []\nset str rand359 attributes\nobj get arg0 rand358 rand359\nset str rand359 x2\nobj get rand358 rand357 rand359\nset str rand360 x2 attribute is null\nerrnull rand357 rand360\narr add rand356 rand357\nset str rand363 methods\nobj get arg0 rand362 rand363\nset str rand363 getY\nobj get rand362 rand362 rand363\ncallgetvar rand361 rand362 mthd:getY arg0 \narr add rand356 rand361\nret rand356\nret\n~","getBL":"~ mthd:getBL\nset obj rand364 []\nset str rand367 attributes\nobj get arg0 rand366 rand367\nset str rand367 x1\nobj get rand366 rand365 rand367\nset str rand368 x1 attribute is null\nerrnull rand365 rand368\narr add rand364 rand365\nset str rand371 attributes\nobj get arg0 rand370 rand371\nset str rand371 y1\nobj get rand370 rand369 rand371\nset str rand372 y1 attribute is null\nerrnull rand369 rand372\narr add rand364 rand369\nret rand364\nret\n~","getB":"~ mthd:getB\nset obj rand373 []\nset str rand376 methods\nobj get arg0 rand375 rand376\nset str rand376 getX\nobj get rand375 rand375 rand376\ncallgetvar rand374 rand375 mthd:getX arg0 \narr add rand373 rand374\nset str rand379 attributes\nobj get arg0 rand378 rand379\nset str rand379 y1\nobj get rand378 rand377 rand379\nset str rand380 y1 attribute is null\nerrnull rand377 rand380\narr add rand373 rand377\nret rand373\nret\n~","getBR":"~ mthd:getBR\nset obj rand381 []\nset str rand384 attributes\nobj get arg0 rand383 rand384\nset str rand384 x2\nobj get rand383 rand382 rand384\nset str rand385 x2 attribute is null\nerrnull rand382 rand385\narr add rand381 rand382\nset str rand388 attributes\nobj get arg0 rand387 rand388\nset str rand388 y1\nobj get rand387 rand386 rand388\nset str rand389 y1 attribute is null\nerrnull rand386 rand389\narr add rand381 rand386\nret rand381\nret\n~","toString":"~ mthd:toString\nset str rand401 Frame{\nset str rand404 attributes\nobj get arg0 rand403 rand404\nset str rand404 x1\nobj get rand403 rand402 rand404\nset str rand405 x1 attribute is null\nerrnull rand402 rand405\nadd rand399 emptystring rand401 rand402\nset str rand407 attributes\nobj get arg0 rand406 rand407\nset str rand407 y1\nobj get rand406 rand400 rand407\nset str rand408 y1 attribute is null\nerrnull rand400 rand408\nadd rand397 emptystring rand399 comma rand400\nset str rand398 to\nadd rand395 emptystring rand397 space rand398\nset str rand410 attributes\nobj get arg0 rand409 rand410\nset str rand410 x2\nobj get rand409 rand396 rand410\nset str rand411 x2 attribute is null\nerrnull rand396 rand411\nadd rand393 emptystring rand395 space rand396\nset str rand413 attributes\nobj get arg0 rand412 rand413\nset str rand413 y2\nobj get rand412 rand394 rand413\nset str rand414 y2 attribute is null\nerrnull rand394 rand414\nadd rand391 emptystring rand393 comma rand394\nset str rand392 }\nadd rand390 emptystring rand391 rand392\nret rand390\nret\n~"},"attributes":{}}
-set str rand262 methods
-obj get rand244 rand261 rand262
-set str rand262 .cns
-obj get rand261 rand261 rand262
-callvar rand261 mthd:constructor rand244 rand245 rand249 rand253 rand257
-ret rand244
+// segment: return new Frame(original.x1, original.y1, original.x2, original.y2);
+// statement: return new Frame(original.x1, original.y1, original.x2, original.y2)
+// instance: new Frame(original.x1, original.y1, original.x2, original.y2)
+// attribute: original.x1
+// argument: original
+set str rand236 attributes
+obj get arg0 rand235 rand236
+set str rand236 x1
+obj get rand235 rand234 rand236
+set str rand237 x1 attribute is null
+errnull rand234 rand237
+// attribute: original.y1
+// argument: original
+set str rand240 attributes
+obj get arg0 rand239 rand240
+set str rand240 y1
+obj get rand239 rand238 rand240
+set str rand241 y1 attribute is null
+errnull rand238 rand241
+// attribute: original.x2
+// argument: original
+set str rand244 attributes
+obj get arg0 rand243 rand244
+set str rand244 x2
+obj get rand243 rand242 rand244
+set str rand245 x2 attribute is null
+errnull rand242 rand245
+// attribute: original.y2
+// argument: original
+set str rand248 attributes
+obj get arg0 rand247 rand248
+set str rand248 y2
+obj get rand247 rand246 rand248
+set str rand249 y2 attribute is null
+errnull rand246 rand249
+set obj rand233 {"methods":{".cns":"~ mthd::constructor:1441a7909c087dbbe7ce59881b9df8b9\n// segment: self.x1 = x1;\\nself.y1 = y1;\\nself.x2 = x2;\\nself.y2 = y2;\n// assignment: self.x1 = x1\n// constant: self\n// attribute: self.x1\n// constant: self\nset str rand258 attributes\nobj get arg0 rand257 rand258\nset str rand258 x1\nobj get rand257 rand256 rand258\n// argument: x1\ndupe rand256 arg1\nobj set rand257 rand258 rand256\n// assignment: self.y1 = y1\n// constant: self\n// attribute: self.y1\n// constant: self\nset str rand261 attributes\nobj get arg0 rand260 rand261\nset str rand261 y1\nobj get rand260 rand259 rand261\n// argument: y1\ndupe rand259 arg2\nobj set rand260 rand261 rand259\n// assignment: self.x2 = x2\n// constant: self\n// attribute: self.x2\n// constant: self\nset str rand264 attributes\nobj get arg0 rand263 rand264\nset str rand264 x2\nobj get rand263 rand262 rand264\n// argument: x2\ndupe rand262 arg3\nobj set rand263 rand264 rand262\n// assignment: self.y2 = y2\n// constant: self\n// attribute: self.y2\n// constant: self\nset str rand267 attributes\nobj get arg0 rand266 rand267\nset str rand267 y2\nobj get rand266 rand265 rand267\n// argument: y2\ndupe rand265 arg4\nobj set rand266 rand267 rand265\nret\n~","getX":"~ mthd::getX:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return math:mid(self.x1,self.x2)\n// execution: math:mid(self.x1,self.x2)\n// attribute: self.x1\n// constant: self\nset str rand271 attributes\nobj get arg0 rand270 rand271\nset str rand271 x1\nobj get rand270 rand269 rand271\nset str rand272 x1 attribute is null\nerrnull rand269 rand272\n// attribute: self.x2\n// constant: self\nset str rand275 attributes\nobj get arg0 rand274 rand275\nset str rand275 x2\nobj get rand274 rand273 rand275\nset str rand276 x2 attribute is null\nerrnull rand273 rand276\ncallget rand268 math:mid rand269 rand273\nret rand268\nret\n~","getY":"~ mthd::getY:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return math:mid(self.y1,self.y2)\n// execution: math:mid(self.y1,self.y2)\n// attribute: self.y1\n// constant: self\nset str rand280 attributes\nobj get arg0 rand279 rand280\nset str rand280 y1\nobj get rand279 rand278 rand280\nset str rand281 y1 attribute is null\nerrnull rand278 rand281\n// attribute: self.y2\n// constant: self\nset str rand284 attributes\nobj get arg0 rand283 rand284\nset str rand284 y2\nobj get rand283 rand282 rand284\nset str rand285 y2 attribute is null\nerrnull rand282 rand285\ncallget rand277 math:mid rand278 rand282\nret rand277\nret\n~","getW":"~ mthd::getW:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return self.x2 - self.x1\n// operation: self.x2 - self.x1\n// attribute: self.x2\n// constant: self\nset str rand290 attributes\nobj get arg0 rand289 rand290\nset str rand290 x2\nobj get rand289 rand287 rand290\nset str rand291 x2 attribute is null\nerrnull rand287 rand291\n// attribute: self.x1\n// constant: self\nset str rand293 attributes\nobj get arg0 rand292 rand293\nset str rand293 x1\nobj get rand292 rand288 rand293\nset str rand294 x1 attribute is null\nerrnull rand288 rand294\nsub rand286 rand287 rand288\nret rand286\nret\n~","getH":"~ mthd::getH:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return self.y2 - self.y1\n// operation: self.y2 - self.y1\n// attribute: self.y2\n// constant: self\nset str rand299 attributes\nobj get arg0 rand298 rand299\nset str rand299 y2\nobj get rand298 rand296 rand299\nset str rand300 y2 attribute is null\nerrnull rand296 rand300\n// attribute: self.y1\n// constant: self\nset str rand302 attributes\nobj get arg0 rand301 rand302\nset str rand302 y1\nobj get rand301 rand297 rand302\nset str rand303 y1 attribute is null\nerrnull rand297 rand303\nsub rand295 rand296 rand297\nret rand295\nret\n~","getTL":"~ mthd::getTL:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x1,self.y2]\n// array: [self.x1,self.y2]\nset obj rand304 []\n// attribute: self.x1\n// constant: self\nset str rand307 attributes\nobj get arg0 rand306 rand307\nset str rand307 x1\nobj get rand306 rand305 rand307\nset str rand308 x1 attribute is null\nerrnull rand305 rand308\narr add rand304 rand305\n// attribute: self.y2\n// constant: self\nset str rand311 attributes\nobj get arg0 rand310 rand311\nset str rand311 y2\nobj get rand310 rand309 rand311\nset str rand312 y2 attribute is null\nerrnull rand309 rand312\narr add rand304 rand309\nret rand304\nret\n~","getT":"~ mthd::getT:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.getX(),self.y2]\n// array: [self.getX(),self.y2]\nset obj rand313 []\n// method: self.getX()\n// constant: self\nset str rand316 methods\nobj get arg0 rand315 rand316\nset str rand316 getX\nobj get rand315 rand315 rand316\ncallgetvar rand314 rand315 mthd::getX:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand313 rand314\n// attribute: self.y2\n// constant: self\nset str rand319 attributes\nobj get arg0 rand318 rand319\nset str rand319 y2\nobj get rand318 rand317 rand319\nset str rand320 y2 attribute is null\nerrnull rand317 rand320\narr add rand313 rand317\nret rand313\nret\n~","getTR":"~ mthd::getTR:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x2,self.y2]\n// array: [self.x2,self.y2]\nset obj rand321 []\n// attribute: self.x2\n// constant: self\nset str rand324 attributes\nobj get arg0 rand323 rand324\nset str rand324 x2\nobj get rand323 rand322 rand324\nset str rand325 x2 attribute is null\nerrnull rand322 rand325\narr add rand321 rand322\n// attribute: self.y2\n// constant: self\nset str rand328 attributes\nobj get arg0 rand327 rand328\nset str rand328 y2\nobj get rand327 rand326 rand328\nset str rand329 y2 attribute is null\nerrnull rand326 rand329\narr add rand321 rand326\nret rand321\nret\n~","getL":"~ mthd::getL:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x1,self.getY()]\n// array: [self.x1,self.getY()]\nset obj rand330 []\n// attribute: self.x1\n// constant: self\nset str rand333 attributes\nobj get arg0 rand332 rand333\nset str rand333 x1\nobj get rand332 rand331 rand333\nset str rand334 x1 attribute is null\nerrnull rand331 rand334\narr add rand330 rand331\n// method: self.getY()\n// constant: self\nset str rand337 methods\nobj get arg0 rand336 rand337\nset str rand337 getY\nobj get rand336 rand336 rand337\ncallgetvar rand335 rand336 mthd::getY:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand330 rand335\nret rand330\nret\n~","getM":"~ mthd::getM:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.getX(),self.getY()]\n// array: [self.getX(),self.getY()]\nset obj rand338 []\n// method: self.getX()\n// constant: self\nset str rand341 methods\nobj get arg0 rand340 rand341\nset str rand341 getX\nobj get rand340 rand340 rand341\ncallgetvar rand339 rand340 mthd::getX:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand338 rand339\n// method: self.getY()\n// constant: self\nset str rand344 methods\nobj get arg0 rand343 rand344\nset str rand344 getY\nobj get rand343 rand343 rand344\ncallgetvar rand342 rand343 mthd::getY:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand338 rand342\nret rand338\nret\n~","getR":"~ mthd::getR:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x2,self.getY()]\n// array: [self.x2,self.getY()]\nset obj rand345 []\n// attribute: self.x2\n// constant: self\nset str rand348 attributes\nobj get arg0 rand347 rand348\nset str rand348 x2\nobj get rand347 rand346 rand348\nset str rand349 x2 attribute is null\nerrnull rand346 rand349\narr add rand345 rand346\n// method: self.getY()\n// constant: self\nset str rand352 methods\nobj get arg0 rand351 rand352\nset str rand352 getY\nobj get rand351 rand351 rand352\ncallgetvar rand350 rand351 mthd::getY:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand345 rand350\nret rand345\nret\n~","getBL":"~ mthd::getBL:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x1,self.y1]\n// array: [self.x1,self.y1]\nset obj rand353 []\n// attribute: self.x1\n// constant: self\nset str rand356 attributes\nobj get arg0 rand355 rand356\nset str rand356 x1\nobj get rand355 rand354 rand356\nset str rand357 x1 attribute is null\nerrnull rand354 rand357\narr add rand353 rand354\n// attribute: self.y1\n// constant: self\nset str rand360 attributes\nobj get arg0 rand359 rand360\nset str rand360 y1\nobj get rand359 rand358 rand360\nset str rand361 y1 attribute is null\nerrnull rand358 rand361\narr add rand353 rand358\nret rand353\nret\n~","getB":"~ mthd::getB:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.getX(),self.y1]\n// array: [self.getX(),self.y1]\nset obj rand362 []\n// method: self.getX()\n// constant: self\nset str rand365 methods\nobj get arg0 rand364 rand365\nset str rand365 getX\nobj get rand364 rand364 rand365\ncallgetvar rand363 rand364 mthd::getX:1441a7909c087dbbe7ce59881b9df8b9 arg0 \narr add rand362 rand363\n// attribute: self.y1\n// constant: self\nset str rand368 attributes\nobj get arg0 rand367 rand368\nset str rand368 y1\nobj get rand367 rand366 rand368\nset str rand369 y1 attribute is null\nerrnull rand366 rand369\narr add rand362 rand366\nret rand362\nret\n~","getBR":"~ mthd::getBR:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return [self.x2,self.y1]\n// array: [self.x2,self.y1]\nset obj rand370 []\n// attribute: self.x2\n// constant: self\nset str rand373 attributes\nobj get arg0 rand372 rand373\nset str rand373 x2\nobj get rand372 rand371 rand373\nset str rand374 x2 attribute is null\nerrnull rand371 rand374\narr add rand370 rand371\n// attribute: self.y1\n// constant: self\nset str rand377 attributes\nobj get arg0 rand376 rand377\nset str rand377 y1\nobj get rand376 rand375 rand377\nset str rand378 y1 attribute is null\nerrnull rand375 rand378\narr add rand370 rand375\nret rand370\nret\n~","toString":"~ mthd::toString:1441a7909c087dbbe7ce59881b9df8b9\n// statement: return \"Frame{\" ++ self.x1 ~++ self.y1 + \"to\" + self.x2 ~++ self.y2 ++ \"}\"\n// operation: \"Frame{\" ++ self.x1 ~++ self.y1 + \"to\" + self.x2 ~++ self.y2 ++ \"}\"\n// operation: \"Frame{\"++self.x1~++self.y1+\"to\"+self.x2~++self.y2\n// operation: \"Frame{\"++self.x1~++self.y1+\"to\"+self.x2\n// operation: \"Frame{\"++self.x1~++self.y1+\"to\"\n// operation: \"Frame{\"++self.x1~++self.y1\n// operation: \"Frame{\"++self.x1\n// string: \"Frame{\"\nset str rand390 Frame{\n// attribute: self.x1\n// constant: self\nset str rand393 attributes\nobj get arg0 rand392 rand393\nset str rand393 x1\nobj get rand392 rand391 rand393\nset str rand394 x1 attribute is null\nerrnull rand391 rand394\nadd rand388 emptystring rand390 rand391\n// attribute: self.y1\n// constant: self\nset str rand396 attributes\nobj get arg0 rand395 rand396\nset str rand396 y1\nobj get rand395 rand389 rand396\nset str rand397 y1 attribute is null\nerrnull rand389 rand397\nadd rand386 emptystring rand388 comma rand389\n// string: \"to\"\nset str rand387 to\nadd rand384 emptystring rand386 space rand387\n// attribute: self.x2\n// constant: self\nset str rand399 attributes\nobj get arg0 rand398 rand399\nset str rand399 x2\nobj get rand398 rand385 rand399\nset str rand400 x2 attribute is null\nerrnull rand385 rand400\nadd rand382 emptystring rand384 space rand385\n// attribute: self.y2\n// constant: self\nset str rand402 attributes\nobj get arg0 rand401 rand402\nset str rand402 y2\nobj get rand401 rand383 rand402\nset str rand403 y2 attribute is null\nerrnull rand383 rand403\nadd rand380 emptystring rand382 comma rand383\n// string: \"}\"\nset str rand381 }\nadd rand379 emptystring rand380 rand381\nret rand379\nret\n~"},"attributes":{}}
+set str rand251 methods
+obj get rand233 rand250 rand251
+set str rand251 .cns
+obj get rand250 rand250 rand251
+callvar rand250 mthd::constructor:1441a7909c087dbbe7ce59881b9df8b9 rand233 rand234 rand238 rand242 rand246
+ret rand233
 ~
-~ state:io:throw
-err arg0
-ret
+~ input:getMouseX
+// segment: return raw("const mousex .target");
+// statement: return raw("const mousex .target")
+// execution: raw("const mousex .target")
+const mousex rand418
+ret rand418
 ~
-~ state:io:getScreenSize
-const screen_width rand425
-const screen_height rand426
-set obj rand427 []
-arr add rand427 rand425
-arr add rand427 rand426
+~ input:getMouseY
+// segment: return raw("const mousey .target");
+// statement: return raw("const mousey .target")
+// execution: raw("const mousey .target")
+const mousey rand421
+ret rand421
+~
+~ input:getKeys
+// segment: return raw("keyhistory getkeys .target");
+// statement: return raw("keyhistory getkeys .target")
+// execution: raw("keyhistory getkeys .target")
+keyhistory getkeys rand424
+ret rand424
+~
+~ input:shiftKeys
+// segment: return raw("keyhistory shift .target");
+// statement: return raw("keyhistory shift .target")
+// execution: raw("keyhistory shift .target")
+keyhistory shift rand427
 ret rand427
 ~
-~ state:io:getCurrentMs
-const ms rand429
-ret rand429
+~ input:getDown
+// segment: return raw("keyhistory getdown .target");
+// statement: return raw("keyhistory getdown .target")
+// execution: raw("keyhistory getdown .target")
+keyhistory getdown rand430
+ret rand430
 ~
-~ state:input:getKeys
-keyhistory getkeys rand438
-ret rand438
-~
-~ state:input:shiftKeys
-keyhistory shift rand442
-ret rand442
-~
-~ state:input:getDown
-keyhistory getdown rand446
-ret rand446
-~
-~ state:input:clearKeys
+~ input:clearKeys
+// segment: raw("keyhistory delkeys");
+// execution: raw("keyhistory delkeys")
 keyhistory delkeys
 ret
 ~
-~ state:input:isSpecialKey
-set obj rand454 ["Backspace","Tab","Enter","Shift","Control","Alt","CapsLock","Escape","Space","PageUp","PageDown","End","Home","ArrowLeft","ArrowUp","ArrowRight","ArrowDown","Insert","Delete","Meta","ContextMenu","AltGraph","ScrollLock","NumLock","Pause","Clear","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12"]
-arr has rand455 rand454 arg0
-jn rand456 rand455
-set bool rand458 true
-ret rand458
-: rand456
-set bool rand459 false
-ret rand459
+~ input:isSpecialKey
+// segment: specialChars = [\n'Backspace', 'Tab', 'Enter', 'Shift', 'Control', 'Alt', 'CapsLock',\n'Escape', 'Space', 'PageUp', 'PageDown', 'End', 'Home',\n'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown',\n'Insert', 'Delete', 'Meta', 'ContextMenu',\n'AltGraph', 'ScrollLock', 'NumLock', 'Pause', 'Clear',\n'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12'\n];\n\nif (specialChars.contains(key)) {\nreturn true;\n}\nreturn false;
+// assignment: specialChars = [\n'Backspace', 'Tab', 'Enter', 'Shift', 'Control', 'Alt', 'CapsLock',\n'Escape', 'Space', 'PageUp', 'PageDown', 'End', 'Home',\n'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown',\n'Insert', 'Delete', 'Meta', 'ContextMenu',\n'AltGraph', 'ScrollLock', 'NumLock', 'Pause', 'Clear',\n'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12'\n]
+// array: [\n'Backspace', 'Tab', 'Enter', 'Shift', 'Control', 'Alt', 'CapsLock',\n'Escape', 'Space', 'PageUp', 'PageDown', 'End', 'Home',\n'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown',\n'Insert', 'Delete', 'Meta', 'ContextMenu',\n'AltGraph', 'ScrollLock', 'NumLock', 'Pause', 'Clear',\n'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12'\n]
+set obj rand436 ["Backspace","Tab","Enter","Shift","Control","Alt","CapsLock","Escape","Space","PageUp","PageDown","End","Home","ArrowLeft","ArrowUp","ArrowRight","ArrowDown","Insert","Delete","Meta","ContextMenu","AltGraph","ScrollLock","NumLock","Pause","Clear","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12"]
+// arg_branch: if (specialChars.contains(key)) {\nreturn true;\n}
+// method: specialChars.contains(key)
+// variable: specialChars
+// argument: key
+arr has rand437 rand436 arg0
+jn rand438 rand437
+// segment: return true;
+// statement: return true
+// constant: true
+set bool rand440 true
+ret rand440
+: rand438
+// statement: return false
+// constant: false
+set bool rand441 false
+ret rand441
 ~
 ~ state:getDefault
-set obj rand473 {"methods":{},"attributes":{"type":"terminal","wait":0}}
-set str rand476 attributes
-obj get rand473 rand477 rand476
-set bool rand478 false
-set str rand479 needsInit
-obj set rand477 rand479 rand478
-set obj rand480 {"methods":{"update":"~ mthd:update\nset str rand486 attributes\nobj get arg0 rand485 rand486\nset str rand486 current\nobj get rand485 rand484 rand486\ncallget rand484 state:io:getCurrentMs \nobj set rand485 rand486 rand484\nset str rand490 attributes\nobj get arg0 rand489 rand490\nset str rand490 uptime\nobj get rand489 rand488 rand490\nset str rand494 attributes\nobj get arg0 rand493 rand494\nset str rand494 current\nobj get rand493 rand491 rand494\nset str rand496 attributes\nobj get arg0 rand495 rand496\nset str rand496 start\nobj get rand495 rand492 rand496\nsub rand488 rand491 rand492\nobj set rand489 rand490 rand488\nret\n~","updateFrame":"~ mthd:updateFrame\nset str rand499 attributes\nobj get arg0 rand498 rand499\nset str rand499 frame\nobj get rand498 rand497 rand499\nset num rand501 1\nadd rand497 rand497 rand501\nobj set rand498 rand499 rand497\nset str rand504 methods\nobj get arg0 rand503 rand504\nset str rand504 update\nobj get rand503 rand503 rand504\ncallvar rand503 mthd:update arg0 \nret\n~"},"attributes":{"frame":0,"uptime":0,"current":0}}
-set str rand505 attributes
-obj get rand480 rand506 rand505
-callget rand507 state:io:getCurrentMs 
-set str rand508 start
-obj set rand506 rand508 rand507
-set str rand509 time
-obj set rand477 rand509 rand480
-set obj rand510 {"methods":{},"attributes":{"fontUrl":"https://raw.githubusercontent.com/Mistium/Origin-OS/refs/heads/main/Fonts/origin.ojff","embeddedCommandChar":""}}
-set str rand513 attributes
-obj get rand510 rand514 rand513
-set obj rand515 {"methods":{},"attributes":{"accent":"#a600ff","primary":"#1a1d28","secondary":"#313f4e","tertiary":"#4f617d","text":"#b3cbf9","background":"#090a0b","selected":"#0059ff"}}
-set str rand518 theme
-obj set rand514 rand518 rand515
-set str rand519 config
-obj set rand477 rand519 rand510
-set obj rand520 {"methods":{".cns":"~ mthd:constructor\ncall state:input:clearKeys \nret\n~","update":"~ mthd:update\nset str rand525 attributes\nobj get arg0 rand524 rand525\nset str rand525 map\nobj get rand524 rand523 rand525\nset str rand527 methods\nobj get rand523 rand526 rand527\nset str rand527 update\nobj get rand526 rand526 rand527\ncallvar rand526 mthd:update rand523 \nret\n~"},"attributes":{}}
-set str rand528 attributes
-obj get rand520 rand529 rand528
-set obj rand530 {"methods":{"update":"~ mthd:update\ncallget rand533 state:input:getKeys \nset num rand537 1\nset num rand538 0\nlen rand534 rand533\n: rand535\nsml rand539 rand538 rand534\njn rand536 rand539\ncallget rand540 state:input:shiftKeys \nset str rand542 data\nobj get rand540 rand541 rand542\nset str rand543  doesnt exist on key\nadd rand543 rand542 rand543\nernull rand541 rand543\ncallget rand545 state:input:isSpecialKey rand541\ninv rand544 rand545\njn rand546 rand544\nset str rand550 attributes\nobj get arg0 rand549 rand550\nset str rand550 keys\nobj get rand549 rand548 rand550\ndupe rand551 rand541\narr add rand548 rand551\njp rand553\n: rand546\nset str rand556 attributes\nobj get arg0 rand555 rand556\nset str rand556 special\nobj get rand555 rand554 rand556\ndupe rand557 rand541\narr add rand554 rand557\n: rand553\njai rand535 rand538\n: rand536\nset str rand561 attributes\nobj get arg0 rand560 rand561\nset str rand561 downKeys\nobj get rand560 rand559 rand561\nset obj rand559 []\nobj set rand560 rand561 rand559\nset str rand565 attributes\nobj get arg0 rand564 rand565\nset str rand565 downSpecial\nobj get rand564 rand563 rand565\nset obj rand563 []\nobj set rand564 rand565 rand563\ncallget rand566 state:input:getDown \nset num rand570 1\nset num rand571 0\nlen rand567 rand566\n: rand568\nsml rand572 rand571 rand567\njn rand569 rand572\nobj get rand566 rand573 rand571\nset str rand574  doesnt exist on down\nadd rand574 rand571 rand574\nernull rand573 rand574\nset str rand576 data\nobj get rand573 rand575 rand576\nset str rand577  doesnt exist on key\nadd rand577 rand576 rand577\nernull rand575 rand577\ncallget rand579 state:input:isSpecialKey rand575\ninv rand578 rand579\njn rand580 rand578\nset str rand584 attributes\nobj get arg0 rand583 rand584\nset str rand584 downKeys\nobj get rand583 rand582 rand584\ndupe rand585 rand575\narr add rand582 rand585\njp rand587\n: rand580\nset str rand590 attributes\nobj get arg0 rand589 rand590\nset str rand590 downSpecial\nobj get rand589 rand588 rand590\ndupe rand591 rand575\narr add rand588 rand591\n: rand587\njai rand568 rand571\n: rand569\nret\n~"},"attributes":{}}
-set str rand592 attributes
-obj get rand530 rand593 rand592
-set obj rand594 []
-set str rand595 keys
-obj set rand593 rand595 rand594
-set obj rand596 []
-set str rand597 special
-obj set rand593 rand597 rand596
-set obj rand598 []
-set str rand599 downKeys
-obj set rand593 rand599 rand598
-set obj rand600 []
-set str rand601 downSpecial
-obj set rand593 rand601 rand600
-set str rand602 map
-obj set rand529 rand602 rand530
-set str rand522 methods
-obj get rand520 rand521 rand522
-set str rand522 .cns
-obj get rand521 rand521 rand522
-callvar rand521 mthd:constructor rand520 
-set str rand603 inputState
-obj set rand477 rand603 rand520
-ret rand473
+// segment: return new State();
+// statement: return new State()
+// instance: new State()
+set obj rand452 {"methods":{},"attributes":{"type":"terminal","wait":0}}
+set str rand455 attributes
+obj get rand452 rand456 rand455
+// constant: false
+set bool rand457 false
+set str rand458 needsInit
+obj set rand456 rand458 rand457
+// instance: new TimeState()
+set obj rand459 {"methods":{"update":"~ mthd::update:1441a7909c087dbbe7ce59881b9df8b9\n// segment: self.current = io:getCurrentMs();\\nself.uptime = self.current - self.start;\n// assignment: self.current = io:getCurrentMs()\n// constant: self\n// attribute: self.current\n// constant: self\nset str rand465 attributes\nobj get arg0 rand464 rand465\nset str rand465 current\nobj get rand464 rand463 rand465\n// execution: io:getCurrentMs()\ncallget rand463 io:getCurrentMs \nobj set rand464 rand465 rand463\n// assignment: self.uptime = self.current - self.start\n// constant: self\n// attribute: self.uptime\n// constant: self\nset str rand469 attributes\nobj get arg0 rand468 rand469\nset str rand469 uptime\nobj get rand468 rand467 rand469\n// operation: self.current-self.start\n// attribute: self.current\n// constant: self\nset str rand473 attributes\nobj get arg0 rand472 rand473\nset str rand473 current\nobj get rand472 rand470 rand473\n// attribute: self.start\n// constant: self\nset str rand475 attributes\nobj get arg0 rand474 rand475\nset str rand475 start\nobj get rand474 rand471 rand475\nsub rand467 rand470 rand471\nobj set rand468 rand469 rand467\nret\n~","updateFrame":"~ mthd::updateFrame:1441a7909c087dbbe7ce59881b9df8b9\n// segment: self.frame ++;\\nself.update();\n// assignment: self.frame ++\n// constant: self\n// attribute: self.frame\n// constant: self\nset str rand478 attributes\nobj get arg0 rand477 rand478\nset str rand478 frame\nobj get rand477 rand476 rand478\nset num rand480 1\nadd rand476 rand476 rand480\nobj set rand477 rand478 rand476\n// method: self.update()\n// constant: self\nset str rand483 methods\nobj get arg0 rand482 rand483\nset str rand483 update\nobj get rand482 rand482 rand483\ncallvar rand482 mthd::update:1441a7909c087dbbe7ce59881b9df8b9 arg0 \nret\n~"},"attributes":{"frame":0,"uptime":0,"current":0}}
+set str rand484 attributes
+obj get rand459 rand485 rand484
+// execution: io:getCurrentMs()
+callget rand486 io:getCurrentMs 
+set str rand487 start
+obj set rand485 rand487 rand486
+set str rand488 time
+obj set rand456 rand488 rand459
+// instance: new Config()
+set obj rand489 {"methods":{},"attributes":{"fontUrl":"https://raw.githubusercontent.com/Mistium/Origin-OS/refs/heads/main/Fonts/origin.ojff","embeddedCommandChar":""}}
+set str rand492 attributes
+obj get rand489 rand493 rand492
+// instance: new Theme()
+set obj rand494 {"methods":{},"attributes":{"accent":"#a600ff","primary":"#1a1d28","secondary":"#313f4e","tertiary":"#4f617d","text":"#b3cbf9","background":"#090a0b","selected":"#0059ff"}}
+set str rand497 theme
+obj set rand493 rand497 rand494
+set str rand498 config
+obj set rand456 rand498 rand489
+// instance: new InputState()
+set obj rand499 {"methods":{".cns":"~ mthd::constructor:1441a7909c087dbbe7ce59881b9df8b9\n// segment: clearKeys();\n// execution: clearKeys()\ncall input:clearKeys \nret\n~","update":"~ mthd::update:1441a7909c087dbbe7ce59881b9df8b9\n// segment: self.map.update();\n// method: self.map.update()\n// attribute: self.map\n// constant: self\nset str rand504 attributes\nobj get arg0 rand503 rand504\nset str rand504 map\nobj get rand503 rand502 rand504\nset str rand506 methods\nobj get rand502 rand505 rand506\nset str rand506 update\nobj get rand505 rand505 rand506\ncallvar rand505 mthd::update:1441a7909c087dbbe7ce59881b9df8b9 rand502 \nret\n~"},"attributes":{}}
+set str rand507 attributes
+obj get rand499 rand508 rand507
+// instance: new KeyMap()
+set obj rand509 {"methods":{"update":"~ mthd::update:1441a7909c087dbbe7ce59881b9df8b9\n// segment: Arr<Obj<str>> keys = getKeys();\\nfor(i, keys.length) {\\nObj<str> key = shiftKeys();\\n\\nstr data = key[\"data\"];\\nif (!isSpecialKey(data)) {\\nself.keys.append(data);\\n} else {\\nself.special.append(data);\\n}\\n}\\n\\nself.downKeys = [];\\nself.downSpecial = [];\\nArr<Obj<str>> down = getDown();\\nfor (i, down.length) {\\nObj<str> key = down[i];\\n\\nstr data = key[\"data\"];\\nif (!isSpecialKey(data)) {\\nself.downKeys.append(data);\\n} else {\\nself.downSpecial.append(data);\\n}\\n}\n// assignment: Arr<Obj<str>> keys = getKeys()\n// execution: getKeys()\ncallget rand512 input:getKeys \n// arg_branch: for(i, keys.length) {\\nObj<str> key = shiftKeys();\\n\\nstr data = key[\"data\"];\\nif (!isSpecialKey(data)) {\\nself.keys.append(data);\\n} else {\\nself.special.append(data);\\n}\\n}\n// variable: i\nset num rand516 1\nset num rand517 0\n// attribute: keys.length\n// variable: keys\nlen rand513 rand512\n: rand514\nsml rand518 rand517 rand513\njn rand515 rand518\n// segment: Obj<str> key = shiftKeys();\\n\\nstr data = key[\"data\"];\\nif (!isSpecialKey(data)) {\\nself.keys.append(data);\\n} else {\\nself.special.append(data);\\n}\n// assignment: Obj<str> key = shiftKeys()\n// execution: shiftKeys()\ncallget rand519 input:shiftKeys \n// assignment: str data = key[\"data\"]\n// key: key[\"data\"]\n// string: \"data\"\nset str rand521 data\n// variable: key\nobj get rand519 rand520 rand521\nset str rand522  doesnt exist on key\nadd rand522 rand521 rand522\nernull rand520 rand522\n// arg_branch: if (!isSpecialKey(data)) {\\nself.keys.append(data);\\n}\n// operation: !isSpecialKey(data)\n// execution: isSpecialKey(data)\n// variable: data\ncallget rand524 input:isSpecialKey rand520\ninv rand523 rand524\njn rand525 rand523\n// segment: self.keys.append(data);\n// method: self.keys.append(data)\n// attribute: self.keys\n// constant: self\nset str rand529 attributes\nobj get arg0 rand528 rand529\nset str rand529 keys\nobj get rand528 rand527 rand529\n// variable: data\ndupe rand530 rand520\narr add rand527 rand530\n: rand525\njp rand532\n: rand525\n// segment: self.special.append(data);\n// method: self.special.append(data)\n// attribute: self.special\n// constant: self\nset str rand535 attributes\nobj get arg0 rand534 rand535\nset str rand535 special\nobj get rand534 rand533 rand535\n// variable: data\ndupe rand536 rand520\narr add rand533 rand536\n: rand532\njai rand514 rand517\n: rand515\n// assignment: self.downKeys = []\n// constant: self\n// attribute: self.downKeys\n// constant: self\nset str rand540 attributes\nobj get arg0 rand539 rand540\nset str rand540 downKeys\nobj get rand539 rand538 rand540\n// array: []\nset obj rand538 []\nobj set rand539 rand540 rand538\n// assignment: self.downSpecial = []\n// constant: self\n// attribute: self.downSpecial\n// constant: self\nset str rand544 attributes\nobj get arg0 rand543 rand544\nset str rand544 downSpecial\nobj get rand543 rand542 rand544\n// array: []\nset obj rand542 []\nobj set rand543 rand544 rand542\n// assignment: Arr<Obj<str>> down = getDown()\n// execution: getDown()\ncallget rand545 input:getDown \n// arg_branch: for (i, down.length) {\\nObj<str> key = down[i];\\n\\nstr data = key[\"data\"];\\nif (!isSpecialKey(data)) {\\nself.downKeys.append(data);\\n} else {\\nself.downSpecial.append(data);\\n}\\n}\n// variable: i\nset num rand549 1\nset num rand550 0\n// attribute: down.length\n// variable: down\nlen rand546 rand545\n: rand547\nsml rand551 rand550 rand546\njn rand548 rand551\n// segment: Obj<str> key = down[i];\\n\\nstr data = key[\"data\"];\\nif (!isSpecialKey(data)) {\\nself.downKeys.append(data);\\n} else {\\nself.downSpecial.append(data);\\n}\n// assignment: Obj<str> key = down[i]\n// key: down[i]\n// variable: i\n// variable: down\nobj get rand545 rand552 rand550\nset str rand553  doesnt exist on down\nadd rand553 rand550 rand553\nernull rand552 rand553\n// assignment: str data = key[\"data\"]\n// key: key[\"data\"]\n// string: \"data\"\nset str rand555 data\n// variable: key\nobj get rand552 rand554 rand555\nset str rand556  doesnt exist on key\nadd rand556 rand555 rand556\nernull rand554 rand556\n// arg_branch: if (!isSpecialKey(data)) {\\nself.downKeys.append(data);\\n}\n// operation: !isSpecialKey(data)\n// execution: isSpecialKey(data)\n// variable: data\ncallget rand558 input:isSpecialKey rand554\ninv rand557 rand558\njn rand559 rand557\n// segment: self.downKeys.append(data);\n// method: self.downKeys.append(data)\n// attribute: self.downKeys\n// constant: self\nset str rand563 attributes\nobj get arg0 rand562 rand563\nset str rand563 downKeys\nobj get rand562 rand561 rand563\n// variable: data\ndupe rand564 rand554\narr add rand561 rand564\n: rand559\njp rand566\n: rand559\n// segment: self.downSpecial.append(data);\n// method: self.downSpecial.append(data)\n// attribute: self.downSpecial\n// constant: self\nset str rand569 attributes\nobj get arg0 rand568 rand569\nset str rand569 downSpecial\nobj get rand568 rand567 rand569\n// variable: data\ndupe rand570 rand554\narr add rand567 rand570\n: rand566\njai rand547 rand550\n: rand548\nret\n~"},"attributes":{}}
+set str rand571 attributes
+obj get rand509 rand572 rand571
+// array: []
+set obj rand573 []
+set str rand574 keys
+obj set rand572 rand574 rand573
+// array: []
+set obj rand575 []
+set str rand576 special
+obj set rand572 rand576 rand575
+// array: []
+set obj rand577 []
+set str rand578 downKeys
+obj set rand572 rand578 rand577
+// array: []
+set obj rand579 []
+set str rand580 downSpecial
+obj set rand572 rand580 rand579
+set str rand581 map
+obj set rand508 rand581 rand509
+set str rand501 methods
+obj get rand499 rand500 rand501
+set str rand501 .cns
+obj get rand500 rand500 rand501
+callvar rand500 mthd::constructor:1441a7909c087dbbe7ce59881b9df8b9 rand499 
+set str rand582 inputState
+obj set rand456 rand582 rand499
+ret rand452
 ~
-~ window:graphics:io:throw
-err arg0
+~ utils:splitChar
+// segment: Arr<str> tokens = [""];\n\n\nbool inDoubleQuotes = false;\n\n\nbool intactQuotes = rules.contains("intactQuotes");\n\nfor (i, text.length) {\nstr char = text[i];\n\nif (char == "\\") {\ntokens[tokens.length-1] ++= char;\ncontinue;\n}\n\nif (intactQuotes) {\nif (char == "\"") {\ninDoubleQuotes = !inDoubleQuotes;\n}\n}\n\nif (!inDoubleQuotes) {\nif (char == splitter) {\ntokens.append("");\ncontinue;\n}\n}\n\ntokens[tokens.length-1] = tokens[tokens.length-1] ++ char;\n}\n\nreturn tokens;
+// assignment: Arr<str> tokens = [""]
+// array: [""]
+set obj rand588 [""]
+// assignment: bool inDoubleQuotes = false
+// constant: false
+set bool rand589 false
+// assignment: bool intactQuotes = rules.contains("intactQuotes")
+// method: rules.contains("intactQuotes")
+// argument: rules
+// string: "intactQuotes"
+set str rand591 intactQuotes
+arr has rand590 arg2 rand591
+// arg_branch: for (i, text.length) {\nstr char = text[i];\n\nif (char == "\\") {\ntokens[tokens.length-1] ++= char;\ncontinue;\n}\n\nif (intactQuotes) {\nif (char == "\"") {\ninDoubleQuotes = !inDoubleQuotes;\n}\n}\n\nif (!inDoubleQuotes) {\nif (char == splitter) {\ntokens.append("");\ncontinue;\n}\n}\n\ntokens[tokens.length-1] = tokens[tokens.length-1] ++ char;\n}
+// variable: i
+set num rand595 1
+set num rand596 0
+// attribute: text.length
+// argument: text
+len rand592 arg0
+: rand593
+sml rand597 rand596 rand592
+jn rand594 rand597
+// segment: str char = text[i];\n\nif (char == "\\") {\ntokens[tokens.length-1] ++= char;\ncontinue;\n}\n\nif (intactQuotes) {\nif (char == "\"") {\ninDoubleQuotes = !inDoubleQuotes;\n}\n}\n\nif (!inDoubleQuotes) {\nif (char == splitter) {\ntokens.append("");\ncontinue;\n}\n}\n\ntokens[tokens.length-1] = tokens[tokens.length-1] ++ char;
+// assignment: str char = text[i]
+// key: text[i]
+// variable: i
+// argument: text
+obj get arg0 rand598 rand596
+set str rand599  doesnt exist on text
+add rand599 rand596 rand599
+ernull rand598 rand599
+// arg_branch: if (char == "\\") {\ntokens[tokens.length-1] ++= char;\ncontinue;\n}
+// comparison: char == "\\"
+// variable: char
+// string: "\\"
+set str rand601 \\
+eql rand600 rand598 rand601
+jn rand602 rand600
+// segment: tokens[tokens.length-1] ++= char;\ncontinue;
+// assignment: tokens[tokens.length-1] ++= char
+// variable: tokens
+// operation: tokens.length-1
+// attribute: tokens.length
+// variable: tokens
+len rand605 rand588
+// number: 1
+set num rand606 1
+sub rand604 rand605 rand606
+// key: tokens[tokens.length-1]
+// operation: tokens.length-1
+// attribute: tokens.length
+// variable: tokens
+len rand609 rand588
+// number: 1
+set num rand610 1
+sub rand608 rand609 rand610
+// variable: tokens
+obj get rand588 rand607 rand608
+set str rand611  doesnt exist on tokens
+add rand611 rand608 rand611
+ernull rand607 rand611
+// variable: char
+dupe rand612 rand598
+add rand598 emptystring rand598 rand612
+obj set rand588 rand604 rand598
+// statement: continue
+jai rand593 rand596
+: rand602
+// arg_branch: if (intactQuotes) {\nif (char == "\"") {\ninDoubleQuotes = !inDoubleQuotes;\n}\n}
+// variable: intactQuotes
+jn rand614 rand590
+// arg_branch: if (char == "\"") {\ninDoubleQuotes = !inDoubleQuotes;\n}
+// comparison: char == "\""
+// variable: char
+// string: "\""
+set str rand617 "
+eql rand616 rand598 rand617
+jn rand618 rand616
+// segment: inDoubleQuotes = !inDoubleQuotes;
+// assignment: inDoubleQuotes = !inDoubleQuotes
+// operation: !inDoubleQuotes
+// variable: inDoubleQuotes
+inv rand589 rand589
+: rand618
+: rand614
+// arg_branch: if (!inDoubleQuotes) {\nif (char == splitter) {\ntokens.append("");\ncontinue;\n}\n}
+// operation: !inDoubleQuotes
+// variable: inDoubleQuotes
+inv rand620 rand589
+jn rand621 rand620
+// arg_branch: if (char == splitter) {\ntokens.append("");\ncontinue;\n}
+// comparison: char == splitter
+// variable: char
+// argument: splitter
+eql rand623 rand598 arg1
+jn rand624 rand623
+// segment: tokens.append("");\ncontinue;
+// method: tokens.append("")
+// variable: tokens
+// string: ""
+set str rand626 
+arr add rand588 rand626
+// statement: continue
+jai rand593 rand596
+: rand624
+: rand621
+// assignment: tokens[tokens.length-1] = tokens[tokens.length-1] ++ char
+// variable: tokens
+// operation: tokens.length-1
+// attribute: tokens.length
+// variable: tokens
+len rand628 rand588
+// number: 1
+set num rand629 1
+sub rand627 rand628 rand629
+// operation: tokens[tokens.length-1]++char
+// key: tokens[tokens.length-1]
+// operation: tokens.length-1
+// attribute: tokens.length
+// variable: tokens
+len rand633 rand588
+// number: 1
+set num rand634 1
+sub rand632 rand633 rand634
+// variable: tokens
+obj get rand588 rand631 rand632
+set str rand635  doesnt exist on tokens
+add rand635 rand632 rand635
+ernull rand631 rand635
+// variable: char
+add rand630 emptystring rand631 rand598
+obj set rand588 rand627 rand630
+jai rand593 rand596
+: rand594
+// statement: return tokens
+// variable: tokens
+ret rand588
+~
+~ utils:deEscape
+// segment: str newStr = "";\nfor (i, text.length) {\nstr char = text[i];\nif (char == "\\") {\nchar = text[i++];\nif (char == "n") {\nnewStr ++= "\n";\ncontinue;\n}\nnewStr ++= char;\ncontinue;\n}\n}\nreturn newStr;
+// assignment: str newStr = ""
+// string: ""
+set str rand639 
+// arg_branch: for (i, text.length) {\nstr char = text[i];\nif (char == "\\") {\nchar = text[i++];\nif (char == "n") {\nnewStr ++= "\n";\ncontinue;\n}\nnewStr ++= char;\ncontinue;\n}\n}
+// variable: i
+set num rand643 1
+set num rand644 0
+// attribute: text.length
+// argument: text
+len rand640 arg0
+: rand641
+sml rand645 rand644 rand640
+jn rand642 rand645
+// segment: str char = text[i];\nif (char == "\\") {\nchar = text[i++];\nif (char == "n") {\nnewStr ++= "\n";\ncontinue;\n}\nnewStr ++= char;\ncontinue;\n}
+// assignment: str char = text[i]
+// key: text[i]
+// variable: i
+// argument: text
+obj get arg0 rand646 rand644
+set str rand647  doesnt exist on text
+add rand647 rand644 rand647
+ernull rand646 rand647
+// arg_branch: if (char == "\\") {\nchar = text[i++];\nif (char == "n") {\nnewStr ++= "\n";\ncontinue;\n}\nnewStr ++= char;\ncontinue;\n}
+// comparison: char == "\\"
+// variable: char
+// string: "\\"
+set str rand649 \\
+eql rand648 rand646 rand649
+jn rand650 rand648
+// segment: char = text[i++];\nif (char == "n") {\nnewStr ++= "\n";\ncontinue;\n}\nnewStr ++= char;\ncontinue;
+// assignment: char = text[i++]
+// key: text[i++]
+// assignment: i++
+set num rand654 1
+add rand644 rand644 rand654
+dupe rand652 rand644
+// argument: text
+obj get arg0 rand646 rand652
+set str rand655  doesnt exist on text
+add rand655 rand652 rand655
+ernull rand646 rand655
+// arg_branch: if (char == "n") {\nnewStr ++= "\n";\ncontinue;\n}
+// comparison: char == "n"
+// variable: char
+// string: "n"
+set str rand657 n
+eql rand656 rand646 rand657
+jn rand658 rand656
+// segment: newStr ++= "\n";\ncontinue;
+// assignment: newStr ++= "\n"
+// string: "\n"
+set str rand660 \n
+add rand639 emptystring rand639 rand660
+// statement: continue
+jai rand641 rand644
+: rand658
+// assignment: newStr ++= char
+// variable: char
+dupe rand661 rand646
+add rand639 emptystring rand639 rand661
+// statement: continue
+jai rand641 rand644
+: rand650
+jai rand641 rand644
+: rand642
+// statement: return newStr
+// variable: newStr
+ret rand639
+~
+~ utils:inBox
+// segment: return x > x1 && y > y1 && x < x2 && y < y2;
+// statement: return x > x1 && y > y1 && x < x2 && y < y2
+// operation: x > x1 && y > y1 && x < x2 && y < y2
+// operation: x > x1&&y > y1&&x < x2
+// operation: x > x1&&y > y1
+// comparison: x > x1
+// argument: x
+// argument: x1
+gtr rand675 arg0 arg2
+// comparison: y > y1
+// argument: y
+// argument: y1
+gtr rand676 arg1 arg3
+and rand673 rand675 rand676
+// comparison: x < x2
+// argument: x
+// argument: x2
+sml rand674 arg0 arg4
+and rand671 rand673 rand674
+// comparison: y < y2
+// argument: y
+// argument: y2
+sml rand672 arg1 arg5
+and rand670 rand671 rand672
+ret rand670
+~
+~ updateButtons
+// segment: num gap = miscData["buttonGap"];\n\nnum size = miscData["topbarHeight"] - miscData["borderRadius"];\nnum realSize = miscData["buttonSize"];\nnum space = size + gap;\n\nx = buttonFrame.x2 - (size / 2);\ny = buttonFrame.getY();\n\nbuttons = win.buttons;\nfor (i, buttons.length) {\nbuttons[i].update(x, y, realSize, theme, win, surface);\nx -= space;\n}
+// assignment: num gap = miscData["buttonGap"]
+// key: miscData["buttonGap"]
+// string: "buttonGap"
+set str rand693 buttonGap
+// argument: miscData
+obj get arg4 rand692 rand693
+set str rand694  doesnt exist on miscData
+add rand694 rand693 rand694
+ernull rand692 rand694
+// assignment: num size = miscData["topbarHeight"] - miscData["borderRadius"]
+// operation: miscData["topbarHeight"]-miscData["borderRadius"]
+// key: miscData["topbarHeight"]
+// string: "topbarHeight"
+set str rand698 topbarHeight
+// argument: miscData
+obj get arg4 rand696 rand698
+set str rand699  doesnt exist on miscData
+add rand699 rand698 rand699
+ernull rand696 rand699
+// key: miscData["borderRadius"]
+// string: "borderRadius"
+set str rand700 borderRadius
+// argument: miscData
+obj get arg4 rand697 rand700
+set str rand701  doesnt exist on miscData
+add rand701 rand700 rand701
+ernull rand697 rand701
+sub rand695 rand696 rand697
+// assignment: num realSize = miscData["buttonSize"]
+// key: miscData["buttonSize"]
+// string: "buttonSize"
+set str rand703 buttonSize
+// argument: miscData
+obj get arg4 rand702 rand703
+set str rand704  doesnt exist on miscData
+add rand704 rand703 rand704
+ernull rand702 rand704
+// assignment: num space = size + gap
+// operation: size+gap
+// variable: size
+// variable: gap
+add rand705 rand695 rand692
+// assignment: x = buttonFrame.x2 - (size / 2)
+// operation: buttonFrame.x2-(size / 2)
+// attribute: buttonFrame.x2
+// argument: buttonFrame
+set str rand710 attributes
+obj get arg1 rand709 rand710
+set str rand710 x2
+obj get rand709 rand707 rand710
+set str rand711 x2 attribute is null
+errnull rand707 rand711
+// operation: (size / 2)
+// variable: size
+// number: 2
+set num rand712 2
+div rand708 rand695 rand712
+sub rand706 rand707 rand708
+// assignment: y = buttonFrame.getY()
+// method: buttonFrame.getY()
+// argument: buttonFrame
+set str rand715 methods
+obj get arg1 rand714 rand715
+set str rand715 getY
+obj get rand714 rand714 rand715
+callgetvar rand713 rand714 mthd::getY:1441a7909c087dbbe7ce59881b9df8b9 arg1 
+// assignment: buttons = win.buttons
+// attribute: win.buttons
+// argument: win
+set str rand718 attributes
+obj get arg2 rand717 rand718
+set str rand718 buttons
+obj get rand717 rand716 rand718
+// arg_branch: for (i, buttons.length) {\nbuttons[i].update(x, y, realSize, theme, win, surface);\nx -= space;\n}
+// variable: i
+set num rand722 1
+set num rand723 0
+// attribute: buttons.length
+// variable: buttons
+len rand719 rand716
+: rand720
+sml rand724 rand723 rand719
+jn rand721 rand724
+// segment: buttons[i].update(x, y, realSize, theme, win, surface);\nx -= space;
+// method: buttons[i].update(x, y, realSize, theme, win, surface)
+// key: buttons[i]
+// variable: i
+// variable: buttons
+obj get rand716 rand725 rand723
+set str rand726  doesnt exist on buttons
+add rand726 rand723 rand726
+ernull rand725 rand726
+// variable: x
+// variable: y
+// variable: realSize
+// argument: theme
+// argument: win
+// argument: surface
+set str rand728 methods
+obj get rand725 rand727 rand728
+set str rand728 update
+obj get rand727 rand727 rand728
+callvar rand727 mthd::update:1441a7909c087dbbe7ce59881b9df8b9 rand725 rand706 rand713 rand702 arg0 arg2 arg3
+// assignment: x -= space
+// variable: space
+dupe rand729 rand705
+sub rand706 rand706 rand729
+jai rand720 rand723
+: rand721
 ret
 ~
-~ window:graphics:io:getScreenSize
-const screen_width rand608
-const screen_height rand609
-set obj rand610 []
-arr add rand610 rand608
-arr add rand610 rand609
-ret rand610
+~ getButtonWidthX
+// segment: num size = miscData["topbarHeight"] - miscData["borderRadius"];\nnum realSize = miscData["buttonSize"];\nnum gap = miscData["buttonGap"];\nnum space = size + gap;\n\nx = right - (size / 2);\n\nx -= win.buttons.length - 1 * space + size - 1.5;\n\nreturn x;
+// assignment: num size = miscData["topbarHeight"] - miscData["borderRadius"]
+// operation: miscData["topbarHeight"]-miscData["borderRadius"]
+// key: miscData["topbarHeight"]
+// string: "topbarHeight"
+set str rand737 topbarHeight
+// argument: miscData
+obj get arg2 rand735 rand737
+set str rand738  doesnt exist on miscData
+add rand738 rand737 rand738
+ernull rand735 rand738
+// key: miscData["borderRadius"]
+// string: "borderRadius"
+set str rand739 borderRadius
+// argument: miscData
+obj get arg2 rand736 rand739
+set str rand740  doesnt exist on miscData
+add rand740 rand739 rand740
+ernull rand736 rand740
+sub rand734 rand735 rand736
+// assignment: num realSize = miscData["buttonSize"]
+// key: miscData["buttonSize"]
+// string: "buttonSize"
+set str rand742 buttonSize
+// argument: miscData
+obj get arg2 rand741 rand742
+set str rand743  doesnt exist on miscData
+add rand743 rand742 rand743
+ernull rand741 rand743
+// assignment: num gap = miscData["buttonGap"]
+// key: miscData["buttonGap"]
+// string: "buttonGap"
+set str rand745 buttonGap
+// argument: miscData
+obj get arg2 rand744 rand745
+set str rand746  doesnt exist on miscData
+add rand746 rand745 rand746
+ernull rand744 rand746
+// assignment: num space = size + gap
+// operation: size+gap
+// variable: size
+// variable: gap
+add rand747 rand734 rand744
+// assignment: x = right - (size / 2)
+// operation: right-(size / 2)
+// argument: right
+// operation: (size / 2)
+// variable: size
+// number: 2
+set num rand750 2
+div rand749 rand734 rand750
+sub rand748 arg0 rand749
+// assignment: x -= win.buttons.length - 1 * space + size - 1.5
+// operation: win.buttons.length-1*space+size-1.5
+// operation: win.buttons.length-1*space+size
+// operation: win.buttons.length-1*space
+// operation: win.buttons.length-1
+// attribute: win.buttons.length
+// attribute: win.buttons
+// argument: win
+set str rand760 attributes
+obj get arg1 rand759 rand760
+set str rand760 buttons
+obj get rand759 rand758 rand760
+len rand756 rand758
+// number: 1
+set num rand757 1
+sub rand755 rand756 rand757
+// variable: space
+mul rand754 rand755 rand747
+// variable: size
+add rand752 rand754 rand734
+// number: 1.5
+set num rand753 1.5
+sub rand751 rand752 rand753
+sub rand748 rand748 rand751
+// statement: return x
+// variable: x
+ret rand748
 ~
-~ window:graphics:io:getCurrentMs
-const ms rand612
-ret rand612
-~
-~ window:graphics:math:sin
-sin rand615 arg0
-ret rand615
-~
-~ window:graphics:math:cos
-cos rand618 arg0
-ret rand618
-~
-~ window:graphics:math:tan
-tan rand621 arg0
-ret rand621
-~
-~ window:graphics:math:round
-round rand624 arg0
-ret rand624
-~
-~ window:graphics:math:floor
-floor rand627 arg0
-ret rand627
-~
-~ window:graphics:math:ceiling
-ceiling rand630 arg0
-ret rand630
-~
-~ window:graphics:math:lerp
-sub rand637 arg1 arg0
-mul rand636 rand637 arg2
-add rand635 rand636 arg0
-ret rand635
-~
-~ window:graphics:math:mid
-add rand642 arg0 arg1
-set num rand643 2
-div rand641 rand642 rand643
-ret rand641
-~
-~ window:graphics:getDefaultFrame
-callget rand646 window:graphics:io:getScreenSize 
-set num rand651 0
-obj get rand646 rand649 rand651
-set str rand652  doesnt exist on screenSize
-add rand652 rand651 rand652
-ernull rand649 rand652
-set num rand650 -0.5
-mul rand648 rand649 rand650
-set num rand656 1
-obj get rand646 rand654 rand656
-set str rand657  doesnt exist on screenSize
-add rand657 rand656 rand657
-ernull rand654 rand657
-set num rand655 -0.5
-mul rand653 rand654 rand655
-set num rand661 0
-obj get rand646 rand659 rand661
-set str rand662  doesnt exist on screenSize
-add rand662 rand661 rand662
-ernull rand659 rand662
-set num rand660 0.5
-mul rand658 rand659 rand660
-set num rand666 1
-obj get rand646 rand664 rand666
-set str rand667  doesnt exist on screenSize
-add rand667 rand666 rand667
-ernull rand664 rand667
-set num rand665 0.5
-mul rand663 rand664 rand665
-set obj rand647 {"methods":{".cns":"~ mthd:constructor\nset str rand676 attributes\nobj get arg0 rand675 rand676\nset str rand676 x1\nobj get rand675 rand674 rand676\ndupe rand674 arg1\nobj set rand675 rand676 rand674\nset str rand679 attributes\nobj get arg0 rand678 rand679\nset str rand679 y1\nobj get rand678 rand677 rand679\ndupe rand677 arg2\nobj set rand678 rand679 rand677\nset str rand682 attributes\nobj get arg0 rand681 rand682\nset str rand682 x2\nobj get rand681 rand680 rand682\ndupe rand680 arg3\nobj set rand681 rand682 rand680\nset str rand685 attributes\nobj get arg0 rand684 rand685\nset str rand685 y2\nobj get rand684 rand683 rand685\ndupe rand683 arg4\nobj set rand684 rand685 rand683\nret\n~","getX":"~ mthd:getX\nset str rand689 attributes\nobj get arg0 rand688 rand689\nset str rand689 x1\nobj get rand688 rand687 rand689\nset str rand690 x1 attribute is null\nerrnull rand687 rand690\nset str rand693 attributes\nobj get arg0 rand692 rand693\nset str rand693 x2\nobj get rand692 rand691 rand693\nset str rand694 x2 attribute is null\nerrnull rand691 rand694\ncallget rand686 window:graphics:math:mid rand687 rand691\nret rand686\nret\n~","getY":"~ mthd:getY\nset str rand698 attributes\nobj get arg0 rand697 rand698\nset str rand698 y1\nobj get rand697 rand696 rand698\nset str rand699 y1 attribute is null\nerrnull rand696 rand699\nset str rand702 attributes\nobj get arg0 rand701 rand702\nset str rand702 y2\nobj get rand701 rand700 rand702\nset str rand703 y2 attribute is null\nerrnull rand700 rand703\ncallget rand695 window:graphics:math:mid rand696 rand700\nret rand695\nret\n~","getW":"~ mthd:getW\nset str rand708 attributes\nobj get arg0 rand707 rand708\nset str rand708 x2\nobj get rand707 rand705 rand708\nset str rand709 x2 attribute is null\nerrnull rand705 rand709\nset str rand711 attributes\nobj get arg0 rand710 rand711\nset str rand711 x1\nobj get rand710 rand706 rand711\nset str rand712 x1 attribute is null\nerrnull rand706 rand712\nsub rand704 rand705 rand706\nret rand704\nret\n~","getH":"~ mthd:getH\nset str rand717 attributes\nobj get arg0 rand716 rand717\nset str rand717 y2\nobj get rand716 rand714 rand717\nset str rand718 y2 attribute is null\nerrnull rand714 rand718\nset str rand720 attributes\nobj get arg0 rand719 rand720\nset str rand720 y1\nobj get rand719 rand715 rand720\nset str rand721 y1 attribute is null\nerrnull rand715 rand721\nsub rand713 rand714 rand715\nret rand713\nret\n~","getTL":"~ mthd:getTL\nset obj rand722 []\nset str rand725 attributes\nobj get arg0 rand724 rand725\nset str rand725 x1\nobj get rand724 rand723 rand725\nset str rand726 x1 attribute is null\nerrnull rand723 rand726\narr add rand722 rand723\nset str rand729 attributes\nobj get arg0 rand728 rand729\nset str rand729 y2\nobj get rand728 rand727 rand729\nset str rand730 y2 attribute is null\nerrnull rand727 rand730\narr add rand722 rand727\nret rand722\nret\n~","getT":"~ mthd:getT\nset obj rand731 []\nset str rand734 methods\nobj get arg0 rand733 rand734\nset str rand734 getX\nobj get rand733 rand733 rand734\ncallgetvar rand732 rand733 mthd:getX arg0 \narr add rand731 rand732\nset str rand737 attributes\nobj get arg0 rand736 rand737\nset str rand737 y2\nobj get rand736 rand735 rand737\nset str rand738 y2 attribute is null\nerrnull rand735 rand738\narr add rand731 rand735\nret rand731\nret\n~","getTR":"~ mthd:getTR\nset obj rand739 []\nset str rand742 attributes\nobj get arg0 rand741 rand742\nset str rand742 x2\nobj get rand741 rand740 rand742\nset str rand743 x2 attribute is null\nerrnull rand740 rand743\narr add rand739 rand740\nset str rand746 attributes\nobj get arg0 rand745 rand746\nset str rand746 y2\nobj get rand745 rand744 rand746\nset str rand747 y2 attribute is null\nerrnull rand744 rand747\narr add rand739 rand744\nret rand739\nret\n~","getL":"~ mthd:getL\nset obj rand748 []\nset str rand751 attributes\nobj get arg0 rand750 rand751\nset str rand751 x1\nobj get rand750 rand749 rand751\nset str rand752 x1 attribute is null\nerrnull rand749 rand752\narr add rand748 rand749\nset str rand755 methods\nobj get arg0 rand754 rand755\nset str rand755 getY\nobj get rand754 rand754 rand755\ncallgetvar rand753 rand754 mthd:getY arg0 \narr add rand748 rand753\nret rand748\nret\n~","getM":"~ mthd:getM\nset obj rand756 []\nset str rand759 methods\nobj get arg0 rand758 rand759\nset str rand759 getX\nobj get rand758 rand758 rand759\ncallgetvar rand757 rand758 mthd:getX arg0 \narr add rand756 rand757\nset str rand762 methods\nobj get arg0 rand761 rand762\nset str rand762 getY\nobj get rand761 rand761 rand762\ncallgetvar rand760 rand761 mthd:getY arg0 \narr add rand756 rand760\nret rand756\nret\n~","getR":"~ mthd:getR\nset obj rand763 []\nset str rand766 attributes\nobj get arg0 rand765 rand766\nset str rand766 x2\nobj get rand765 rand764 rand766\nset str rand767 x2 attribute is null\nerrnull rand764 rand767\narr add rand763 rand764\nset str rand770 methods\nobj get arg0 rand769 rand770\nset str rand770 getY\nobj get rand769 rand769 rand770\ncallgetvar rand768 rand769 mthd:getY arg0 \narr add rand763 rand768\nret rand763\nret\n~","getBL":"~ mthd:getBL\nset obj rand771 []\nset str rand774 attributes\nobj get arg0 rand773 rand774\nset str rand774 x1\nobj get rand773 rand772 rand774\nset str rand775 x1 attribute is null\nerrnull rand772 rand775\narr add rand771 rand772\nset str rand778 attributes\nobj get arg0 rand777 rand778\nset str rand778 y1\nobj get rand777 rand776 rand778\nset str rand779 y1 attribute is null\nerrnull rand776 rand779\narr add rand771 rand776\nret rand771\nret\n~","getB":"~ mthd:getB\nset obj rand780 []\nset str rand783 methods\nobj get arg0 rand782 rand783\nset str rand783 getX\nobj get rand782 rand782 rand783\ncallgetvar rand781 rand782 mthd:getX arg0 \narr add rand780 rand781\nset str rand786 attributes\nobj get arg0 rand785 rand786\nset str rand786 y1\nobj get rand785 rand784 rand786\nset str rand787 y1 attribute is null\nerrnull rand784 rand787\narr add rand780 rand784\nret rand780\nret\n~","getBR":"~ mthd:getBR\nset obj rand788 []\nset str rand791 attributes\nobj get arg0 rand790 rand791\nset str rand791 x2\nobj get rand790 rand789 rand791\nset str rand792 x2 attribute is null\nerrnull rand789 rand792\narr add rand788 rand789\nset str rand795 attributes\nobj get arg0 rand794 rand795\nset str rand795 y1\nobj get rand794 rand793 rand795\nset str rand796 y1 attribute is null\nerrnull rand793 rand796\narr add rand788 rand793\nret rand788\nret\n~","toString":"~ mthd:toString\nset str rand808 Frame{\nset str rand811 attributes\nobj get arg0 rand810 rand811\nset str rand811 x1\nobj get rand810 rand809 rand811\nset str rand812 x1 attribute is null\nerrnull rand809 rand812\nadd rand806 emptystring rand808 rand809\nset str rand814 attributes\nobj get arg0 rand813 rand814\nset str rand814 y1\nobj get rand813 rand807 rand814\nset str rand815 y1 attribute is null\nerrnull rand807 rand815\nadd rand804 emptystring rand806 comma rand807\nset str rand805 to\nadd rand802 emptystring rand804 space rand805\nset str rand817 attributes\nobj get arg0 rand816 rand817\nset str rand817 x2\nobj get rand816 rand803 rand817\nset str rand818 x2 attribute is null\nerrnull rand803 rand818\nadd rand800 emptystring rand802 space rand803\nset str rand820 attributes\nobj get arg0 rand819 rand820\nset str rand820 y2\nobj get rand819 rand801 rand820\nset str rand821 y2 attribute is null\nerrnull rand801 rand821\nadd rand798 emptystring rand800 comma rand801\nset str rand799 }\nadd rand797 emptystring rand798 rand799\nret rand797\nret\n~"},"attributes":{}}
-set str rand669 methods
-obj get rand647 rand668 rand669
-set str rand669 .cns
-obj get rand668 rand668 rand669
-callvar rand668 mthd:constructor rand647 rand648 rand653 rand658 rand663
-ret rand647
-~
-~ window:graphics:cloneFrame
-set str rand827 attributes
-obj get arg0 rand826 rand827
-set str rand827 x1
-obj get rand826 rand825 rand827
-set str rand828 x1 attribute is null
-errnull rand825 rand828
-set str rand831 attributes
-obj get arg0 rand830 rand831
-set str rand831 y1
-obj get rand830 rand829 rand831
-set str rand832 y1 attribute is null
-errnull rand829 rand832
-set str rand835 attributes
-obj get arg0 rand834 rand835
-set str rand835 x2
-obj get rand834 rand833 rand835
-set str rand836 x2 attribute is null
-errnull rand833 rand836
+~ updateTopbar
+// segment: num borderRad = miscData["borderRadius"];\nnum height = miscData["topbarHeight"];\nnum textSize = 10;\n\nFrame topbarFrame = graphics:cloneFrame(winFrame);\ntopbarFrame.y1 = topbarFrame.y2 - height + borderRad;\n\nnum buttonSize = miscData["buttonSize"];\nnum buttonsX = getButtonWidthX(topbarFrame.x2, win, miscData);\n\n\nsurface.setColor(theme.primary);\nsurface.rect(topbarFrame.x1, topbarFrame.y1, topbarFrame.x2, topbarFrame.y2, borderRad);\n\nFrame titleFrame = graphics:cloneFrame(topbarFrame);\ntitleFrame.x2 = buttonsX;\n\n\n\n\nsurface.setColor(theme.text);\nsurface.text(win.title, textSize, titleFrame.getX() - (win.title.length * textSize * .5), titleFrame.getY() - 6.5);\n\n\nsurface.setColor(theme.secondary);\nsurface.path([\n[ titleFrame.x2, titleFrame.y1 - half borderRad + 5 ],\n[ titleFrame.x2, titleFrame.y2 + half borderRad - 5 ],\n], 2);\n\n\nFrame buttonFrame = graphics:cloneFrame(topbarFrame);\nbuttonFrame.x1 = titleFrame.x2;\nupdateButtons(theme, buttonFrame, win, surface, miscData);
+// assignment: num borderRad = miscData["borderRadius"]
+// key: miscData["borderRadius"]
+// string: "borderRadius"
+set str rand768 borderRadius
+// argument: miscData
+obj get arg4 rand767 rand768
+set str rand769  doesnt exist on miscData
+add rand769 rand768 rand769
+ernull rand767 rand769
+// assignment: num height = miscData["topbarHeight"]
+// key: miscData["topbarHeight"]
+// string: "topbarHeight"
+set str rand771 topbarHeight
+// argument: miscData
+obj get arg4 rand770 rand771
+set str rand772  doesnt exist on miscData
+add rand772 rand771 rand772
+ernull rand770 rand772
+// assignment: num textSize = 10
+// number: 10
+set num rand773 10
+// assignment: Frame topbarFrame = graphics:cloneFrame(winFrame)
+// execution: graphics:cloneFrame(winFrame)
+// argument: winFrame
+callget rand774 graphics:cloneFrame arg1
+// assignment: topbarFrame.y1 = topbarFrame.y2 - height + borderRad
+// variable: topbarFrame
+// attribute: topbarFrame.y1
+// variable: topbarFrame
+set str rand778 attributes
+obj get rand774 rand777 rand778
+set str rand778 y1
+obj get rand777 rand776 rand778
+// operation: topbarFrame.y2-height+borderRad
+// operation: topbarFrame.y2-height
+// attribute: topbarFrame.y2
+// variable: topbarFrame
+set str rand782 attributes
+obj get rand774 rand781 rand782
+set str rand782 y2
+obj get rand781 rand780 rand782
+set str rand783 y2 attribute is null
+errnull rand780 rand783
+// variable: height
+sub rand779 rand780 rand770
+// variable: borderRad
+add rand776 rand779 rand767
+obj set rand777 rand778 rand776
+// assignment: num buttonSize = miscData["buttonSize"]
+// key: miscData["buttonSize"]
+// string: "buttonSize"
+set str rand785 buttonSize
+// argument: miscData
+obj get arg4 rand784 rand785
+set str rand786  doesnt exist on miscData
+add rand786 rand785 rand786
+ernull rand784 rand786
+// assignment: num buttonsX = getButtonWidthX(topbarFrame.x2, win, miscData)
+// execution: getButtonWidthX(topbarFrame.x2, win, miscData)
+// attribute: topbarFrame.x2
+// variable: topbarFrame
+set str rand790 attributes
+obj get rand774 rand789 rand790
+set str rand790 x2
+obj get rand789 rand788 rand790
+set str rand791 x2 attribute is null
+errnull rand788 rand791
+// argument: win
+// argument: miscData
+callget rand787 getButtonWidthX rand788 arg2 arg4
+// method: surface.setColor(theme.primary)
+// argument: surface
+// attribute: theme.primary
+// argument: theme
+set str rand796 attributes
+obj get arg0 rand795 rand796
+set str rand796 primary
+obj get rand795 rand794 rand796
+set str rand793 methods
+obj get arg3 rand792 rand793
+set str rand793 setColor
+obj get rand792 rand792 rand793
+callvar rand792 mthd::setColor:1441a7909c087dbbe7ce59881b9df8b9 arg3 rand794
+// method: surface.rect(topbarFrame.x1, topbarFrame.y1, topbarFrame.x2, topbarFrame.y2, borderRad)
+// argument: surface
+// attribute: topbarFrame.x1
+// variable: topbarFrame
+set str rand801 attributes
+obj get rand774 rand800 rand801
+set str rand801 x1
+obj get rand800 rand799 rand801
+set str rand802 x1 attribute is null
+errnull rand799 rand802
+// attribute: topbarFrame.y1
+// variable: topbarFrame
+set str rand805 attributes
+obj get rand774 rand804 rand805
+set str rand805 y1
+obj get rand804 rand803 rand805
+set str rand806 y1 attribute is null
+errnull rand803 rand806
+// attribute: topbarFrame.x2
+// variable: topbarFrame
+set str rand809 attributes
+obj get rand774 rand808 rand809
+set str rand809 x2
+obj get rand808 rand807 rand809
+set str rand810 x2 attribute is null
+errnull rand807 rand810
+// attribute: topbarFrame.y2
+// variable: topbarFrame
+set str rand813 attributes
+obj get rand774 rand812 rand813
+set str rand813 y2
+obj get rand812 rand811 rand813
+set str rand814 y2 attribute is null
+errnull rand811 rand814
+// variable: borderRad
+set str rand798 methods
+obj get arg3 rand797 rand798
+set str rand798 rect
+obj get rand797 rand797 rand798
+callvar rand797 mthd::rect:1441a7909c087dbbe7ce59881b9df8b9 arg3 rand799 rand803 rand807 rand811 rand767
+// assignment: Frame titleFrame = graphics:cloneFrame(topbarFrame)
+// execution: graphics:cloneFrame(topbarFrame)
+// variable: topbarFrame
+callget rand815 graphics:cloneFrame rand774
+// assignment: titleFrame.x2 = buttonsX
+// variable: titleFrame
+// attribute: titleFrame.x2
+// variable: titleFrame
+set str rand818 attributes
+obj get rand815 rand817 rand818
+set str rand818 x2
+obj get rand817 rand816 rand818
+// variable: buttonsX
+dupe rand816 rand787
+obj set rand817 rand818 rand816
+// method: surface.setColor(theme.text)
+// argument: surface
+// attribute: theme.text
+// argument: theme
+set str rand823 attributes
+obj get arg0 rand822 rand823
+set str rand823 text
+obj get rand822 rand821 rand823
+set str rand820 methods
+obj get arg3 rand819 rand820
+set str rand820 setColor
+obj get rand819 rand819 rand820
+callvar rand819 mthd::setColor:1441a7909c087dbbe7ce59881b9df8b9 arg3 rand821
+// method: surface.text(win.title, textSize, titleFrame.getX() - (win.title.length * textSize * .5), titleFrame.getY() - 6.5)
+// argument: surface
+// attribute: win.title
+// argument: win
+set str rand828 attributes
+obj get arg2 rand827 rand828
+set str rand828 title
+obj get rand827 rand826 rand828
+// variable: textSize
+// operation: titleFrame.getX() - (win.title.length * textSize * .5)
+// method: titleFrame.getX()
+// variable: titleFrame
+set str rand833 methods
+obj get rand815 rand832 rand833
+set str rand833 getX
+obj get rand832 rand832 rand833
+callgetvar rand830 rand832 mthd::getX:1441a7909c087dbbe7ce59881b9df8b9 rand815 
+// operation: (win.title.length * textSize * .5)
+// operation: win.title.length*textSize
+// attribute: win.title.length
+// attribute: win.title
+// argument: win
 set str rand839 attributes
-obj get arg0 rand838 rand839
-set str rand839 y2
+obj get arg2 rand838 rand839
+set str rand839 title
 obj get rand838 rand837 rand839
-set str rand840 y2 attribute is null
-errnull rand837 rand840
-set obj rand824 {"methods":{".cns":"~ mthd:constructor\nset str rand849 attributes\nobj get arg0 rand848 rand849\nset str rand849 x1\nobj get rand848 rand847 rand849\ndupe rand847 arg1\nobj set rand848 rand849 rand847\nset str rand852 attributes\nobj get arg0 rand851 rand852\nset str rand852 y1\nobj get rand851 rand850 rand852\ndupe rand850 arg2\nobj set rand851 rand852 rand850\nset str rand855 attributes\nobj get arg0 rand854 rand855\nset str rand855 x2\nobj get rand854 rand853 rand855\ndupe rand853 arg3\nobj set rand854 rand855 rand853\nset str rand858 attributes\nobj get arg0 rand857 rand858\nset str rand858 y2\nobj get rand857 rand856 rand858\ndupe rand856 arg4\nobj set rand857 rand858 rand856\nret\n~","getX":"~ mthd:getX\nset str rand862 attributes\nobj get arg0 rand861 rand862\nset str rand862 x1\nobj get rand861 rand860 rand862\nset str rand863 x1 attribute is null\nerrnull rand860 rand863\nset str rand866 attributes\nobj get arg0 rand865 rand866\nset str rand866 x2\nobj get rand865 rand864 rand866\nset str rand867 x2 attribute is null\nerrnull rand864 rand867\ncallget rand859 window:graphics:math:mid rand860 rand864\nret rand859\nret\n~","getY":"~ mthd:getY\nset str rand871 attributes\nobj get arg0 rand870 rand871\nset str rand871 y1\nobj get rand870 rand869 rand871\nset str rand872 y1 attribute is null\nerrnull rand869 rand872\nset str rand875 attributes\nobj get arg0 rand874 rand875\nset str rand875 y2\nobj get rand874 rand873 rand875\nset str rand876 y2 attribute is null\nerrnull rand873 rand876\ncallget rand868 window:graphics:math:mid rand869 rand873\nret rand868\nret\n~","getW":"~ mthd:getW\nset str rand881 attributes\nobj get arg0 rand880 rand881\nset str rand881 x2\nobj get rand880 rand878 rand881\nset str rand882 x2 attribute is null\nerrnull rand878 rand882\nset str rand884 attributes\nobj get arg0 rand883 rand884\nset str rand884 x1\nobj get rand883 rand879 rand884\nset str rand885 x1 attribute is null\nerrnull rand879 rand885\nsub rand877 rand878 rand879\nret rand877\nret\n~","getH":"~ mthd:getH\nset str rand890 attributes\nobj get arg0 rand889 rand890\nset str rand890 y2\nobj get rand889 rand887 rand890\nset str rand891 y2 attribute is null\nerrnull rand887 rand891\nset str rand893 attributes\nobj get arg0 rand892 rand893\nset str rand893 y1\nobj get rand892 rand888 rand893\nset str rand894 y1 attribute is null\nerrnull rand888 rand894\nsub rand886 rand887 rand888\nret rand886\nret\n~","getTL":"~ mthd:getTL\nset obj rand895 []\nset str rand898 attributes\nobj get arg0 rand897 rand898\nset str rand898 x1\nobj get rand897 rand896 rand898\nset str rand899 x1 attribute is null\nerrnull rand896 rand899\narr add rand895 rand896\nset str rand902 attributes\nobj get arg0 rand901 rand902\nset str rand902 y2\nobj get rand901 rand900 rand902\nset str rand903 y2 attribute is null\nerrnull rand900 rand903\narr add rand895 rand900\nret rand895\nret\n~","getT":"~ mthd:getT\nset obj rand904 []\nset str rand907 methods\nobj get arg0 rand906 rand907\nset str rand907 getX\nobj get rand906 rand906 rand907\ncallgetvar rand905 rand906 mthd:getX arg0 \narr add rand904 rand905\nset str rand910 attributes\nobj get arg0 rand909 rand910\nset str rand910 y2\nobj get rand909 rand908 rand910\nset str rand911 y2 attribute is null\nerrnull rand908 rand911\narr add rand904 rand908\nret rand904\nret\n~","getTR":"~ mthd:getTR\nset obj rand912 []\nset str rand915 attributes\nobj get arg0 rand914 rand915\nset str rand915 x2\nobj get rand914 rand913 rand915\nset str rand916 x2 attribute is null\nerrnull rand913 rand916\narr add rand912 rand913\nset str rand919 attributes\nobj get arg0 rand918 rand919\nset str rand919 y2\nobj get rand918 rand917 rand919\nset str rand920 y2 attribute is null\nerrnull rand917 rand920\narr add rand912 rand917\nret rand912\nret\n~","getL":"~ mthd:getL\nset obj rand921 []\nset str rand924 attributes\nobj get arg0 rand923 rand924\nset str rand924 x1\nobj get rand923 rand922 rand924\nset str rand925 x1 attribute is null\nerrnull rand922 rand925\narr add rand921 rand922\nset str rand928 methods\nobj get arg0 rand927 rand928\nset str rand928 getY\nobj get rand927 rand927 rand928\ncallgetvar rand926 rand927 mthd:getY arg0 \narr add rand921 rand926\nret rand921\nret\n~","getM":"~ mthd:getM\nset obj rand929 []\nset str rand932 methods\nobj get arg0 rand931 rand932\nset str rand932 getX\nobj get rand931 rand931 rand932\ncallgetvar rand930 rand931 mthd:getX arg0 \narr add rand929 rand930\nset str rand935 methods\nobj get arg0 rand934 rand935\nset str rand935 getY\nobj get rand934 rand934 rand935\ncallgetvar rand933 rand934 mthd:getY arg0 \narr add rand929 rand933\nret rand929\nret\n~","getR":"~ mthd:getR\nset obj rand936 []\nset str rand939 attributes\nobj get arg0 rand938 rand939\nset str rand939 x2\nobj get rand938 rand937 rand939\nset str rand940 x2 attribute is null\nerrnull rand937 rand940\narr add rand936 rand937\nset str rand943 methods\nobj get arg0 rand942 rand943\nset str rand943 getY\nobj get rand942 rand942 rand943\ncallgetvar rand941 rand942 mthd:getY arg0 \narr add rand936 rand941\nret rand936\nret\n~","getBL":"~ mthd:getBL\nset obj rand944 []\nset str rand947 attributes\nobj get arg0 rand946 rand947\nset str rand947 x1\nobj get rand946 rand945 rand947\nset str rand948 x1 attribute is null\nerrnull rand945 rand948\narr add rand944 rand945\nset str rand951 attributes\nobj get arg0 rand950 rand951\nset str rand951 y1\nobj get rand950 rand949 rand951\nset str rand952 y1 attribute is null\nerrnull rand949 rand952\narr add rand944 rand949\nret rand944\nret\n~","getB":"~ mthd:getB\nset obj rand953 []\nset str rand956 methods\nobj get arg0 rand955 rand956\nset str rand956 getX\nobj get rand955 rand955 rand956\ncallgetvar rand954 rand955 mthd:getX arg0 \narr add rand953 rand954\nset str rand959 attributes\nobj get arg0 rand958 rand959\nset str rand959 y1\nobj get rand958 rand957 rand959\nset str rand960 y1 attribute is null\nerrnull rand957 rand960\narr add rand953 rand957\nret rand953\nret\n~","getBR":"~ mthd:getBR\nset obj rand961 []\nset str rand964 attributes\nobj get arg0 rand963 rand964\nset str rand964 x2\nobj get rand963 rand962 rand964\nset str rand965 x2 attribute is null\nerrnull rand962 rand965\narr add rand961 rand962\nset str rand968 attributes\nobj get arg0 rand967 rand968\nset str rand968 y1\nobj get rand967 rand966 rand968\nset str rand969 y1 attribute is null\nerrnull rand966 rand969\narr add rand961 rand966\nret rand961\nret\n~","toString":"~ mthd:toString\nset str rand981 Frame{\nset str rand984 attributes\nobj get arg0 rand983 rand984\nset str rand984 x1\nobj get rand983 rand982 rand984\nset str rand985 x1 attribute is null\nerrnull rand982 rand985\nadd rand979 emptystring rand981 rand982\nset str rand987 attributes\nobj get arg0 rand986 rand987\nset str rand987 y1\nobj get rand986 rand980 rand987\nset str rand988 y1 attribute is null\nerrnull rand980 rand988\nadd rand977 emptystring rand979 comma rand980\nset str rand978 to\nadd rand975 emptystring rand977 space rand978\nset str rand990 attributes\nobj get arg0 rand989 rand990\nset str rand990 x2\nobj get rand989 rand976 rand990\nset str rand991 x2 attribute is null\nerrnull rand976 rand991\nadd rand973 emptystring rand975 space rand976\nset str rand993 attributes\nobj get arg0 rand992 rand993\nset str rand993 y2\nobj get rand992 rand974 rand993\nset str rand994 y2 attribute is null\nerrnull rand974 rand994\nadd rand971 emptystring rand973 comma rand974\nset str rand972 }\nadd rand970 emptystring rand971 rand972\nret rand970\nret\n~"},"attributes":{}}
-set str rand842 methods
-obj get rand824 rand841 rand842
-set str rand842 .cns
-obj get rand841 rand841 rand842
-callvar rand841 mthd:constructor rand824 rand825 rand829 rand833 rand837
-ret rand824
-~
-~ drawTopbar
-set str rand1013 topbarHeight
-obj get arg4 rand1012 rand1013
-set str rand1014  doesnt exist on miscData
-add rand1014 rand1013 rand1014
-ernull rand1012 rand1014
-set str rand1016 borderRadius
-obj get arg4 rand1015 rand1016
-set str rand1017  doesnt exist on miscData
-add rand1017 rand1016 rand1017
-ernull rand1015 rand1017
-set num rand1018 11
-callget rand1019 window:graphics:cloneFrame arg1
-set str rand1023 attributes
-obj get rand1019 rand1022 rand1023
-set str rand1023 y1
-obj get rand1022 rand1021 rand1023
-set str rand1027 attributes
-obj get rand1019 rand1026 rand1027
-set str rand1027 y2
-obj get rand1026 rand1025 rand1027
-set str rand1028 y2 attribute is null
-errnull rand1025 rand1028
-sub rand1024 rand1025 rand1012
-add rand1021 rand1024 rand1015
-obj set rand1022 rand1023 rand1021
-set str rand1033 attributes
-obj get arg0 rand1032 rand1033
-set str rand1033 primary
-obj get rand1032 rand1031 rand1033
-set str rand1030 methods
-obj get arg3 rand1029 rand1030
-set str rand1030 setColor
-obj get rand1029 rand1029 rand1030
-callvar rand1029 mthd:setColor arg3 rand1031
-set str rand1038 attributes
-obj get rand1019 rand1037 rand1038
-set str rand1038 x1
-obj get rand1037 rand1036 rand1038
-set str rand1039 x1 attribute is null
-errnull rand1036 rand1039
-set str rand1042 attributes
-obj get rand1019 rand1041 rand1042
-set str rand1042 y1
-obj get rand1041 rand1040 rand1042
-set str rand1043 y1 attribute is null
-errnull rand1040 rand1043
-set str rand1046 attributes
-obj get rand1019 rand1045 rand1046
-set str rand1046 x2
-obj get rand1045 rand1044 rand1046
-set str rand1047 x2 attribute is null
-errnull rand1044 rand1047
-set str rand1050 attributes
-obj get rand1019 rand1049 rand1050
-set str rand1050 y2
-obj get rand1049 rand1048 rand1050
-set str rand1051 y2 attribute is null
-errnull rand1048 rand1051
-set str rand1035 methods
-obj get arg3 rand1034 rand1035
-set str rand1035 rect
-obj get rand1034 rand1034 rand1035
-callvar rand1034 mthd:rect arg3 rand1036 rand1040 rand1044 rand1048 rand1015
-callget rand1052 window:graphics:cloneFrame rand1019
-set str rand1056 attributes
-obj get rand1052 rand1055 rand1056
-set str rand1056 x2
-obj get rand1055 rand1054 rand1056
-set str rand1057 x2 attribute is null
-errnull rand1054 rand1057
-set num rand1058 100
-sub rand1054 rand1054 rand1058
-obj set rand1055 rand1056 rand1054
-set str rand1064 attributes
-obj get arg0 rand1063 rand1064
-set str rand1064 text
-obj get rand1063 rand1062 rand1064
-set str rand1061 methods
-obj get arg3 rand1060 rand1061
-set str rand1061 setColor
-obj get rand1060 rand1060 rand1061
-callvar rand1060 mthd:setColor arg3 rand1062
-set str rand1069 attributes
-obj get arg2 rand1068 rand1069
-set str rand1069 title
-obj get rand1068 rand1067 rand1069
-set str rand1074 methods
-obj get rand1052 rand1073 rand1074
-set str rand1074 getX
-obj get rand1073 rand1073 rand1074
-callgetvar rand1071 rand1073 mthd:getX rand1052 
-set str rand1080 attributes
-obj get arg2 rand1079 rand1080
-set str rand1080 title
-obj get rand1079 rand1078 rand1080
-len rand1077 rand1078
-mul rand1075 rand1077 rand1018
-set num rand1076 0.5
-mul rand1072 rand1075 rand1076
-sub rand1070 rand1071 rand1072
-set str rand1085 methods
-obj get rand1052 rand1084 rand1085
-set str rand1085 getY
-obj get rand1084 rand1084 rand1085
-callgetvar rand1082 rand1084 mthd:getY rand1052 
-set num rand1083 6.5
-sub rand1081 rand1082 rand1083
-set num rand1086 90
-set num rand1087 0
-set str rand1066 methods
-obj get arg3 rand1065 rand1066
-set str rand1066 text
-obj get rand1065 rand1065 rand1066
-callvar rand1065 mthd:text arg3 rand1067 rand1018 rand1070 rand1081 rand1086 rand1087
-set str rand1092 attributes
-obj get arg0 rand1091 rand1092
-set str rand1092 secondary
-obj get rand1091 rand1090 rand1092
-set str rand1089 methods
-obj get arg3 rand1088 rand1089
-set str rand1089 setColor
-obj get rand1088 rand1088 rand1089
-callvar rand1088 mthd:setColor arg3 rand1090
-set obj rand1095 []
-set obj rand1096 []
-set str rand1099 attributes
-obj get rand1052 rand1098 rand1099
-set str rand1099 x2
-obj get rand1098 rand1097 rand1099
-set str rand1100 x2 attribute is null
-errnull rand1097 rand1100
-arr add rand1096 rand1097
-set str rand1107 attributes
-obj get rand1052 rand1106 rand1107
-set str rand1107 y1
-obj get rand1106 rand1104 rand1107
-set str rand1108 y1 attribute is null
-errnull rand1104 rand1108
-set num rand1109 2
-div rand1105 rand1015 rand1109
-sub rand1102 rand1104 rand1105
-set num rand1103 5
-add rand1101 rand1102 rand1103
-arr add rand1096 rand1101
-arr add rand1095 rand1096
-set obj rand1110 []
-set str rand1113 attributes
-obj get rand1052 rand1112 rand1113
-set str rand1113 x2
-obj get rand1112 rand1111 rand1113
-set str rand1114 x2 attribute is null
-errnull rand1111 rand1114
-arr add rand1110 rand1111
-set str rand1121 attributes
-obj get rand1052 rand1120 rand1121
-set str rand1121 y2
-obj get rand1120 rand1118 rand1121
-set str rand1122 y2 attribute is null
-errnull rand1118 rand1122
-set num rand1123 2
-div rand1119 rand1015 rand1123
-add rand1116 rand1118 rand1119
-set num rand1117 5
-sub rand1115 rand1116 rand1117
-arr add rand1110 rand1115
-arr add rand1095 rand1110
-set num rand1124 2
-set bool rand1125 false
-set str rand1094 methods
-obj get arg3 rand1093 rand1094
-set str rand1094 path
-obj get rand1093 rand1093 rand1094
-callvar rand1093 mthd:path arg3 rand1095 rand1124 rand1125
+len rand836 rand837
+// variable: textSize
+mul rand834 rand836 rand773
+// number: .5
+set num rand835 0.5
+mul rand831 rand834 rand835
+sub rand829 rand830 rand831
+// operation: titleFrame.getY() - 6.5
+// method: titleFrame.getY()
+// variable: titleFrame
+set str rand844 methods
+obj get rand815 rand843 rand844
+set str rand844 getY
+obj get rand843 rand843 rand844
+callgetvar rand841 rand843 mthd::getY:1441a7909c087dbbe7ce59881b9df8b9 rand815 
+// number: 6.5
+set num rand842 6.5
+sub rand840 rand841 rand842
+// number: 90
+set num rand845 90
+// number: 0
+set num rand846 0
+set str rand825 methods
+obj get arg3 rand824 rand825
+set str rand825 text
+obj get rand824 rand824 rand825
+callvar rand824 mthd::text:1441a7909c087dbbe7ce59881b9df8b9 arg3 rand826 rand773 rand829 rand840 rand845 rand846
+// method: surface.setColor(theme.secondary)
+// argument: surface
+// attribute: theme.secondary
+// argument: theme
+set str rand851 attributes
+obj get arg0 rand850 rand851
+set str rand851 secondary
+obj get rand850 rand849 rand851
+set str rand848 methods
+obj get arg3 rand847 rand848
+set str rand848 setColor
+obj get rand847 rand847 rand848
+callvar rand847 mthd::setColor:1441a7909c087dbbe7ce59881b9df8b9 arg3 rand849
+// method: surface.path([\n[ titleFrame.x2, titleFrame.y1 - half borderRad + 5 ],\n[ titleFrame.x2, titleFrame.y2 + half borderRad - 5 ],\n], 2)
+// argument: surface
+// array: [\n[ titleFrame.x2, titleFrame.y1 - half borderRad + 5 ],\n[ titleFrame.x2, titleFrame.y2 + half borderRad - 5 ],\n]
+set obj rand854 []
+// array: [ titleFrame.x2, titleFrame.y1 - half borderRad + 5 ]
+set obj rand855 []
+// attribute: titleFrame.x2
+// variable: titleFrame
+set str rand858 attributes
+obj get rand815 rand857 rand858
+set str rand858 x2
+obj get rand857 rand856 rand858
+set str rand859 x2 attribute is null
+errnull rand856 rand859
+arr add rand855 rand856
+// operation: titleFrame.y1 - half borderRad + 5
+// operation: titleFrame.y1-half borderRad
+// attribute: titleFrame.y1
+// variable: titleFrame
+set str rand866 attributes
+obj get rand815 rand865 rand866
+set str rand866 y1
+obj get rand865 rand863 rand866
+set str rand867 y1 attribute is null
+errnull rand863 rand867
+// statement: half borderRad
+// variable: borderRad
+set num rand868 2
+div rand864 rand767 rand868
+sub rand861 rand863 rand864
+// number: 5
+set num rand862 5
+add rand860 rand861 rand862
+arr add rand855 rand860
+arr add rand854 rand855
+// array: [ titleFrame.x2, titleFrame.y2 + half borderRad - 5 ]
+set obj rand869 []
+// attribute: titleFrame.x2
+// variable: titleFrame
+set str rand872 attributes
+obj get rand815 rand871 rand872
+set str rand872 x2
+obj get rand871 rand870 rand872
+set str rand873 x2 attribute is null
+errnull rand870 rand873
+arr add rand869 rand870
+// operation: titleFrame.y2 + half borderRad - 5
+// operation: titleFrame.y2+half borderRad
+// attribute: titleFrame.y2
+// variable: titleFrame
+set str rand880 attributes
+obj get rand815 rand879 rand880
+set str rand880 y2
+obj get rand879 rand877 rand880
+set str rand881 y2 attribute is null
+errnull rand877 rand881
+// statement: half borderRad
+// variable: borderRad
+set num rand882 2
+div rand878 rand767 rand882
+add rand875 rand877 rand878
+// number: 5
+set num rand876 5
+sub rand874 rand875 rand876
+arr add rand869 rand874
+arr add rand854 rand869
+// number: 2
+set num rand883 2
+// constant: false
+set bool rand884 false
+set str rand853 methods
+obj get arg3 rand852 rand853
+set str rand853 path
+obj get rand852 rand852 rand853
+callvar rand852 mthd::path:1441a7909c087dbbe7ce59881b9df8b9 arg3 rand854 rand883 rand884
+// assignment: Frame buttonFrame = graphics:cloneFrame(topbarFrame)
+// execution: graphics:cloneFrame(topbarFrame)
+// variable: topbarFrame
+callget rand885 graphics:cloneFrame rand774
+// assignment: buttonFrame.x1 = titleFrame.x2
+// variable: buttonFrame
+// attribute: buttonFrame.x1
+// variable: buttonFrame
+set str rand889 attributes
+obj get rand885 rand888 rand889
+set str rand889 x1
+obj get rand888 rand887 rand889
+// attribute: titleFrame.x2
+// variable: titleFrame
+set str rand891 attributes
+obj get rand815 rand890 rand891
+set str rand891 x2
+obj get rand890 rand887 rand891
+set str rand892 x2 attribute is null
+errnull rand887 rand892
+obj set rand888 rand889 rand887
+// execution: updateButtons(theme, buttonFrame, win, surface, miscData)
+// argument: theme
+// variable: buttonFrame
+// argument: win
+// argument: surface
+// argument: miscData
+call updateButtons arg0 rand885 arg2 arg3 arg4
 ret
 ~
 ~ main
-quitTo rand1130
-: rand1130
-set str rand1133 attributes
-obj get arg1 rand1132 rand1133
-set str rand1133 drawSurface
-obj get rand1132 rand1131 rand1133
-set str rand1138 attributes
-obj get arg0 rand1137 rand1138
-set str rand1138 config
-obj get rand1137 rand1135 rand1138
-set str rand1139 attributes
-obj get rand1135 rand1136 rand1139
-set str rand1139 theme
-obj get rand1136 rand1134 rand1139
-set str rand1141 methods
-obj get rand1131 rand1140 rand1141
-set str rand1141 clear
-obj get rand1140 rand1140 rand1141
-callvar rand1140 mthd:clear rand1131 
-set num rand1142 15
-set num rand1143 5
-set num rand1144 35
-obj keys rand1145 arg2
-set num rand1149 1
-set num rand1150 0
-len rand1146 rand1145
-: rand1147
-sml rand1151 rand1150 rand1146
-jn rand1148 rand1151
-obj get rand1145 rand1152 rand1150
-set str rand1153  doesnt exist on winKeys
-add rand1153 rand1150 rand1153
-ernull rand1152 rand1153
-obj get arg2 rand1154 rand1152
-set str rand1155  doesnt exist on windows
-add rand1155 rand1152 rand1155
-ernull rand1154 rand1155
-set str rand1158 attributes
-obj get rand1154 rand1157 rand1158
-set str rand1158 renderSettings
-obj get rand1157 rand1156 rand1158
-set str rand1161 attributes
-obj get rand1154 rand1160 rand1161
-set str rand1161 frame
-obj get rand1160 rand1159 rand1161
-set str rand1162 frame attribute is null
-errnull rand1159 rand1162
-set str rand1166 attributes
-obj get rand1154 rand1165 rand1166
-set str rand1166 contentFrame
-obj get rand1165 rand1164 rand1166
-set str rand1169 attributes
-obj get rand1154 rand1168 rand1169
-set str rand1169 frame
-obj get rand1168 rand1167 rand1169
-set str rand1170 frame attribute is null
-errnull rand1167 rand1170
-callget rand1164 window:graphics:cloneFrame rand1167
-obj set rand1165 rand1166 rand1164
-set str rand1173 attributes
-obj get rand1154 rand1172 rand1173
-set str rand1173 contentFrame
-obj get rand1172 rand1171 rand1173
-set str rand1174 contentFrame attribute is null
-errnull rand1171 rand1174
-set str rand1179 attributes
-obj get rand1154 rand1178 rand1179
-set str rand1179 contentFrame
-obj get rand1178 rand1176 rand1179
-set str rand1180 contentFrame attribute is null
-errnull rand1176 rand1180
-set str rand1181 attributes
-obj get rand1176 rand1177 rand1181
-set str rand1181 y2
-obj get rand1177 rand1175 rand1181
-set str rand1182 y2 attribute is null
-errnull rand1175 rand1182
-dupe rand1183 rand1144
-sub rand1175 rand1175 rand1183
-obj set rand1177 rand1181 rand1175
-set str rand1187 attributes
-obj get rand1156 rand1186 rand1187
-set str rand1187 renderBase
-obj get rand1186 rand1185 rand1187
-jn rand1188 rand1185
-set str rand1194 attributes
-obj get rand1134 rand1193 rand1194
-set str rand1194 accent
-obj get rand1193 rand1192 rand1194
-set str rand1191 methods
-obj get rand1131 rand1190 rand1191
-set str rand1191 setColor
-obj get rand1190 rand1190 rand1191
-callvar rand1190 mthd:setColor rand1131 rand1192
-set str rand1199 attributes
-obj get rand1159 rand1198 rand1199
-set str rand1199 x1
-obj get rand1198 rand1197 rand1199
-set str rand1200 x1 attribute is null
-errnull rand1197 rand1200
-set str rand1203 attributes
-obj get rand1159 rand1202 rand1203
-set str rand1203 y1
-obj get rand1202 rand1201 rand1203
-set str rand1204 y1 attribute is null
-errnull rand1201 rand1204
-set str rand1207 attributes
-obj get rand1159 rand1206 rand1207
-set str rand1207 x2
-obj get rand1206 rand1205 rand1207
-set str rand1208 x2 attribute is null
-errnull rand1205 rand1208
-set str rand1211 attributes
-obj get rand1159 rand1210 rand1211
-set str rand1211 y2
-obj get rand1210 rand1209 rand1211
-set str rand1212 y2 attribute is null
-errnull rand1209 rand1212
-add rand1213 rand1142 rand1143
-set str rand1196 methods
-obj get rand1131 rand1195 rand1196
-set str rand1196 rect
-obj get rand1195 rand1195 rand1196
-callvar rand1195 mthd:rect rand1131 rand1197 rand1201 rand1205 rand1209 rand1213
-set str rand1218 attributes
-obj get rand1134 rand1217 rand1218
-set str rand1218 background
-obj get rand1217 rand1216 rand1218
-set str rand1215 methods
-obj get rand1131 rand1214 rand1215
-set str rand1215 setColor
-obj get rand1214 rand1214 rand1215
-callvar rand1214 mthd:setColor rand1131 rand1216
-set str rand1223 attributes
-obj get rand1159 rand1222 rand1223
-set str rand1223 x1
-obj get rand1222 rand1221 rand1223
-set str rand1224 x1 attribute is null
-errnull rand1221 rand1224
-set str rand1227 attributes
-obj get rand1159 rand1226 rand1227
-set str rand1227 y1
-obj get rand1226 rand1225 rand1227
-set str rand1228 y1 attribute is null
-errnull rand1225 rand1228
-set str rand1231 attributes
-obj get rand1159 rand1230 rand1231
-set str rand1231 x2
-obj get rand1230 rand1229 rand1231
-set str rand1232 x2 attribute is null
-errnull rand1229 rand1232
-set str rand1235 attributes
-obj get rand1159 rand1234 rand1235
-set str rand1235 y2
-obj get rand1234 rand1233 rand1235
-set str rand1236 y2 attribute is null
-errnull rand1233 rand1236
-set str rand1220 methods
-obj get rand1131 rand1219 rand1220
-set str rand1220 rect
-obj get rand1219 rand1219 rand1220
-callvar rand1219 mthd:rect rand1131 rand1221 rand1225 rand1229 rand1233 rand1142
-: rand1188
-set str rand1239 attributes
-obj get rand1156 rand1238 rand1239
-set str rand1239 renderMenuBar
-obj get rand1238 rand1237 rand1239
-jn rand1240 rand1237
-set obj rand1242 {}
-set str rand1243 topbarHeight
-obj set rand1242 rand1243 rand1144
-set str rand1244 borderRadius
-obj set rand1242 rand1244 rand1142
-call drawTopbar rand1134 rand1159 rand1154 rand1131 rand1242
-: rand1240
-jai rand1147 rand1150
-: rand1148
-quitTo rand1130
+// branch: forever {\nSurface surface = graphicsState!.drawSurface;\nTheme theme = state.config.theme;\n\nsurface.clear();\n\nnum borderRadius = 15;\nnum borderThickness = 5;\n\nnum topbarHeight = 35;\nnum buttonSize = 13.5;\nnum buttonGap = 5;\n\nArr<str> winKeys = windows.keys();\nfor (i, winKeys.length) {\nstr winKey = winKeys[i];\nWindow win = windows[winKey];\nWindowRenderSettings settings = win.renderSettings;\nFrame frame = win.frame;\nwin.contentFrame = graphics:cloneFrame(win.frame);\nwin.contentFrame.y2 -= topbarHeight;\n\nif (settings.renderBase) {\nsurface.setColor(theme.accent);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius + borderThickness);\nsurface.setColor(theme.background);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius);\n}\n\n\n\n\nif (settings.renderMenuBar) {\nupdateTopbar(theme, frame, win, surface, {\ntopbarHeight,\nborderRadius,\nbuttonSize,\nbuttonGap\n});\n}\n}\n}
+quitTo rand897
+: rand897
+// segment: Surface surface = graphicsState!.drawSurface;\nTheme theme = state.config.theme;\n\nsurface.clear();\n\nnum borderRadius = 15;\nnum borderThickness = 5;\n\nnum topbarHeight = 35;\nnum buttonSize = 13.5;\nnum buttonGap = 5;\n\nArr<str> winKeys = windows.keys();\nfor (i, winKeys.length) {\nstr winKey = winKeys[i];\nWindow win = windows[winKey];\nWindowRenderSettings settings = win.renderSettings;\nFrame frame = win.frame;\nwin.contentFrame = graphics:cloneFrame(win.frame);\nwin.contentFrame.y2 -= topbarHeight;\n\nif (settings.renderBase) {\nsurface.setColor(theme.accent);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius + borderThickness);\nsurface.setColor(theme.background);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius);\n}\n\n\n\n\nif (settings.renderMenuBar) {\nupdateTopbar(theme, frame, win, surface, {\ntopbarHeight,\nborderRadius,\nbuttonSize,\nbuttonGap\n});\n}\n}
+// assignment: Surface surface = graphicsState!.drawSurface
+// attribute: graphicsState!.drawSurface
+// argument: graphicsState
+set str rand900 attributes
+obj get arg1 rand899 rand900
+set str rand900 drawSurface
+obj get rand899 rand898 rand900
+// assignment: Theme theme = state.config.theme
+// attribute: state.config.theme
+// attribute: state.config
+// argument: state
+set str rand905 attributes
+obj get arg0 rand904 rand905
+set str rand905 config
+obj get rand904 rand902 rand905
+set str rand906 attributes
+obj get rand902 rand903 rand906
+set str rand906 theme
+obj get rand903 rand901 rand906
+// method: surface.clear()
+// variable: surface
+set str rand908 methods
+obj get rand898 rand907 rand908
+set str rand908 clear
+obj get rand907 rand907 rand908
+callvar rand907 mthd::clear:1441a7909c087dbbe7ce59881b9df8b9 rand898 
+// assignment: num borderRadius = 15
+// number: 15
+set num rand909 15
+// assignment: num borderThickness = 5
+// number: 5
+set num rand910 5
+// assignment: num topbarHeight = 35
+// number: 35
+set num rand911 35
+// assignment: num buttonSize = 13.5
+// number: 13.5
+set num rand912 13.5
+// assignment: num buttonGap = 5
+// number: 5
+set num rand913 5
+// assignment: Arr<str> winKeys = windows.keys()
+// method: windows.keys()
+// argument: windows
+obj keys rand914 arg2
+// arg_branch: for (i, winKeys.length) {\nstr winKey = winKeys[i];\nWindow win = windows[winKey];\nWindowRenderSettings settings = win.renderSettings;\nFrame frame = win.frame;\nwin.contentFrame = graphics:cloneFrame(win.frame);\nwin.contentFrame.y2 -= topbarHeight;\n\nif (settings.renderBase) {\nsurface.setColor(theme.accent);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius + borderThickness);\nsurface.setColor(theme.background);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius);\n}\n\n\n\n\nif (settings.renderMenuBar) {\nupdateTopbar(theme, frame, win, surface, {\ntopbarHeight,\nborderRadius,\nbuttonSize,\nbuttonGap\n});\n}\n}
+// variable: i
+set num rand918 1
+set num rand919 0
+// attribute: winKeys.length
+// variable: winKeys
+len rand915 rand914
+: rand916
+sml rand920 rand919 rand915
+jn rand917 rand920
+// segment: str winKey = winKeys[i];\nWindow win = windows[winKey];\nWindowRenderSettings settings = win.renderSettings;\nFrame frame = win.frame;\nwin.contentFrame = graphics:cloneFrame(win.frame);\nwin.contentFrame.y2 -= topbarHeight;\n\nif (settings.renderBase) {\nsurface.setColor(theme.accent);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius + borderThickness);\nsurface.setColor(theme.background);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius);\n}\n\n\n\n\nif (settings.renderMenuBar) {\nupdateTopbar(theme, frame, win, surface, {\ntopbarHeight,\nborderRadius,\nbuttonSize,\nbuttonGap\n});\n}
+// assignment: str winKey = winKeys[i]
+// key: winKeys[i]
+// variable: i
+// variable: winKeys
+obj get rand914 rand921 rand919
+set str rand922  doesnt exist on winKeys
+add rand922 rand919 rand922
+ernull rand921 rand922
+// assignment: Window win = windows[winKey]
+// key: windows[winKey]
+// variable: winKey
+// argument: windows
+obj get arg2 rand923 rand921
+set str rand924  doesnt exist on windows
+add rand924 rand921 rand924
+ernull rand923 rand924
+// assignment: WindowRenderSettings settings = win.renderSettings
+// attribute: win.renderSettings
+// variable: win
+set str rand927 attributes
+obj get rand923 rand926 rand927
+set str rand927 renderSettings
+obj get rand926 rand925 rand927
+// assignment: Frame frame = win.frame
+// attribute: win.frame
+// variable: win
+set str rand930 attributes
+obj get rand923 rand929 rand930
+set str rand930 frame
+obj get rand929 rand928 rand930
+set str rand931 frame attribute is null
+errnull rand928 rand931
+// assignment: win.contentFrame = graphics:cloneFrame(win.frame)
+// variable: win
+// attribute: win.contentFrame
+// variable: win
+set str rand935 attributes
+obj get rand923 rand934 rand935
+set str rand935 contentFrame
+obj get rand934 rand933 rand935
+// execution: graphics:cloneFrame(win.frame)
+// attribute: win.frame
+// variable: win
+set str rand938 attributes
+obj get rand923 rand937 rand938
+set str rand938 frame
+obj get rand937 rand936 rand938
+set str rand939 frame attribute is null
+errnull rand936 rand939
+callget rand933 graphics:cloneFrame rand936
+obj set rand934 rand935 rand933
+// assignment: win.contentFrame.y2 -= topbarHeight
+// attribute: win.contentFrame
+// variable: win
+set str rand942 attributes
+obj get rand923 rand941 rand942
+set str rand942 contentFrame
+obj get rand941 rand940 rand942
+set str rand943 contentFrame attribute is null
+errnull rand940 rand943
+// attribute: win.contentFrame.y2
+// attribute: win.contentFrame
+// variable: win
+set str rand948 attributes
+obj get rand923 rand947 rand948
+set str rand948 contentFrame
+obj get rand947 rand945 rand948
+set str rand949 contentFrame attribute is null
+errnull rand945 rand949
+set str rand950 attributes
+obj get rand945 rand946 rand950
+set str rand950 y2
+obj get rand946 rand944 rand950
+set str rand951 y2 attribute is null
+errnull rand944 rand951
+// variable: topbarHeight
+dupe rand952 rand911
+sub rand944 rand944 rand952
+obj set rand946 rand950 rand944
+// arg_branch: if (settings.renderBase) {\nsurface.setColor(theme.accent);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius + borderThickness);\nsurface.setColor(theme.background);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius);\n}
+// attribute: settings.renderBase
+// variable: settings
+set str rand956 attributes
+obj get rand925 rand955 rand956
+set str rand956 renderBase
+obj get rand955 rand954 rand956
+jn rand957 rand954
+// segment: surface.setColor(theme.accent);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius + borderThickness);\nsurface.setColor(theme.background);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius);
+// method: surface.setColor(theme.accent)
+// variable: surface
+// attribute: theme.accent
+// variable: theme
+set str rand963 attributes
+obj get rand901 rand962 rand963
+set str rand963 accent
+obj get rand962 rand961 rand963
+set str rand960 methods
+obj get rand898 rand959 rand960
+set str rand960 setColor
+obj get rand959 rand959 rand960
+callvar rand959 mthd::setColor:1441a7909c087dbbe7ce59881b9df8b9 rand898 rand961
+// method: surface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius + borderThickness)
+// variable: surface
+// attribute: frame.x1
+// variable: frame
+set str rand968 attributes
+obj get rand928 rand967 rand968
+set str rand968 x1
+obj get rand967 rand966 rand968
+set str rand969 x1 attribute is null
+errnull rand966 rand969
+// attribute: frame.y1
+// variable: frame
+set str rand972 attributes
+obj get rand928 rand971 rand972
+set str rand972 y1
+obj get rand971 rand970 rand972
+set str rand973 y1 attribute is null
+errnull rand970 rand973
+// attribute: frame.x2
+// variable: frame
+set str rand976 attributes
+obj get rand928 rand975 rand976
+set str rand976 x2
+obj get rand975 rand974 rand976
+set str rand977 x2 attribute is null
+errnull rand974 rand977
+// attribute: frame.y2
+// variable: frame
+set str rand980 attributes
+obj get rand928 rand979 rand980
+set str rand980 y2
+obj get rand979 rand978 rand980
+set str rand981 y2 attribute is null
+errnull rand978 rand981
+// operation: borderRadius + borderThickness
+// variable: borderRadius
+// variable: borderThickness
+add rand982 rand909 rand910
+set str rand965 methods
+obj get rand898 rand964 rand965
+set str rand965 rect
+obj get rand964 rand964 rand965
+callvar rand964 mthd::rect:1441a7909c087dbbe7ce59881b9df8b9 rand898 rand966 rand970 rand974 rand978 rand982
+// method: surface.setColor(theme.background)
+// variable: surface
+// attribute: theme.background
+// variable: theme
+set str rand987 attributes
+obj get rand901 rand986 rand987
+set str rand987 background
+obj get rand986 rand985 rand987
+set str rand984 methods
+obj get rand898 rand983 rand984
+set str rand984 setColor
+obj get rand983 rand983 rand984
+callvar rand983 mthd::setColor:1441a7909c087dbbe7ce59881b9df8b9 rand898 rand985
+// method: surface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius)
+// variable: surface
+// attribute: frame.x1
+// variable: frame
+set str rand992 attributes
+obj get rand928 rand991 rand992
+set str rand992 x1
+obj get rand991 rand990 rand992
+set str rand993 x1 attribute is null
+errnull rand990 rand993
+// attribute: frame.y1
+// variable: frame
+set str rand996 attributes
+obj get rand928 rand995 rand996
+set str rand996 y1
+obj get rand995 rand994 rand996
+set str rand997 y1 attribute is null
+errnull rand994 rand997
+// attribute: frame.x2
+// variable: frame
+set str rand1000 attributes
+obj get rand928 rand999 rand1000
+set str rand1000 x2
+obj get rand999 rand998 rand1000
+set str rand1001 x2 attribute is null
+errnull rand998 rand1001
+// attribute: frame.y2
+// variable: frame
+set str rand1004 attributes
+obj get rand928 rand1003 rand1004
+set str rand1004 y2
+obj get rand1003 rand1002 rand1004
+set str rand1005 y2 attribute is null
+errnull rand1002 rand1005
+// variable: borderRadius
+set str rand989 methods
+obj get rand898 rand988 rand989
+set str rand989 rect
+obj get rand988 rand988 rand989
+callvar rand988 mthd::rect:1441a7909c087dbbe7ce59881b9df8b9 rand898 rand990 rand994 rand998 rand1002 rand909
+: rand957
+// arg_branch: if (settings.renderMenuBar) {\nupdateTopbar(theme, frame, win, surface, {\ntopbarHeight,\nborderRadius,\nbuttonSize,\nbuttonGap\n});\n}
+// attribute: settings.renderMenuBar
+// variable: settings
+set str rand1008 attributes
+obj get rand925 rand1007 rand1008
+set str rand1008 renderMenuBar
+obj get rand1007 rand1006 rand1008
+jn rand1009 rand1006
+// segment: updateTopbar(theme, frame, win, surface, {\ntopbarHeight,\nborderRadius,\nbuttonSize,\nbuttonGap\n});
+// execution: updateTopbar(theme, frame, win, surface, {\ntopbarHeight,\nborderRadius,\nbuttonSize,\nbuttonGap\n})
+// variable: theme
+// variable: frame
+// variable: win
+// variable: surface
+// object: {\ntopbarHeight,\nborderRadius,\nbuttonSize,\nbuttonGap\n}
+set obj rand1011 {}
+// variable: topbarHeight
+set str rand1012 topbarHeight
+obj set rand1011 rand1012 rand911
+// variable: borderRadius
+set str rand1013 borderRadius
+obj set rand1011 rand1013 rand909
+// variable: buttonSize
+set str rand1014 buttonSize
+obj set rand1011 rand1014 rand912
+// variable: buttonGap
+set str rand1015 buttonGap
+obj set rand1011 rand1015 rand913
+call updateTopbar rand901 rand928 rand923 rand898 rand1011
+: rand1009
+jai rand916 rand919
+: rand917
+quitTo rand897
 ret
 ~
+// segment: import graphics, state, window;\n\nvoid updateButtons(Theme theme, Frame buttonFrame, Window win, Surface surface, Obj<num> miscData) {\nnum gap = miscData["buttonGap"];\n\nnum size = miscData["topbarHeight"] - miscData["borderRadius"];\nnum realSize = miscData["buttonSize"];\nnum space = size + gap;\n\nx = buttonFrame.x2 - (size / 2);\ny = buttonFrame.getY();\n\nbuttons = win.buttons;\nfor (i, buttons.length) {\nbuttons[i].update(x, y, realSize, theme, win, surface);\nx -= space;\n}\n}\n\nnum getButtonWidthX(num right, Window win, Obj<num> miscData) {\nnum size = miscData["topbarHeight"] - miscData["borderRadius"];\nnum realSize = miscData["buttonSize"];\nnum gap = miscData["buttonGap"];\nnum space = size + gap;\n\nx = right - (size / 2);\n\nx -= win.buttons.length - 1 * space + size - 1.5;\n\nreturn x;\n}\n\nvoid updateTopbar(Theme theme, Frame winFrame, Window win, Surface surface, Obj<num> miscData) {\nnum borderRad = miscData["borderRadius"];\nnum height = miscData["topbarHeight"];\nnum textSize = 10;\n\nFrame topbarFrame = graphics:cloneFrame(winFrame);\ntopbarFrame.y1 = topbarFrame.y2 - height + borderRad;\n\nnum buttonSize = miscData["buttonSize"];\nnum buttonsX = getButtonWidthX(topbarFrame.x2, win, miscData);\n\n\nsurface.setColor(theme.primary);\nsurface.rect(topbarFrame.x1, topbarFrame.y1, topbarFrame.x2, topbarFrame.y2, borderRad);\n\nFrame titleFrame = graphics:cloneFrame(topbarFrame);\ntitleFrame.x2 = buttonsX;\n\n/*\nsurface.setColor("#f00");\nsurface.path([\n[topbarFrame.x1, topbarFrame.y1],\n[topbarFrame.x2, topbarFrame.y1],\n[topbarFrame.x2, topbarFrame.y2],\n[topbarFrame.x1, topbarFrame.y2]\n], 1, true);\nsurface.setColor("#0f0");\nsurface.path([\n[titleFrame.x1, titleFrame.y1],\n[titleFrame.x2, titleFrame.y1],\n[titleFrame.x2, titleFrame.y2],\n[titleFrame.x1, titleFrame.y2]\n], 1, true);\n*/\n\n// title\nsurface.setColor(theme.text);\nsurface.text(win.title, textSize, titleFrame.getX() - (win.title.length * textSize * .5), titleFrame.getY() - 6.5);\n\n// seperator\nsurface.setColor(theme.secondary);\nsurface.path([\n[ titleFrame.x2, titleFrame.y1 - half borderRad + 5 ],\n[ titleFrame.x2, titleFrame.y2 + half borderRad - 5 ],\n], 2);\n\n// buttons\nFrame buttonFrame = graphics:cloneFrame(topbarFrame);\nbuttonFrame.x1 = titleFrame.x2;\nupdateButtons(theme, buttonFrame, win, surface, miscData);\n}\n\nvoid main(State state, GraphicsState graphicsState, Obj<Window> windows) {\nforever {\nSurface surface = graphicsState!.drawSurface;\nTheme theme = state.config.theme;\n\nsurface.clear();\n\nnum borderRadius = 15; // 15\nnum borderThickness = 5; // 5\n\nnum topbarHeight = 35; // 35\nnum buttonSize = 13.5; // 13.5\nnum buttonGap = 5;\n\nArr<str> winKeys = windows.keys();\nfor (i, winKeys.length) {\nstr winKey = winKeys[i];\nWindow win = windows[winKey];\nWindowRenderSettings settings = win.renderSettings;\nFrame frame = win.frame;\nwin.contentFrame = graphics:cloneFrame(win.frame);\nwin.contentFrame.y2 -= topbarHeight;\n\nif (settings.renderBase) {\nsurface.setColor(theme.accent);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius + borderThickness);\nsurface.setColor(theme.background);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius);\n}\n\n// content tester\n//surface.rect(win.contentFrame.x1, win.contentFrame.y1, win.contentFrame.x2, win.contentFrame.y2, 1);\n\nif (settings.renderMenuBar) {\nupdateTopbar(theme, frame, win, surface, {\ntopbarHeight,\nborderRadius,\nbuttonSize,\nbuttonGap\n});\n}\n}\n}\n}
+// import: import graphics, state, window
+// function: void throw(str text) {\nraw("err arg0");\n}
+// function: Arr<num:2> getScreenSize() {\nnum width = raw("const screen_width .target");\nnum height = raw("const screen_height .target");\nreturn [width, height];\n}
+// function: num getCurrentMs() {\nreturn raw("const ms .target");\n}
+// function: num sin(num deg) { return raw("sin .target arg0") }
+// function: num cos(num deg) { return raw("cos .target arg0") }
+// function: num tan(num deg) { return raw("tan .target arg0") }
+// function: num round(num deg) { return raw("round .target arg0") }
+// function: num floor(num deg) { return raw("floor .target arg0") }
+// function: num ceiling(num deg) { return raw("ceiling .target arg0") }
+// function: num lerp(num a, num b, num t) { return b - a * t + a }
+// function: num mid(num a, num b) { return a + b / 2 }
+// struct_def: struct Frame {\nnum x1;\nnum y1;\nnum x2;\nnum y2;\n\nvoid constructor(num x1, num y1, num x2, num y2) {\nself.x1 = x1;\nself.y1 = y1;\nself.x2 = x2;\nself.y2 = y2;\n}\n\nnum getX() { return math:mid(self.x1,self.x2) }\nnum getY() { return math:mid(self.y1,self.y2) }\nnum getW() { return self.x2 - self.x1 }\nnum getH() { return self.y2 - self.y1 }\n\nArr<num:2> getTL() { return [self.x1,self.y2] }\nArr<num:2> getT() { return [self.getX(),self.y2] }\nArr<num:2> getTR() { return [self.x2,self.y2] }\nArr<num:2> getL() { return [self.x1,self.getY()] }\nArr<num:2> getM() { return [self.getX(),self.getY()] }\nArr<num:2> getR() { return [self.x2,self.getY()] }\nArr<num:2> getBL() { return [self.x1,self.y1] }\nArr<num:2> getB() { return [self.getX(),self.y1] }\nArr<num:2> getBR() { return [self.x2,self.y1] }\n\nstr toString() {\nreturn "Frame{" ++ self.x1 ~++ self.y1 + "to" + self.x2 ~++ self.y2 ++ "}"\n}\n}
+// function: Frame getDefaultFrame() {\nscreenSize = io:getScreenSize();\nreturn new Frame(screenSize[0] * -.5, screenSize[1] * -.5, screenSize[0] * .5, screenSize[1] * .5);\n}
+// function: Frame cloneFrame(Frame original) {\nreturn new Frame(original.x1, original.y1, original.x2, original.y2);\n}
+// struct_def: struct Surface {\nstr type;\nFrame frame;\n\nvoid constructor(str type = "pen", Frame frame = getDefaultFrame()) {\nself.type = type;\nself.frame = frame;\n}\n\nvoid clear() {\nif (self.type == "pen") {\nraw("pen clear");\nreturn;\n}\n\nio:throw("cannot use clear method on" + self.type + "surface");\n}\nvoid line(num x1, num y1, num x2, num y2, num w) {\nif (self.type == "pen") {\nraw("drawCursor goto arg1 arg2\npen size arg5\npen down\ndrawCursor goto arg3 arg4\npen up");\nreturn;\n}\n\nio:throw("cannot use line method on" + self.type + "surface");\n}\n\nvoid path(Arr<Arr<num:2>> points, num w, bool loop = false) {\nnum len = points.length;\nif (!loop) {\nlen -= 1;\n}\nfor (i, len) {\nArr<num:2> point = points[i];\nArr<num:2> npoint = points[i + 1 % points.length];\nself.line(point[0], point[1], npoint[0], npoint[1], w);\n}\n}\nvoid tri(num x1, num y1, num x2, num y2, num x3, num y3, num border) {\nif (self.type == "pen") {\nraw("pen tri arg1 arg2 arg3 arg4 arg5 arg6 arg7");\nreturn;\n}\n\nio:throw("cannot use tri method on" + self.type + "surface");\n}\nvoid quad(num x1, num y1, num x2, num y2, num x3, num y3, num x4, num y4, num border) {\n\nself.tri(x1,y1, x2,y2, x3,y3, border);\nself.tri(x2,y2, x3,y3, x4,y4, border);\n}\nvoid rect(num x1, num y1, num x2, num y2, num border) {\nself.quad(\nx1, y1,\nx1, y2,\nx2, y1,\nx2, y2,\nborder\n)\n}\nvoid square(num x, num y, num w, num h, num border) {\nhalfW = w / 2;\nhalfH = h / 2;\nself.quad(\nx - halfW, y - halfH,\nx - halfW, y + halfH,\nx + halfW, y - halfH,\nx + halfW, y + halfH,\nborder\n);\n}\nvoid icon(str code, num size, num x, num y, num direction = 90, num boldness = 0) {\nif (self.type == "pen") {\nraw("pen icn arg1 arg2 arg3 arg4 arg5 arg6");\nreturn;\n}\n\nio:throw("cannot use icon method on" + self.type + "surface");\n}\nvoid text(str txt, num size, num x, num y, num direction = 90, num boldness = 0) {\nif (self.type == "pen") {\nraw("pen text arg1 arg2 arg3 arg4 arg5 arg6");\nreturn;\n}\n\nio:throw("cannot use text method on" + self.type + "surface");\n}\n\nvoid loadFontFromUrl(str url) {\nif (self.type == "pen") {\nraw("pen loadfonturl arg1");\nreturn;\n}\n\nio:throw("cannot use loadFontFromUrl method on" + self.type + "surface");\n}\nvoid loadFontData(Obj<str> data) {\nif (self.type == "pen") {\nraw("pen loadfontdata arg1");\nreturn;\n}\n\nio:throw("cannot use loadFontData method on" + self.type + "surface");\n}\n\nvoid setColor(str color) {\nif (self.type == "pen") {\nraw("pen color arg1");\nreturn;\n}\n\nio:throw("cannot use setColor method on" + self.type + "surface");\n}\n}
+// struct_def: struct Display {\nSurface surface;\n\nvoid constructor(Frame frame) {\nself.surface = new Surface("pen", frame);\n}\n}
+// struct_def: struct GraphicsState {\nSurface drawSurface;\nArr<Display> displays;\n\nvoid constructor() {\nself.newDisplay(getDefaultFrame());\nself.drawSurface = new Surface();\n}\n\nvoid newDisplay(Frame frame) {\nif (self?.displays) {\nself!.displays.append(new Display(frame));\n} else {\nself.displays = [new Display(frame)];\n}\n}\nvoid clearDisplays() {\nself.displays = [];\n}\n}
+// struct_def: struct Icon {\nstr color;\nstr kind = "icn";\nstr type;\nstr data = "";\n\nvoid draw(Surface surface, num x, num y, num size) {\nif (self.kind == "icn") {\nsurface.icon(self.data, size, x, y);\n}\n}\n}
+// function: void throw(str text) {\nraw("err arg0");\n}
+// function: Arr<num:2> getScreenSize() {\nnum width = raw("const screen_width .target");\nnum height = raw("const screen_height .target");\nreturn [width, height];\n}
+// function: num getCurrentMs() {\nreturn raw("const ms .target");\n}
+// struct_def: struct Theme {\nstr accent = "#a600ff";\n\nstr primary = "#1a1d28";\nstr secondary = "#313f4e";\nstr tertiary = "#4f617d";\n\nstr text = "#b3cbf9";\n\nstr background = "#090a0b";\nstr selected = "#0059ff";\n}
+// struct_def: struct Config {\n\nstr fontUrl = "https://raw.githubusercontent.com/Mistium/Origin-OS/refs/heads/main/Fonts/origin.ojff";\n\n\nstr embeddedCommandChar = "";\n\nTheme theme = new Theme();\n}
+// function: num getMouseX() {\nreturn raw("const mousex .target");\n}
+// function: num getMouseY() {\nreturn raw("const mousey .target");\n}
+// function: Arr<Obj<str>> getKeys() {\nreturn raw("keyhistory getkeys .target");\n}
+// function: Obj<str> shiftKeys() {\nreturn raw("keyhistory shift .target");\n}
+// function: Arr<Obj<str>> getDown() {\nreturn raw("keyhistory getdown .target");\n}
+// function: void clearKeys() {\nraw("keyhistory delkeys");\n}
+// function: bool isSpecialKey(str key) {\nspecialChars = [\n'Backspace', 'Tab', 'Enter', 'Shift', 'Control', 'Alt', 'CapsLock',\n'Escape', 'Space', 'PageUp', 'PageDown', 'End', 'Home',\n'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown',\n'Insert', 'Delete', 'Meta', 'ContextMenu',\n'AltGraph', 'ScrollLock', 'NumLock', 'Pause', 'Clear',\n'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12'\n];\n\nif (specialChars.contains(key)) {\nreturn true;\n}\nreturn false;\n}
+// struct_def: struct KeyMap {\nArr<str> keys = [];\nArr<str> special = [];\n\nArr<str> downKeys = [];\nArr<str> downSpecial = [];\n\nvoid update() {\nArr<Obj<str>> keys = getKeys();\nfor(i, keys.length) {\nObj<str> key = shiftKeys();\n\nstr data = key["data"];\nif (!isSpecialKey(data)) {\nself.keys.append(data);\n} else {\nself.special.append(data);\n}\n}\n\nself.downKeys = [];\nself.downSpecial = [];\nArr<Obj<str>> down = getDown();\nfor (i, down.length) {\nObj<str> key = down[i];\n\nstr data = key["data"];\nif (!isSpecialKey(data)) {\nself.downKeys.append(data);\n} else {\nself.downSpecial.append(data);\n}\n}\n}\n}
+// struct_def: struct InputState {\nKeyMap map = new KeyMap();\n\nvoid constructor() {\nclearKeys();\n}\n\nvoid update() {\nself.map.update();\n}\n}
+// struct_def: struct TimeState {\nnum frame = 0;\n\nnum uptime = 0;\nnum start = io:getCurrentMs();\nnum current = 0;\n\nvoid update() {\nself.current = io:getCurrentMs();\nself.uptime = self.current - self.start;\n}\n\nvoid updateFrame() {\nself.frame ++;\nself.update();\n}\n}
+// struct_def: struct State {\nstr type = "terminal";\n\nbool needsInit = false;\nnum wait = 0;\n\nTimeState time = new TimeState();\n\nConfig config = new Config();\n\nInputState inputState = new InputState();\n}
+// function: State getDefault() {\nreturn new State();\n}
+// function: void throw(str text) {\nraw("err arg0");\n}
+// function: Arr<num:2> getScreenSize() {\nnum width = raw("const screen_width .target");\nnum height = raw("const screen_height .target");\nreturn [width, height];\n}
+// function: num getCurrentMs() {\nreturn raw("const ms .target");\n}
+// function: num sin(num deg) { return raw("sin .target arg0") }
+// function: num cos(num deg) { return raw("cos .target arg0") }
+// function: num tan(num deg) { return raw("tan .target arg0") }
+// function: num round(num deg) { return raw("round .target arg0") }
+// function: num floor(num deg) { return raw("floor .target arg0") }
+// function: num ceiling(num deg) { return raw("ceiling .target arg0") }
+// function: num lerp(num a, num b, num t) { return b - a * t + a }
+// function: num mid(num a, num b) { return a + b / 2 }
+// struct_def: struct Frame {\nnum x1;\nnum y1;\nnum x2;\nnum y2;\n\nvoid constructor(num x1, num y1, num x2, num y2) {\nself.x1 = x1;\nself.y1 = y1;\nself.x2 = x2;\nself.y2 = y2;\n}\n\nnum getX() { return math:mid(self.x1,self.x2) }\nnum getY() { return math:mid(self.y1,self.y2) }\nnum getW() { return self.x2 - self.x1 }\nnum getH() { return self.y2 - self.y1 }\n\nArr<num:2> getTL() { return [self.x1,self.y2] }\nArr<num:2> getT() { return [self.getX(),self.y2] }\nArr<num:2> getTR() { return [self.x2,self.y2] }\nArr<num:2> getL() { return [self.x1,self.getY()] }\nArr<num:2> getM() { return [self.getX(),self.getY()] }\nArr<num:2> getR() { return [self.x2,self.getY()] }\nArr<num:2> getBL() { return [self.x1,self.y1] }\nArr<num:2> getB() { return [self.getX(),self.y1] }\nArr<num:2> getBR() { return [self.x2,self.y1] }\n\nstr toString() {\nreturn "Frame{" ++ self.x1 ~++ self.y1 + "to" + self.x2 ~++ self.y2 ++ "}"\n}\n}
+// function: Frame getDefaultFrame() {\nscreenSize = io:getScreenSize();\nreturn new Frame(screenSize[0] * -.5, screenSize[1] * -.5, screenSize[0] * .5, screenSize[1] * .5);\n}
+// function: Frame cloneFrame(Frame original) {\nreturn new Frame(original.x1, original.y1, original.x2, original.y2);\n}
+// struct_def: struct Surface {\nstr type;\nFrame frame;\n\nvoid constructor(str type = "pen", Frame frame = getDefaultFrame()) {\nself.type = type;\nself.frame = frame;\n}\n\nvoid clear() {\nif (self.type == "pen") {\nraw("pen clear");\nreturn;\n}\n\nio:throw("cannot use clear method on" + self.type + "surface");\n}\nvoid line(num x1, num y1, num x2, num y2, num w) {\nif (self.type == "pen") {\nraw("drawCursor goto arg1 arg2\npen size arg5\npen down\ndrawCursor goto arg3 arg4\npen up");\nreturn;\n}\n\nio:throw("cannot use line method on" + self.type + "surface");\n}\n\nvoid path(Arr<Arr<num:2>> points, num w, bool loop = false) {\nnum len = points.length;\nif (!loop) {\nlen -= 1;\n}\nfor (i, len) {\nArr<num:2> point = points[i];\nArr<num:2> npoint = points[i + 1 % points.length];\nself.line(point[0], point[1], npoint[0], npoint[1], w);\n}\n}\nvoid tri(num x1, num y1, num x2, num y2, num x3, num y3, num border) {\nif (self.type == "pen") {\nraw("pen tri arg1 arg2 arg3 arg4 arg5 arg6 arg7");\nreturn;\n}\n\nio:throw("cannot use tri method on" + self.type + "surface");\n}\nvoid quad(num x1, num y1, num x2, num y2, num x3, num y3, num x4, num y4, num border) {\n\nself.tri(x1,y1, x2,y2, x3,y3, border);\nself.tri(x2,y2, x3,y3, x4,y4, border);\n}\nvoid rect(num x1, num y1, num x2, num y2, num border) {\nself.quad(\nx1, y1,\nx1, y2,\nx2, y1,\nx2, y2,\nborder\n)\n}\nvoid square(num x, num y, num w, num h, num border) {\nhalfW = w / 2;\nhalfH = h / 2;\nself.quad(\nx - halfW, y - halfH,\nx - halfW, y + halfH,\nx + halfW, y - halfH,\nx + halfW, y + halfH,\nborder\n);\n}\nvoid icon(str code, num size, num x, num y, num direction = 90, num boldness = 0) {\nif (self.type == "pen") {\nraw("pen icn arg1 arg2 arg3 arg4 arg5 arg6");\nreturn;\n}\n\nio:throw("cannot use icon method on" + self.type + "surface");\n}\nvoid text(str txt, num size, num x, num y, num direction = 90, num boldness = 0) {\nif (self.type == "pen") {\nraw("pen text arg1 arg2 arg3 arg4 arg5 arg6");\nreturn;\n}\n\nio:throw("cannot use text method on" + self.type + "surface");\n}\n\nvoid loadFontFromUrl(str url) {\nif (self.type == "pen") {\nraw("pen loadfonturl arg1");\nreturn;\n}\n\nio:throw("cannot use loadFontFromUrl method on" + self.type + "surface");\n}\nvoid loadFontData(Obj<str> data) {\nif (self.type == "pen") {\nraw("pen loadfontdata arg1");\nreturn;\n}\n\nio:throw("cannot use loadFontData method on" + self.type + "surface");\n}\n\nvoid setColor(str color) {\nif (self.type == "pen") {\nraw("pen color arg1");\nreturn;\n}\n\nio:throw("cannot use setColor method on" + self.type + "surface");\n}\n}
+// struct_def: struct Display {\nSurface surface;\n\nvoid constructor(Frame frame) {\nself.surface = new Surface("pen", frame);\n}\n}
+// struct_def: struct GraphicsState {\nSurface drawSurface;\nArr<Display> displays;\n\nvoid constructor() {\nself.newDisplay(getDefaultFrame());\nself.drawSurface = new Surface();\n}\n\nvoid newDisplay(Frame frame) {\nif (self?.displays) {\nself!.displays.append(new Display(frame));\n} else {\nself.displays = [new Display(frame)];\n}\n}\nvoid clearDisplays() {\nself.displays = [];\n}\n}
+// struct_def: struct Icon {\nstr color;\nstr kind = "icn";\nstr type;\nstr data = "";\n\nvoid draw(Surface surface, num x, num y, num size) {\nif (self.kind == "icn") {\nsurface.icon(self.data, size, x, y);\n}\n}\n}
+// function: Arr<str> splitChar(str text, str splitter, Arr<str> rules) {\nArr<str> tokens = [""];\n\n\nbool inDoubleQuotes = false;\n\n\nbool intactQuotes = rules.contains("intactQuotes");\n\nfor (i, text.length) {\nstr char = text[i];\n\nif (char == "\\") {\ntokens[tokens.length-1] ++= char;\ncontinue;\n}\n\nif (intactQuotes) {\nif (char == "\"") {\ninDoubleQuotes = !inDoubleQuotes;\n}\n}\n\nif (!inDoubleQuotes) {\nif (char == splitter) {\ntokens.append("");\ncontinue;\n}\n}\n\ntokens[tokens.length-1] = tokens[tokens.length-1] ++ char;\n}\n\nreturn tokens;\n}
+// function: str deEscape(str text) {\nstr newStr = "";\nfor (i, text.length) {\nstr char = text[i];\nif (char == "\\") {\nchar = text[i++];\nif (char == "n") {\nnewStr ++= "\n";\ncontinue;\n}\nnewStr ++= char;\ncontinue;\n}\n}\nreturn newStr;\n}
+// function: bool inBox(num x, num y, num x1, num y1, num x2, num y2) {\nreturn x > x1 && y > y1 && x < x2 && y < y2;\n}
+// function: num getMouseX() {\nreturn raw("const mousex .target");\n}
+// function: num getMouseY() {\nreturn raw("const mousey .target");\n}
+// function: Arr<Obj<str>> getKeys() {\nreturn raw("keyhistory getkeys .target");\n}
+// function: Obj<str> shiftKeys() {\nreturn raw("keyhistory shift .target");\n}
+// function: Arr<Obj<str>> getDown() {\nreturn raw("keyhistory getdown .target");\n}
+// function: void clearKeys() {\nraw("keyhistory delkeys");\n}
+// function: bool isSpecialKey(str key) {\nspecialChars = [\n'Backspace', 'Tab', 'Enter', 'Shift', 'Control', 'Alt', 'CapsLock',\n'Escape', 'Space', 'PageUp', 'PageDown', 'End', 'Home',\n'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown',\n'Insert', 'Delete', 'Meta', 'ContextMenu',\n'AltGraph', 'ScrollLock', 'NumLock', 'Pause', 'Clear',\n'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12'\n];\n\nif (specialChars.contains(key)) {\nreturn true;\n}\nreturn false;\n}
+// struct_def: struct KeyMap {\nArr<str> keys = [];\nArr<str> special = [];\n\nArr<str> downKeys = [];\nArr<str> downSpecial = [];\n\nvoid update() {\nArr<Obj<str>> keys = getKeys();\nfor(i, keys.length) {\nObj<str> key = shiftKeys();\n\nstr data = key["data"];\nif (!isSpecialKey(data)) {\nself.keys.append(data);\n} else {\nself.special.append(data);\n}\n}\n\nself.downKeys = [];\nself.downSpecial = [];\nArr<Obj<str>> down = getDown();\nfor (i, down.length) {\nObj<str> key = down[i];\n\nstr data = key["data"];\nif (!isSpecialKey(data)) {\nself.downKeys.append(data);\n} else {\nself.downSpecial.append(data);\n}\n}\n}\n}
+// struct_def: struct InputState {\nKeyMap map = new KeyMap();\n\nvoid constructor() {\nclearKeys();\n}\n\nvoid update() {\nself.map.update();\n}\n}
+// struct_def: struct WindowFunction {\nstr preset;\n}
+// struct_def: struct WindowButton {\nWindowFunction function;\nIcon icon;\n\nvoid constructor(Icon icon) {\nself.icon = icon;\n}\n\nvoid update(num x, num y, num size, Theme theme, Window win, Surface surface) {\nnum hSize = size / 2;\nbool hovered = utils:inBox(input:getMouseX(), input:getMouseY(), x - hSize, y - hSize, x + hSize, y + hSize);\nsurface.setColor(hovered ? theme.tertiary : theme.secondary);\nsurface.square(x, y, size, size, 10);\nif (self?.icon) {\nself.icon.draw(surface, x, y, size);\n}\n}\n}
+// struct_def: struct WindowRenderSettings {\nbool renderBase = true;\nbool renderMenuBar = true;\n\n\n}
+// struct_def: struct Window {\nSurface surface;\nFrame frame;\nFrame contentFrame;\n\nArr<WindowButton> buttons = [\nnew WindowButton(new Icon())\n];\n\nstr title = "Window";\n\nWindowRenderSettings renderSettings = new WindowRenderSettings();\n\nvoid constructor(Frame frame) {\nself.frame = frame;\nself.surface = new Surface("pen", self!.frame);\n}\n}
+// function: void updateButtons(Theme theme, Frame buttonFrame, Window win, Surface surface, Obj<num> miscData) {\nnum gap = miscData["buttonGap"];\n\nnum size = miscData["topbarHeight"] - miscData["borderRadius"];\nnum realSize = miscData["buttonSize"];\nnum space = size + gap;\n\nx = buttonFrame.x2 - (size / 2);\ny = buttonFrame.getY();\n\nbuttons = win.buttons;\nfor (i, buttons.length) {\nbuttons[i].update(x, y, realSize, theme, win, surface);\nx -= space;\n}\n}
+// function: num getButtonWidthX(num right, Window win, Obj<num> miscData) {\nnum size = miscData["topbarHeight"] - miscData["borderRadius"];\nnum realSize = miscData["buttonSize"];\nnum gap = miscData["buttonGap"];\nnum space = size + gap;\n\nx = right - (size / 2);\n\nx -= win.buttons.length - 1 * space + size - 1.5;\n\nreturn x;\n}
+// function: void updateTopbar(Theme theme, Frame winFrame, Window win, Surface surface, Obj<num> miscData) {\nnum borderRad = miscData["borderRadius"];\nnum height = miscData["topbarHeight"];\nnum textSize = 10;\n\nFrame topbarFrame = graphics:cloneFrame(winFrame);\ntopbarFrame.y1 = topbarFrame.y2 - height + borderRad;\n\nnum buttonSize = miscData["buttonSize"];\nnum buttonsX = getButtonWidthX(topbarFrame.x2, win, miscData);\n\n\nsurface.setColor(theme.primary);\nsurface.rect(topbarFrame.x1, topbarFrame.y1, topbarFrame.x2, topbarFrame.y2, borderRad);\n\nFrame titleFrame = graphics:cloneFrame(topbarFrame);\ntitleFrame.x2 = buttonsX;\n\n\n\n\nsurface.setColor(theme.text);\nsurface.text(win.title, textSize, titleFrame.getX() - (win.title.length * textSize * .5), titleFrame.getY() - 6.5);\n\n\nsurface.setColor(theme.secondary);\nsurface.path([\n[ titleFrame.x2, titleFrame.y1 - half borderRad + 5 ],\n[ titleFrame.x2, titleFrame.y2 + half borderRad - 5 ],\n], 2);\n\n\nFrame buttonFrame = graphics:cloneFrame(topbarFrame);\nbuttonFrame.x1 = titleFrame.x2;\nupdateButtons(theme, buttonFrame, win, surface, miscData);\n}
+// function: void main(State state, GraphicsState graphicsState, Obj<Window> windows) {\nforever {\nSurface surface = graphicsState!.drawSurface;\nTheme theme = state.config.theme;\n\nsurface.clear();\n\nnum borderRadius = 15;\nnum borderThickness = 5;\n\nnum topbarHeight = 35;\nnum buttonSize = 13.5;\nnum buttonGap = 5;\n\nArr<str> winKeys = windows.keys();\nfor (i, winKeys.length) {\nstr winKey = winKeys[i];\nWindow win = windows[winKey];\nWindowRenderSettings settings = win.renderSettings;\nFrame frame = win.frame;\nwin.contentFrame = graphics:cloneFrame(win.frame);\nwin.contentFrame.y2 -= topbarHeight;\n\nif (settings.renderBase) {\nsurface.setColor(theme.accent);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius + borderThickness);\nsurface.setColor(theme.background);\nsurface.rect(frame.x1, frame.y1, frame.x2, frame.y2, borderRadius);\n}\n\n\n\n\nif (settings.renderMenuBar) {\nupdateTopbar(theme, frame, win, surface, {\ntopbarHeight,\nborderRadius,\nbuttonSize,\nbuttonGap\n});\n}\n}\n}\n}

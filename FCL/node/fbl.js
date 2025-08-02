@@ -322,6 +322,8 @@ function removeComments(text) {
 let randomNum = 0
 const randomStr = () => "rand" + randomNum ++;
 
+const MD5 = function (r) { function n(r, n) { var t, o, e, u, f; return e = 2147483648 & r, u = 2147483648 & n, f = (1073741823 & r) + (1073741823 & n), (t = 1073741824 & r) & (o = 1073741824 & n) ? 2147483648 ^ f ^ e ^ u : t | o ? 1073741824 & f ? 3221225472 ^ f ^ e ^ u : 1073741824 ^ f ^ e ^ u : f ^ e ^ u } function t(r, t, o, e, u, f, a) { return r = n(r, n(n(t & o | ~t & e, u), a)), n(r << f | r >>> 32 - f, t) } function o(r, t, o, e, u, f, a) { return r = n(r, n(n(t & e | o & ~e, u), a)), n(r << f | r >>> 32 - f, t) } function e(r, t, o, e, u, f, a) { return r = n(r, n(n(t ^ o ^ e, u), a)), n(r << f | r >>> 32 - f, t) } function u(r, t, o, e, u, f, a) { return r = n(r, n(n(o ^ (t | ~e), u), a)), n(r << f | r >>> 32 - f, t) } function f(r) { var n, t = "", o = ""; for (n = 0; 3 >= n; n++)t += (o = "0" + (o = r >>> 8 * n & 255).toString(16)).substr(o.length - 2, 2); return t } var a, i, C, c, g, h, d, v, S; for (r = function (r) { r = r.replace(/\r\n/g, "\n"); for (var n = "", t = 0; t < r.length; t++) { var o = r.charCodeAt(t); 128 > o ? n += String.fromCharCode(o) : (127 < o && 2048 > o ? n += String.fromCharCode(o >> 6 | 192) : (n += String.fromCharCode(o >> 12 | 224), n += String.fromCharCode(o >> 6 & 63 | 128)), n += String.fromCharCode(63 & o | 128)) } return n }(r), a = function (r) { for (var n, t = r.length, o = 16 * (((n = t + 8) - n % 64) / 64 + 1), e = Array(o - 1), u = 0, f = 0; f < t;)u = f % 4 * 8, e[n = (f - f % 4) / 4] |= r.charCodeAt(f) << u, f++; return e[n = (f - f % 4) / 4] |= 128 << f % 4 * 8, e[o - 2] = t << 3, e[o - 1] = t >>> 29, e }(r), h = 1732584193, d = 4023233417, v = 2562383102, S = 271733878, r = 0; r < a.length; r += 16)i = h, C = d, c = v, g = S, h = t(h, d, v, S, a[r + 0], 7, 3614090360), S = t(S, h, d, v, a[r + 1], 12, 3905402710), v = t(v, S, h, d, a[r + 2], 17, 606105819), d = t(d, v, S, h, a[r + 3], 22, 3250441966), h = t(h, d, v, S, a[r + 4], 7, 4118548399), S = t(S, h, d, v, a[r + 5], 12, 1200080426), v = t(v, S, h, d, a[r + 6], 17, 2821735955), d = t(d, v, S, h, a[r + 7], 22, 4249261313), h = t(h, d, v, S, a[r + 8], 7, 1770035416), S = t(S, h, d, v, a[r + 9], 12, 2336552879), v = t(v, S, h, d, a[r + 10], 17, 4294925233), d = t(d, v, S, h, a[r + 11], 22, 2304563134), h = t(h, d, v, S, a[r + 12], 7, 1804603682), S = t(S, h, d, v, a[r + 13], 12, 4254626195), v = t(v, S, h, d, a[r + 14], 17, 2792965006), h = o(h, d = t(d, v, S, h, a[r + 15], 22, 1236535329), v, S, a[r + 1], 5, 4129170786), S = o(S, h, d, v, a[r + 6], 9, 3225465664), v = o(v, S, h, d, a[r + 11], 14, 643717713), d = o(d, v, S, h, a[r + 0], 20, 3921069994), h = o(h, d, v, S, a[r + 5], 5, 3593408605), S = o(S, h, d, v, a[r + 10], 9, 38016083), v = o(v, S, h, d, a[r + 15], 14, 3634488961), d = o(d, v, S, h, a[r + 4], 20, 3889429448), h = o(h, d, v, S, a[r + 9], 5, 568446438), S = o(S, h, d, v, a[r + 14], 9, 3275163606), v = o(v, S, h, d, a[r + 3], 14, 4107603335), d = o(d, v, S, h, a[r + 8], 20, 1163531501), h = o(h, d, v, S, a[r + 13], 5, 2850285829), S = o(S, h, d, v, a[r + 2], 9, 4243563512), v = o(v, S, h, d, a[r + 7], 14, 1735328473), h = e(h, d = o(d, v, S, h, a[r + 12], 20, 2368359562), v, S, a[r + 5], 4, 4294588738), S = e(S, h, d, v, a[r + 8], 11, 2272392833), v = e(v, S, h, d, a[r + 11], 16, 1839030562), d = e(d, v, S, h, a[r + 14], 23, 4259657740), h = e(h, d, v, S, a[r + 1], 4, 2763975236), S = e(S, h, d, v, a[r + 4], 11, 1272893353), v = e(v, S, h, d, a[r + 7], 16, 4139469664), d = e(d, v, S, h, a[r + 10], 23, 3200236656), h = e(h, d, v, S, a[r + 13], 4, 681279174), S = e(S, h, d, v, a[r + 0], 11, 3936430074), v = e(v, S, h, d, a[r + 3], 16, 3572445317), d = e(d, v, S, h, a[r + 6], 23, 76029189), h = e(h, d, v, S, a[r + 9], 4, 3654602809), S = e(S, h, d, v, a[r + 12], 11, 3873151461), v = e(v, S, h, d, a[r + 15], 16, 530742520), h = u(h, d = e(d, v, S, h, a[r + 2], 23, 3299628645), v, S, a[r + 0], 6, 4096336452), S = u(S, h, d, v, a[r + 7], 10, 1126891415), v = u(v, S, h, d, a[r + 14], 15, 2878612391), d = u(d, v, S, h, a[r + 5], 21, 4237533241), h = u(h, d, v, S, a[r + 12], 6, 1700485571), S = u(S, h, d, v, a[r + 3], 10, 2399980690), v = u(v, S, h, d, a[r + 10], 15, 4293915773), d = u(d, v, S, h, a[r + 1], 21, 2240044497), h = u(h, d, v, S, a[r + 8], 6, 1873313359), S = u(S, h, d, v, a[r + 15], 10, 4264355552), v = u(v, S, h, d, a[r + 6], 15, 2734768916), d = u(d, v, S, h, a[r + 13], 21, 1309151649), h = u(h, d, v, S, a[r + 4], 6, 4149444226), S = u(S, h, d, v, a[r + 11], 10, 3174756917), v = u(v, S, h, d, a[r + 2], 15, 718787259), d = u(d, v, S, h, a[r + 9], 21, 3951481745), h = n(h, i), d = n(d, C), v = n(v, c), S = n(S, g); return (f(h) + f(d) + f(v) + f(S)).toLowerCase() };
+
 //const chooseRandom = (arr) => arr[Math.floor(Math.random() * arr.length)]
 //const randomStr = () => Array(10).fill(null).map(l => chooseRandom("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")).join("")
 
@@ -347,9 +349,9 @@ class Context {
                     if (areTypes(atype,btype,["str","num"]))
                         return `add ${target.id} emptystring ${aref} space ${bref}`;
                 },
-                "join": (_,target,aref,bref,atype,btype) => areTypes(atype,btype,["str","num"]) ? `add ${target.id} emptystring ${aref} ${bref}` : null,
-                "list_join": (_,target,aref,bref,atype,btype) => areTypes(atype,btype,["str","num"]) ? `add ${target.id} emptystring ${aref} comma space ${bref}` : null,
-                "list_concat": (_,target,aref,bref,atype,btype) => areTypes(atype,btype,["str","num"]) ? `add ${target.id} emptystring ${aref} comma ${bref}` : null,
+                "join": (_,target,aref,bref,atype,btype) => areTypes(atype,btype,["str","num","bool"]) ? `add ${target.id} emptystring ${aref} ${bref}` : null,
+                "list_join": (_,target,aref,bref,atype,btype) => areTypes(atype,btype,["str","num","bool"]) ? `add ${target.id} emptystring ${aref} comma space ${bref}` : null,
+                "list_concat": (_,target,aref,bref,atype,btype) => areTypes(atype,btype,["str","num","bool"]) ? `add ${target.id} emptystring ${aref} comma ${bref}` : null,
                 "sub": (_,target,aref,bref,atype,btype) => areNums(atype,btype) ? `sub ${target.id} ${aref} ${bref}` : null,
                 "mul": (_,target,aref,bref,atype,btype) => areNums(atype,btype) ? `mul ${target.id} ${aref} ${bref}` : null,
                 "div": (_,target,aref,bref,atype,btype) => areNums(atype,btype) ? `div ${target.id} ${aref} ${bref}` : null,
@@ -463,8 +465,8 @@ class Context {
                 "and_bool": (_,target,aref,bref) => `and ${target.id} ${aref} ${bref}\ntobool ${target.id} ${target.id}`,
             }
             this.logic_types = {
-                "or": (_,a,b) => a instanceof Type && b instanceof Type && a.name == b.name ? a : new Union([a,b]),
-                "and": (_,a,b) => new Union([a,b]),
+                "or": (_,a,b) => isTypeSafeStrict(a,b) ? a : new Union([a,b]),
+                "and": (_,a,b) => isTypeSafeStrict(a,b) ? a : new Union([a,b]),
                 "or_bool": (_,a,b) => `bool`,
                 "and_bool": (_,a,b) => `bool`,
             }
@@ -530,6 +532,7 @@ class CompileContext extends Context {
         this.neqlSupport = true;
         this.unsafe = false;
         this.jaiSupport = true;
+        this.elementDebug = false;
 
         this.scope = new Scope({
             "print": new CompiledFunc("print",(args) => `print ${args.join(" ")}`),
@@ -946,10 +949,15 @@ class Node {
             if (typeof key === "string") {
                 const attributes = split(key, ".").filter(t => t !== ".");
                 if (attributes.length > 1 && isValid) {
-                    this.fullAttribute = new Node(key, context);
-                    key = attributes.pop();
-                    this.parent = new Node(attributes.join("."), context);
-                    isVar = false;
+                    try {
+                        let fullAttribute = new Node(key, context);
+                        let key2 = attributes.pop();
+                        let parent = new Node(attributes.join("."), context);
+                        isVar = false;
+                        this.fullAttribute = fullAttribute;
+                        key = key2;
+                        this.parent = parent;
+                    } catch {}
                 }
             }
 
@@ -1130,6 +1138,29 @@ class Node {
                 this.type = types[op];
                 this.b = new Node(tokens.join(""), context);
                 return;
+            }
+        }
+
+        /* ternary */ {
+            const tokens = split(code, ["?",":"]);
+            const cond = tokens.shift();
+            if (tokens[0] == "?") {
+                tokens.shift();
+                let token;
+                let hit;
+                let depth = 0;
+                let content = "";
+                while (tokens.length > 0 && !(hit = (token = tokens.shift()) == ":" && depth == 0)) {
+                    content += token;
+                    depth += token == "?" ? 1 : token == ":" ? -1 : 0;
+                }
+                if (hit) {
+                    this.kind = "ternary";
+                    this.cond = new Node(cond, context);
+                    this.true = new Node(content, context);
+                    this.false = new Node(tokens.join(" "), context);
+                    return;
+                }
             }
         }
 
@@ -1428,6 +1459,8 @@ class Node {
         if (!context) throw `in:\n  ${this.formattedCode}\nerror:\n  ` + "no context";
         if (target && !(target instanceof Target)) throw `in:\n  ${this.formattedCode}\nerror:\n  ` + "no valid target";
         //console.log("compiling node of type " + this.kind);
+        if (context.elementDebug)
+            context.text += `// ${this.kind}: ${this.formattedCode}\n`;
         switch (this.kind) {
             case "segment": {
                 if (!flags?.includes("noscope"))
@@ -2291,6 +2324,26 @@ class Node {
                 context.text += `isnull ${target.id} ${ref}\ninv ${target.id} ${target.id}\n`;
                 break;
             }
+            case "ternary": {
+                const ref = new Target(target != null ? target.id : "void");
+                const condKey = this.cond.compileKey(context);
+                this.cond.compile(context, new Target(condKey));
+
+                const lbl = randomStr();
+                const elbl = randomStr();
+                context.text += `jn ${lbl} ${condKey}\n`;
+
+                const trueRef = this.true.compileKey(context);
+                this.true.compile(context, ref);
+
+                context.text += `jp ${elbl}\n: ${lbl}\n`;
+
+                const falseRef = this.false.compileKey(context);
+                this.false.compile(context, ref);
+                
+                context.text += `: ${elbl}\n`;
+                break;
+            }
 
             case "variable":
                 context.text += target != null && !(target.id == context.scope.get(this.key).ref) ? `dupe ${target.id} ${context.scope.get(this.key).ref}\n` : "";
@@ -2611,8 +2664,8 @@ class Node {
                         
                         context.packages[imp.name] = current;
                         const old = context.packageName;
-                        context.packageName = name + ":" + imp.name;
-                        current.node.import(context, name + ":" + imp.name);
+                        context.packageName = /*name + ":" + */imp.name;
+                        current.node.import(context, /*name + ":" + */imp.name);
                         context.packageName = old;
                     } catch (e) {
                         if (e instanceof RangeError) {
@@ -2652,7 +2705,7 @@ class Node {
             case "variable":
                 const val = context.scope.get(this.key);
                 if (!val)
-                    throw `${this.key} is not defined`;
+                    throw `in:\n  ${this.formattedCode}\nerror:\n  ` + `${this.key} is not defined`;
                 return val.ref;
             case "argument":
                 return "arg" + (this.index + (context.argOffset ?? 0));
@@ -2693,7 +2746,7 @@ class Node {
                 }[this.name];
             case "package_method":
                 return context.scope.get(`${context.packageName != null ? context.packageName + ":" : ""}${this.package}:${this.key}`) ??
-                    context.scope.get(`${this.package}:${this.key}`);;
+                    context.scope.get(`${this.package}:${this.key}`);
 
             case "assignment":
                 if (["inc", "dec"].includes(this.type))
@@ -2881,6 +2934,13 @@ class Node {
             }
             case "attribute_check":
                 return new Type("bool");
+            case "ternary": {
+                const tType = this.true.getType(context);
+                const fType = this.false.getType(context);
+                return isTypeSafe(tType, fType) ? (
+                    isTypeSafe(fType, tType) ? fType : tType
+                ) : new Union([tType, fType]);
+            }
 
             case "array": case "object": {
                 const val = this.getValue(context);
@@ -2895,6 +2955,7 @@ class Node {
 class Parameter {
     constructor(code, context) {
         this.code = code.trim();
+        this.formattedCode = code.trim().split("\n").map(l => l.trim()).join("\\n");
         this.parse(this.code, context);
     }
 
@@ -2910,7 +2971,7 @@ class Parameter {
             this.type = new Node(spaceTokens[0], context);
             return;
         } else if (spaceTokens.length == 1) {
-            throw "param needs a type";
+            throw `in:\n  ${this.formattedCode}\nerror:\n  ` + "param needs a type";
         }
 
         throw "unexpected tokens: " + code.split("\n").map(l => l.trim()).join("\\n")
@@ -3112,7 +3173,11 @@ class Union extends Value {
     }
 
     stringify() {
-        return `<union:${this.elements.map(e => e.stringify()).join(",")}>`;
+        return `<Union:${this.elements.map(e => e.stringify()).join(",")}>`;
+    }
+
+    getName() {
+        return this.stringify();
     }
 }
 
@@ -3244,7 +3309,7 @@ class CompiledFunc extends Func {
 const methodfuncRefs = {};
 class MethodFunc extends Func {
     constructor(content, type, params, key) {
-        methodfuncRefs[content.formattedCode] ??= `mthd:${key}`;
+        methodfuncRefs[content.formattedCode] ??= `mthd::${key}:${MD5(content.toString())}`;
         super();
         this.funcType = "method";
         this.content = content;
@@ -3304,6 +3369,7 @@ const fs = require('fs');
 const c = fs.readFileSync('node/code.fcl', 'utf8');
 console.time("parse");
 const script = new Script(c);
+console.log(JSON.stringify(script.node));
 console.timeEnd("parse");
 const fclfs = getDefaultFs();
 console.time("compile");

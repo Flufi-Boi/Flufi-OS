@@ -187,3 +187,16 @@ struct GraphicsState {
         self.displays = [];
     }
 }
+
+struct Icon {
+    str color;
+    str kind = "icn"; // the language, so for now just "icn"
+    str type; // "ref" | "raw", ref - an icn name e.g. close, raw - the raw icon data.
+    str data = "";
+
+    void draw(Surface surface, num x, num y, num size) {
+        if (self.kind == "icn") {
+            surface.icon(self.data, size, x, y);
+        }
+    }
+}

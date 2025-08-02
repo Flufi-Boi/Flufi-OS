@@ -49,6 +49,7 @@ struct WindowManagerContext {
         self.currentProvider = name;
     }
     void startProvider(State state, GraphicsState graphicsState) {
+        print(self);
         if (!self?.currentProvider) {
             io:throw("no current wm provider");
         }

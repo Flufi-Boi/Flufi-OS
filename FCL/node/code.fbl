@@ -1,7 +1,23 @@
+~ funny
+dupe rand2 arg0
+set str rand4 .generic
+settype arg1 rand4
+ret arg1
+~
 ~ main
-set str rand3 hello world
-set str rand4 <- funny
-add rand2 emptystring rand3 space rand4
-print rand2
+set str rand7 hi
+set str rand8 str
+settype rand7 rand8
+set type rand9 str
+callget rand6 funny rand9 rand7
+istypeg rand10 rand6 rand9
+ji rand13 rand10
+set str rand11 generic function returned 
+set str rand12  not the specified type 
+add rand11 rand11 .typechecktype rand12
+add rand11 rand11 rand9
+err rand11
+: rand13
+print rand6
 ret
 ~
