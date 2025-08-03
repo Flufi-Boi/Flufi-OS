@@ -1,9 +1,10 @@
 import './topbar.css';
 import { Component, ComponentChildren, FunctionalComponent } from "preact";
-import { Play, Sun, type LucideIcon } from 'lucide-preact';
+import { Play, FileInput, type LucideIcon } from 'lucide-preact';
 import { generateID } from '../../ts/utils';
 import { editorPanel, outputPanel } from '../../ts/layout';
 import { compile } from '../../../fcl/link';
+import { run } from './console';
 
 interface TopbarButtonProps {
     children: ComponentChildren;
@@ -27,7 +28,16 @@ export class TopbarButton extends Component<TopbarButtonProps> {
 }
 
 export function Topbar() {
-    const update = () => {
+    const play = () => {
+        compileAndWrite();
+        
+        const outputElem = outputPanel.getElem();
+        if (!outputElem) return
+        const data = outputElem.textContent;
+
+        run(data);
+    };
+    const compileAndWrite = () => {
         const outputElem = outputPanel.getElem();
         if (!outputElem) return
 
@@ -35,8 +45,11 @@ export function Topbar() {
     };
     return (
         <div class="output-topbar">
-            <TopbarButton func={update}>
-                <Play size={20}/>
+            <TopbarButton func={play}>
+                <Play size={19.5}/>
+            </TopbarButton>
+            <TopbarButton func={compileAndWrite}>
+                <FileInput size={19.5}/>
             </TopbarButton>
         </div>
     )

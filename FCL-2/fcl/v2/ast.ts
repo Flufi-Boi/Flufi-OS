@@ -227,22 +227,26 @@ export const NodeFilters: Record<string, NodeFilter> = {
 // [--- node classes ---]
 
 export abstract class Node {
+    public kind: NodeKind;
+    public isRoot: boolean = false;
+
     constructor(public position: NodePosition) {
 
     }
 }
 
 export abstract class LiteralNode extends Node {
-
 }
 
 // syntax
 
 export class EmptyNode extends Node {
-
+    kind = NodeKind.Empty;
 }
 
 export class BlockNode extends Node {
+    kind = NodeKind.Block;
+
     constructor(position: NodePosition, public content: Array<Node>) {
         super(position);
     }
@@ -251,6 +255,8 @@ export class BlockNode extends Node {
 // accessing
 
 export class IdentifierNode extends Node {
+    kind = NodeKind.Identifier;
+    
     constructor(position: NodePosition, public name: string) {
         super(position);
     }
@@ -259,6 +265,8 @@ export class IdentifierNode extends Node {
 // literals
 
 export class StringNode extends LiteralNode {
+    kind = NodeKind.String;
+    
     constructor(position: NodePosition, public nodes: Array<Node | Token>) {
         super(position);
     }
@@ -267,6 +275,8 @@ export class StringNode extends LiteralNode {
 // operations
 
 export class ExecutionNode extends Node {
+    kind = NodeKind.Execution;
+    
     constructor(position: NodePosition, public func: Node, public args: Array<Node>) {
         super(position);
     }
@@ -275,6 +285,8 @@ export class ExecutionNode extends Node {
 // defs
 
 export abstract class FunctionDefinitionNode extends LiteralNode {
+    kind = NodeKind.FunctionDefinition;
+    
     constructor(position: NodePosition, public content: Node) {
         super(position);
     }
@@ -637,6 +649,7 @@ export class Ast {
             end: tokens.length
         });
         this.rootNode = node.node;
+        this.rootNode.isRoot = true;
         
         if (debug)
             console.log(this.rootNode);

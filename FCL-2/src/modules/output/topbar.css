@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono');
 
 .output-topbar {
-    min-height: 35px;
+    min-height: 30px;
 
     display: flex;
 
@@ -11,23 +11,20 @@
 .output-topbar-button {
     width: 40px;
     height: 40px;
-    margin: 7.5px;
+
+    margin-left: 1px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     background-color: rgb(22, 8, 53);
-    border: rgb(55, 17, 109) 1px solid;
-    border-radius: 12.5px;
+    border: none;
+    border-right: rgb(55, 17, 109) 1px solid;
 
-    transition: .1s ease;
+    transition: .075s ease;
 }
 
 .output-topbar-button:hover {
     background-color: rgb(26, 10, 63);
-}
-
-#output-code {
-    font-family: "Noto Sans Mono", monospace;
 }

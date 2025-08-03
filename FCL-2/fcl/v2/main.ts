@@ -39,7 +39,7 @@ export class FCL {
     public compile(target?: FCLTarget): string {
         if (target)
             this.target = target;
-
+        
         switch (this.target) {
             case FCLTarget.JS: return JS.CompileScripts(this.scripts);
         }

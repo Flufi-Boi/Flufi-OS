@@ -1,8 +1,10 @@
 import { Fragment, VNode } from "preact";
 import { Panel } from "../panel";
 import { Topbar } from "./output/topbar";
-import { Code } from "./output/code";
 import { setOutputPanel } from "../ts/layout";
+
+import "./output/style.css";
+import { Content } from "./output/content";
 
 export class OutputPanel extends Panel {
     panelName = "output";
@@ -11,7 +13,7 @@ export class OutputPanel extends Panel {
         return super.render(
             <Fragment>
                 <Topbar />
-                <Code />
+                <Content />
             </Fragment>
         )
     }

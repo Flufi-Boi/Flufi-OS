@@ -1,0 +1,38 @@
+#output-code, #output-console {
+    min-height: calc(50% - 5px);
+    max-width: calc(600px);
+
+    font-family: "Noto Sans Mono", monospace;
+    font-size: 13px;
+    white-space: pre;
+    overflow: auto;
+}
+
+#output-code {
+    border-top: rgb(55, 17, 109) 1px solid;
+    max-width: calc(600px - 20px);
+
+    margin: 0px;
+    padding: 10px;
+}
+
+#output-split {
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+}
+
+
+#output-console > div {
+    min-height: 20px;
+    border-bottom: rgb(55, 17, 109) 1px solid;
+
+    padding: 10px;
+    gap: 10px;
+
+    display: flex;
+}
+
+.console-text {
+    margin: 4px;
+}

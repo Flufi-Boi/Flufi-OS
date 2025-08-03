@@ -1,4 +1,4 @@
-import { Ast } from "../ast";
+import { Ast, BlockNode, Node, NodeKind } from "../ast";
 import { FCLCompilerData, Script } from "../main";
 
 // [--- utils ---]
@@ -46,6 +46,8 @@ export abstract class Value {
 
 // [--- value classes ---]
 export class Module extends Value {
+    compiled?: string;
+
     constructor(public script: Script) {
         super();
     }
@@ -53,7 +55,6 @@ export class Module extends Value {
 
 export function CompileScripts(scripts: Record<string, Script>, data?: FCLCompilerData): string {
     const ctx = new Context(scripts);
-    console.log(scripts);
     
     const entry = scripts[data?.entry] ?? scripts["main"];
 
@@ -61,9 +62,8 @@ export function CompileScripts(scripts: Record<string, Script>, data?: FCLCompil
         throw Errors.NoEntry();
     
     const entryOut = CompileScript(entry, ctx);
-    console.log(entryOut);
 
-    return "funny";
+    return entryOut.compiled ?? "null";
 }
 
 export function CompileScript(script: Script, rootCtx: Context): Module {
@@ -74,9 +74,34 @@ export function CompileScript(script: Script, rootCtx: Context): Module {
         module: mod
     };
 
+    mod.compiled = CompileNode(mod.script.ast.rootNode, ctx);
+
     return mod;
 }
 
-export function CompileNode(node: Node) {
+export function CompileNode(rawNode: Node, ctx: NodeContext): string {
+    switch(rawNode.kind) {
+        case NodeKind.Block: {
+            const node = rawNode as BlockNode;
+            let str = "";
 
+            for (let i = 0; i < node.content.length; i++) {
+                const element = node.content[i];
+                str += CompileNode(element, ctx) + ";\n";
+            }
+
+            str += `
+                console.debug("huh?");
+                console.log("bleh");
+                console.warn("maybe");
+                console.error("sad");
+            `.split("\n").map(l => l.trim()).join("\n");
+
+            if (node.isRoot)
+                return str;
+            return "{\n" + str + "}";
+        }
+    }
+
+    return `/* ${NodeKind[rawNode.kind]} node */ (() => {console.error("${NodeKind[rawNode.kind]} has no compilation");return null})()`;
 }
